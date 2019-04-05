@@ -2,6 +2,7 @@ let gulp = require('gulp');
 let {watch, task} = require('gulp')
 let babel = require('gulp-babel');
 let console = require('child_process').spawn;
+let concat = require('gulp-concat')
 
 let path = {
 	src: {

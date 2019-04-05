@@ -6,7 +6,6 @@ export default class Slix extends Container {
 	/** @constructor */
 	constructor() {
 		super()
-
 	}
 
 	boot() {
