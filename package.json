@@ -32,7 +32,8 @@
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "jsdoc-babel": "^0.4.0-alpha.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "browser-sync": "^2.26.3"
   },
   "dependencies": {
     "babel-plugin-add-jsdoc-properties": "^0.1.4"

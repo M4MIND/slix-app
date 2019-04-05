@@ -4,17 +4,12 @@ exports.default = void 0;
 
 var _Container = require("./container/Container");
 
+var _LoggerServiceProvider = require("./providers/LoggerServiceProvider");
+
 class Slix extends _Container.default {
   constructor() {
     super();
-  }
-
-  boot() {
-    console.dir("Boot server");
-  }
-
-  run() {
-    console.dir("Run server");
+    this.registrationProvider(new _LoggerServiceProvider.default(), {});
   }
 
 }

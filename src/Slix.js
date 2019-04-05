@@ -1,15 +1,9 @@
 import Container from "./container/Container"
+import LoggerServiceProvider from "./providers/LoggerServiceProvider";
 
 export default class Slix extends Container {
 	constructor() {
-		super()
-	}
-
-	boot() {
-		console.dir("Boot server")
-	}
-
-	run() {
-		console.dir("Run server")
+		super();
+		this.registrationProvider(new LoggerServiceProvider(), {});
 	}
 }

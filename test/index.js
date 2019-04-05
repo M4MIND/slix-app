@@ -1,4 +1,3 @@
-import {Slix} from '/';
+import {Slix} from '../index';
 
 let server = new Slix();
-server.boot()
