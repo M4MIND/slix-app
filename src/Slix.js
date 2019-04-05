@@ -6,10 +6,10 @@ export default class Slix extends Container {
 	}
 
 	boot() {
-
+		console.dir("Boot server")
 	}
 
 	run() {
-
+		console.dir("Run server")
 	}
 }

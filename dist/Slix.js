@@ -9,9 +9,13 @@ class Slix extends _Container.default {
     super();
   }
 
-  boot() {}
+  boot() {
+    console.dir("Boot server");
+  }
 
-  run() {}
+  run() {
+    console.dir("Run server");
+  }
 
 }
 
