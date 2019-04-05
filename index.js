@@ -1,5 +1,2 @@
-let _Slix = require('./dist/Slix')
-let _Container = require('./dist/container/Container')
-
-exports.Slix = _Slix.default;
-exports.Container = _Container.default;
+exports.Slix = require('./dist/Slix').default;
+exports.Container = require('./dist/container/Container').default;
