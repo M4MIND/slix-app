@@ -36,6 +36,8 @@
     "browser-sync": "^2.26.3"
   },
   "dependencies": {
+    "natives": "^1.1.6",
+    "http": "0.0.0",
     "babel-plugin-add-jsdoc-properties": "^0.1.4"
   }
 }

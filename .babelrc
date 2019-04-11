@@ -16,7 +16,8 @@
       {
         "loose": true,
         "strict": true,
-        "noInterop": true
+        "noInterop": true,
+        "lazy": true
       }
     ]
   ]

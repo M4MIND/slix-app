@@ -11,11 +11,13 @@ class Container {
   }
   /**
    * @param {AbstractProvider} provider
-   * @param {?Object} value
+   * @param {Object|?} value
    * */
 
 
-  registrationProvider(provider, value) {
+  registrationProvider(provider, value = {}) {
+    value.__provider = provider.getName();
+
     if (!this.providers.has(provider.getName())) {
       this.providers.set(provider.getName(), provider);
     }
@@ -26,6 +28,16 @@ class Container {
 
     provider.registration(this);
   }
+  /** @return [AbstractProvider]*/
+
+
+  getAllProviders() {
+    return [...this.providers.values()];
+  }
+
+  getAllParams() {
+    return [...this.params.values()];
+  }
   /**
    * @param {string} key
    * @param {?Object} value
@@ -35,6 +47,12 @@ class Container {
   setParam(key, value) {
     if (!this.params.has(key)) {
       this.params.set(key, value);
+    } else {
+      if (typeof this.params.get(key) === "object") {
+        for (let property of Object.keys(value)) {
+          this.params.get(key)[property] = value[property];
+        }
+      }
     }
   }
   /** @param {string} key*/
