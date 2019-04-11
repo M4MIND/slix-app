@@ -9,7 +9,6 @@ import FileTransferServiceProvider from "./providers/FileTransferServiceProvider
 
 let boot = false;
 export default class Slix extends Container {
-	/** @param {string} __dir*/
 	constructor(__dir) {
 		super();
 		this.set('DIR', __dir);

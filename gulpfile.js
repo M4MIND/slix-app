@@ -3,6 +3,7 @@ let {watch, task} = require('gulp');
 let babel = require('gulp-babel');
 let console = require('child_process').spawn;
 let concat = require('gulp-concat');
+let clean = require('gulp-clean');
 
 let path = {
 	src: {
@@ -26,13 +27,18 @@ task('compile-src', () => {
 		.pipe(gulp.dest(path.dist.backendOut));
 });
 
+task('dist-clean', gulp.parallel(() => {
+	return gulp.src(path.dist.backendOut, {read: false})
+		.pipe(clean());
+}))
+
 task('watch-dev', gulp.parallel(() => {
-	watch(path.src.backend, gulp.series('compile-src'));
+	watch(path.src.backend, gulp.series('dist-clean', 'compile-src'));
 }));
 
 task('watch-test', gulp.parallel(() => {
 	watch(path.test.backend)
 }));
 
-task('dev', gulp.series('compile-src', gulp.parallel('watch-dev')));
+task('dev', gulp.series('dist-clean', 'compile-src', gulp.parallel('watch-dev')));
 // task('test', gulp.series(gulp.parallel()))

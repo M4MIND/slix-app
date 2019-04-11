@@ -21,7 +21,6 @@ var _FileTransferServiceProvider = require("./providers/FileTransferServiceProvi
 let boot = false;
 
 class Slix extends _Container.default {
-  /** @param {string} __dir*/
   constructor(__dir) {
     super();
     this.set('DIR', __dir);
