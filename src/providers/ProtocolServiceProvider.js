@@ -2,6 +2,8 @@ import AbstractProvider from "../api/AbstractProvider"
 import HTTP from "./protocol/HTTP";
 import Request from "../core/request/Request"
 import PreparationResponse from "../core/response/PreparationResponse"
+import KernelEvents from "./event/KernelEvents"
+import EventRequest from "./event/EventRequest"
 
 /**
  * @export
@@ -24,7 +26,7 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 		 * @param {PreparationResponse} response
 		 * */
 		this.config.callback = async (request, response) => {
-			App['log']('Request');
+			App['dispatch'](KernelEvents.REQUEST(), new EventRequest(request, response));
 			response.res.end(JSON.stringify({PARAMS: App.getAllParams(), SLIX: App}));
 		}
 		/** @type {HTTP} */

@@ -1,4 +1,5 @@
 import AbstractProvider from "../api/AbstractProvider"
+import KernelEvents from "./event/KernelEvents"
 
 export default class FileTransferServiceProvider extends AbstractProvider {
 	registration(App) {
@@ -13,6 +14,12 @@ export default class FileTransferServiceProvider extends AbstractProvider {
 				'.jpg': 'image/jpg'
 			},
 			customContentType: {},
+		})
+	}
+
+	subscribe(App, EventDispatcher) {
+		EventDispatcher.addEventListener(KernelEvents.REQUEST(), (event) => {
+
 		})
 	}
 }

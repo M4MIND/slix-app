@@ -11,8 +11,8 @@ var _LogFile = require("./logger/LogFile");
 class LoggerServiceProvider extends _AbstractProvider.default {
   registration(App) {
     App.setParam(this.getName(), {
-      console: App.get('debug') ? App.get('debug') : false,
-      writeFile: App.get('log') ? App.get('log') : false,
+      console: App.get('debug') ? App.get('debug') : true,
+      writeFile: App.get('log') ? App.get('log') : true,
       pathFile: '/logs/',
       recordEventsLevel: [_Log.default.DEFAULT(), _Log.default.INFO(), _Log.default.WARNING(), _Log.default.ERROR()]
     });

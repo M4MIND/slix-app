@@ -10,6 +10,10 @@ var _Request = require("../core/request/Request");
 
 var _PreparationResponse = require("../core/response/PreparationResponse");
 
+var _KernelEvents = require("./event/KernelEvents");
+
+var _EventRequest = require("./event/EventRequest");
+
 /**
  * @export
  * @class ProtocolServiceProvider
@@ -32,7 +36,7 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
      * */
 
     this.config.callback = async (request, response) => {
-      App['log']('Request');
+      App['dispatch'](_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
       response.res.end(JSON.stringify({
         PARAMS: App.getAllParams(),
         SLIX: App

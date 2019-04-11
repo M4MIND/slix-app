@@ -21,6 +21,8 @@ module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceProvid
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcherServiceProvider.EventDispatcher = require('./dist/providers/event/EventDispatcher').default;
+module.exports.EventDispatcherServiceProvider.EventRequest = require('./dist/providers/event/EventRequest').default;
+module.exports.EventDispatcherServiceProvider.KernelEvents = require('./dist/providers/event/KernelEvents').default;
 module.exports.LoggerServiceProvider.Log = require('./dist/providers/logger/Log').default;
 module.exports.LoggerServiceProvider.LogFile = require('./dist/providers/logger/LogFile').default;
 module.exports.ProtocolServiceProvider.HTTP = require('./dist/providers/protocol/HTTP').default;

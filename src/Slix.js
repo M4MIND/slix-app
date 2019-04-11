@@ -32,6 +32,9 @@ export default class Slix extends Container {
 			for (let provider of this.getAllProviders()) {
 				provider.boot(this);
 			}
+			for (let provider of this.getAllProviders()) {
+				provider.subscribe(this, this.get('eventDispatcher'));
+			}
 		}
 	}
 }

@@ -4,6 +4,8 @@ exports.default = void 0;
 
 var _AbstractProvider = require("../api/AbstractProvider");
 
+var _KernelEvents = require("./event/KernelEvents");
+
 class FileTransferServiceProvider extends _AbstractProvider.default {
   registration(App) {
     App.setParam(this.getName(), {
@@ -18,6 +20,10 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
       },
       customContentType: {}
     });
+  }
+
+  subscribe(App, EventDispatcher) {
+    EventDispatcher.addEventListener(_KernelEvents.default.REQUEST(), event => {});
   }
 
 }

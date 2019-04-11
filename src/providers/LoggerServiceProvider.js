@@ -5,8 +5,8 @@ import LogFile from "./logger/LogFile"
 export default class LoggerServiceProvider extends AbstractProvider {
 	registration(App) {
 		App.setParam(this.getName(), {
-			console: App.get('debug') ? App.get('debug') : false,
-			writeFile: App.get('log') ? App.get('log') : false,
+			console: App.get('debug') ? App.get('debug') : true,
+			writeFile: App.get('log') ? App.get('log') : true,
 			pathFile: '/logs/',
 			recordEventsLevel: [Log.DEFAULT(), Log.INFO(), Log.WARNING(), Log.ERROR()]
 		})
