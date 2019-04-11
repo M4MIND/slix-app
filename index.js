@@ -17,9 +17,10 @@ module.exports.FileTransferServiceProvider = require('./dist/providers/FileTrans
 module.exports.LoggerServiceProvider = require('./dist/providers/LoggerServiceProvider').default;
 module.exports.ProtocolServiceProvider = require('./dist/providers/ProtocolServiceProvider').default;
 module.exports.RouterServiceProvider = require('./dist/providers/RouterServiceProvider').default;
-module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceDispatcher').default;
+module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceProvider').default;
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcherServiceProvider.EventDispatcher = require('./dist/providers/event/EventDispatcher').default;
 module.exports.LoggerServiceProvider.Log = require('./dist/providers/logger/Log').default;
+module.exports.LoggerServiceProvider.LogFile = require('./dist/providers/logger/LogFile').default;
 module.exports.ProtocolServiceProvider.HTTP = require('./dist/providers/protocol/HTTP').default;

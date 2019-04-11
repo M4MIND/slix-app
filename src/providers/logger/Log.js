@@ -1,21 +1,34 @@
 export default class Log {
-    constructor(level = this.constructor.DEFAULT(), message) {
+	/**
+	 * @param {string} message
+	 * @param {number} level
+	 * */
+	static console(message, level = this.constructor.DEFAULT()) {
+		console.log(this.getColor(level) + message);
+	}
 
-    }
+	/** @return {number} */
+	static DEFAULT() {
+		return 100;
+	}
 
-    static DEFAULT() {
+	/** @return {number} */
+	static INFO() {
+		return 200;
+	}
 
-    }
+	/** @return {number} */
+	static WARNING() {
+		return 300;
+	}
 
-    static INFO() {
+	/** @return {number} */
+	static ERROR() {
+		return 500;
+	}
 
-    }
-
-    static WARNING() {
-
-    }
-
-    static ERROR() {
-
-    }
+	/** @return {string} */
+	static getColor(level = this.constructor.DEFAULT()) {
+		return '';
+	}
 }

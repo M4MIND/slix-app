@@ -32,10 +32,11 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
      * */
 
     this.config.callback = async (request, response) => {
-      console.dir(response.res.end(JSON.stringify({
+      App['log']('Request');
+      response.res.end(JSON.stringify({
         PARAMS: App.getAllParams(),
         SLIX: App
-      })));
+      }));
     };
     /** @type {HTTP} */
 

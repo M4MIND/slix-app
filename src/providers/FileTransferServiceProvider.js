@@ -4,13 +4,15 @@ export default class FileTransferServiceProvider extends AbstractProvider {
 	registration(App) {
 		App.setParam(this.getName(), {
 			path: '/static/',
-			contentTypeList: {
+			filesWithoutAccess: [],
+			defaultContentType: {
 				'.css': 'text/css',
 				'.js': 'text/javascript',
 				'.json': 'application/json',
 				'.png': 'image/png',
 				'.jpg': 'image/jpg'
 			},
+			customContentType: {},
 		})
 	}
 }

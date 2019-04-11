@@ -24,7 +24,8 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 		 * @param {PreparationResponse} response
 		 * */
 		this.config.callback = async (request, response) => {
-			console.dir(response.res.end(JSON.stringify({PARAMS: App.getAllParams(), SLIX: App})));
+			App['log']('Request');
+			response.res.end(JSON.stringify({PARAMS: App.getAllParams(), SLIX: App}));
 		}
 		/** @type {HTTP} */
 		new this.config.protocol(this.config);
