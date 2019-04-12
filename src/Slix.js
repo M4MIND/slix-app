@@ -3,9 +3,9 @@ import LoggerServiceProvider from "./providers/LoggerServiceProvider";
 import ProtocolServiceProvider from "./providers/ProtocolServiceProvider"
 import EventDispatcherServiceProvider from "./providers/EventDispatcherServiceProvider"
 import TwigServiceProvider from "./providers/TwigServiceProvider"
-import HTTP from "./providers/protocol/HTTP"
 import ControllerServiceProvider from "./providers/ControllerServiceProvider"
 import FileTransferServiceProvider from "./providers/FileTransferServiceProvider"
+import ExceptionServiceProvider from "./providers/ExceptionServiceProvider"
 
 let boot = false;
 export default class Slix extends Container {
@@ -13,6 +13,7 @@ export default class Slix extends Container {
 		super();
 		this.set('DIR', __dir);
 		this.registrationProvider(new EventDispatcherServiceProvider());
+		this.registrationProvider(new ExceptionServiceProvider());
 		this.registrationProvider(new LoggerServiceProvider());
 		this.registrationProvider(new FileTransferServiceProvider());
 		this.registrationProvider(new ProtocolServiceProvider());

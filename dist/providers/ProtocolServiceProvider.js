@@ -14,6 +14,10 @@ var _KernelEvents = require("./event/KernelEvents");
 
 var _EventRequest = require("./event/EventRequest");
 
+var _Log = require("./logger/Log");
+
+var _EventException = require("./event/EventException");
+
 /**
  * @export
  * @class ProtocolServiceProvider
@@ -31,16 +35,25 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
     this.config = App.getParam(this.getName());
     /**
      * @callback
+     * @param {*} err
      * @param {Request} request
      * @param {PreparationResponse} response
      * */
 
-    this.config.callback = async (request, response) => {
-      App['dispatch'](_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
-      response.res.end(JSON.stringify({
-        PARAMS: App.getAllParams(),
-        SLIX: App
-      }));
+    this.config.callback = async (err = null, request, response) => {
+      try {
+        if (err) {
+          App.log(err, _Log.default.ERROR());
+        }
+
+        await App.dispatch(_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
+        response.setResponse((await App.render('index', {
+          title: 'test'
+        })));
+      } catch (e) {
+        App.log(e.message, _Log.default.ERROR());
+        await await App.dispatch(_KernelEvents.default.EXCEPTION(), new _EventException.default(request, response, e));
+      }
     };
     /** @type {HTTP} */
 

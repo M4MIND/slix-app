@@ -12,6 +12,14 @@ function _http() {
   return data;
 }
 
+var _FileResponse = require("./FileResponse");
+
+var _RedirectResponse = require("./RedirectResponse");
+
+var _Response = require("./Response");
+
+var _JsonResponse = require("./JsonResponse");
+
 class PreparationResponse {
   /** @param {ServerResponse} res */
   constructor(res) {
@@ -27,7 +35,24 @@ class PreparationResponse {
 
 
   set res(value) {
+    if (this._res) {
+      return;
+    }
+
     this._res = value;
+  }
+  /** @param {Response|RedirectResponse|JsonResponse|FileResponse} response */
+
+
+  setResponse(response) {
+    this.res.statusCode = response.statusCode;
+    this.write(response.content);
+  }
+  /** @param {string} value */
+
+
+  write(value) {
+    this.res.end(value);
   }
 
 }

@@ -18,8 +18,8 @@ export default class FileTransferServiceProvider extends AbstractProvider {
 	}
 
 	subscribe(App, EventDispatcher) {
-		EventDispatcher.addEventListener(KernelEvents.REQUEST(), (event) => {
-
-		})
+		EventDispatcher.addEventListener(KernelEvents.REQUEST(), async (event) => {
+			return event;
+		}, -10, this);
 	}
 }

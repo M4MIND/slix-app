@@ -2,6 +2,8 @@
 
 exports.default = void 0;
 
-class RedirectResponse {}
+var _Response = require("./Response");
+
+class RedirectResponse extends _Response.default {}
 
 exports.default = RedirectResponse;

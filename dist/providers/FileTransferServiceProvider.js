@@ -23,7 +23,9 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
   }
 
   subscribe(App, EventDispatcher) {
-    EventDispatcher.addEventListener(_KernelEvents.default.REQUEST(), event => {});
+    EventDispatcher.addEventListener(_KernelEvents.default.REQUEST(), async event => {
+      return event;
+    }, -10, this);
   }
 
 }

@@ -2,6 +2,9 @@ import Slix from "../Slix";
 import EventDispatcher from '../providers/event/EventDispatcher';
 
 export default class AbstractProvider {
+	constructor() {
+		this.__nameProvider = this.getName();
+	}
 
 	/** @param {Slix} App */
 	registration(App) {}
@@ -22,6 +25,6 @@ export default class AbstractProvider {
 
 	/** @return {string} */
 	static getName() {
-		return this.constructor.name;
+		return this.name;
 	}
 }

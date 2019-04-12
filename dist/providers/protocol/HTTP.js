@@ -25,16 +25,15 @@ class HTTP {
    * }} config
    * */
   constructor(config) {
-    console.dir(config);
     this.http = (0, _http().createServer)((req, res) => {
       let body = [];
       req.on('err', err => {
-        console.dir(err);
+        config.callback(err);
       }).on('data', data => {
         body.push(data);
       }).on('end', () => {
         req.body = body;
-        config.callback(new _Request.default(req), new _PreparationResponse.default(res));
+        config.callback(null, new _Request.default(req), new _PreparationResponse.default(res));
       });
     });
     this.http.listen({

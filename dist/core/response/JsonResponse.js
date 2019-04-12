@@ -2,6 +2,8 @@
 
 exports.default = void 0;
 
-class JsonResponse {}
+var _Response = require("./Response");
+
+class JsonResponse extends _Response.default {}
 
 exports.default = JsonResponse;

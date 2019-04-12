@@ -1,3 +1,5 @@
-export default class JsonResponse {
-	
+import Response from "./Response"
+
+export default class JsonResponse extends Response {
+
 }

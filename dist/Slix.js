@@ -12,11 +12,11 @@ var _EventDispatcherServiceProvider = require("./providers/EventDispatcherServic
 
 var _TwigServiceProvider = require("./providers/TwigServiceProvider");
 
-var _HTTP = require("./providers/protocol/HTTP");
-
 var _ControllerServiceProvider = require("./providers/ControllerServiceProvider");
 
 var _FileTransferServiceProvider = require("./providers/FileTransferServiceProvider");
+
+var _ExceptionServiceProvider = require("./providers/ExceptionServiceProvider");
 
 let boot = false;
 
@@ -25,6 +25,7 @@ class Slix extends _Container.default {
     super();
     this.set('DIR', __dir);
     this.registrationProvider(new _EventDispatcherServiceProvider.default());
+    this.registrationProvider(new _ExceptionServiceProvider.default());
     this.registrationProvider(new _LoggerServiceProvider.default());
     this.registrationProvider(new _FileTransferServiceProvider.default());
     this.registrationProvider(new _ProtocolServiceProvider.default());

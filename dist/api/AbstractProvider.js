@@ -7,7 +7,12 @@ var _Slix = require("../Slix");
 var _EventDispatcher = require("../providers/event/EventDispatcher");
 
 class AbstractProvider {
+  constructor() {
+    this.__nameProvider = this.getName();
+  }
   /** @param {Slix} App */
+
+
   registration(App) {}
   /** @param {Slix} App */
 
@@ -30,7 +35,7 @@ class AbstractProvider {
 
 
   static getName() {
-    return this.constructor.name;
+    return this.name;
   }
 
 }

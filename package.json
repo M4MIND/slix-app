@@ -36,8 +36,9 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "natives": "^1.1.6",
+    "babel-plugin-add-jsdoc-properties": "^0.1.4",
     "http": "0.0.0",
-    "babel-plugin-add-jsdoc-properties": "^0.1.4"
+    "natives": "^1.1.6",
+    "twig": "^1.13.2"
   }
 }

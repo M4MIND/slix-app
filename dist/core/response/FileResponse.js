@@ -2,6 +2,8 @@
 
 exports.default = void 0;
 
-class FileResponse {}
+var _Response = require("./Response");
+
+class FileResponse extends _Response.default {}
 
 exports.default = FileResponse;

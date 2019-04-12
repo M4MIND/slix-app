@@ -29,6 +29,17 @@ export default class Log {
 
 	/** @return {string} */
 	static getColor(level = this.constructor.DEFAULT()) {
-		return '';
+		if (level === this.DEFAULT()) {
+			return '\x1b[37m';
+		}
+		if (level === this.INFO()) {
+			return '\x1b[34m';
+		}
+		if (level === this.WARNING()) {
+			return '\x1b[33m';
+		}
+		if (level === this.ERROR()) {
+			return '\x1b[31m';
+		}
 	}
 }

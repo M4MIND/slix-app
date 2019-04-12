@@ -11,17 +11,15 @@ export default class HTTP {
 	 * }} config
 	 * */
 	constructor(config) {
-		console.dir(config);
-
 		this.http = createServer((req, res) => {
 			let body = [];
 			req.on('err', err => {
-				console.dir(err);
+				config.callback(err);
 			}).on('data', data => {
 				body.push(data);
 			}).on('end', () => {
 				req.body = body;
-				config.callback(new Request(req), new PreparationResponse(res));
+				config.callback(null, new Request(req), new PreparationResponse(res));
 			})
 		})
 

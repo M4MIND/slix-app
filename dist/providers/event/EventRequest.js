@@ -6,12 +6,15 @@ var _Request = require("../../core/request/Request");
 
 var _PreparationResponse = require("../../core/response/PreparationResponse");
 
-class EventRequest {
+var _AbstractEvent = require("../../api/AbstractEvent");
+
+class EventRequest extends _AbstractEvent.default {
   /**
    * @param {Request} request
    * @param {PreparationResponse} response
    * */
   constructor(request, response) {
+    super();
     this._request = request;
     this._response = response;
   }
@@ -25,6 +28,7 @@ class EventRequest {
 
 
   set request(value) {
+    if (this._request) return;
     this._request = value;
   }
   /** @return {PreparationResponse} */
@@ -37,7 +41,12 @@ class EventRequest {
 
 
   set response(value) {
+    if (this._response) return;
     this._response = value;
+  }
+
+  setResponse(response) {
+    this.response.setResponse(response);
   }
 
 }

@@ -1,4 +1,8 @@
 import {ServerResponse} from 'http';
+import FileResponse from "./FileResponse"
+import RedirectResponse from "./RedirectResponse"
+import Response from "./Response"
+import JsonResponse from "./JsonResponse"
 
 export default class PreparationResponse {
 	/** @param {ServerResponse} res */
@@ -13,6 +17,20 @@ export default class PreparationResponse {
 
 	/** @param {ServerResponse} value */
 	set res(value) {
+		if (this._res) {
+			return;
+		}
 		this._res = value
+	}
+
+	/** @param {Response|RedirectResponse|JsonResponse|FileResponse} response */
+	setResponse(response) {
+		this.res.statusCode = response.statusCode;
+		this.write(response.content);
+	}
+
+	/** @param {string} value */
+	write(value) {
+		this.res.end(value);
 	}
 }
