@@ -1,4 +1,6 @@
-export default class KernelEvents {
+export default class
+
+KernelEvents {
 	static REQUEST() {
 		return "KernelEvents::REQUEST";
 	}

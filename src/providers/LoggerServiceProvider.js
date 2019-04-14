@@ -9,7 +9,7 @@ export default class LoggerServiceProvider extends AbstractProvider {
 			writeFile: App.get('log') ? App.get('log') : true,
 			pathFile: '/logs/',
 			recordEventsLevel: [Log.DEFAULT(), Log.INFO(), Log.WARNING(), Log.ERROR()]
-		})
+		});
 
 		App.set('log', (message, level = Log.DEFAULT()) => {
 			if (App.getParam(this.getName()).console) {

@@ -13,8 +13,9 @@ let pathLib = require('path');
 class TwigServiceProvider extends _AbstractProvider.default {
   registration(App) {
     App.setParam(this.getName(), {
-      path: './views/',
-      cache: false
+      path: pathLib.join(App.get('DIR'), '/views/'),
+      cache: false,
+      typeFile: '.twig'
     });
   }
 
@@ -24,7 +25,7 @@ class TwigServiceProvider extends _AbstractProvider.default {
 
     App.render = async (path, values = {}) => {
       return await new Promise((resolve, reject) => {
-        path = pathLib.join(App.get('DIR'), pathLib.join(this.config.path, path)) + '.twig';
+        path = pathLib.join(this.config.path, path) + this.config.typeFile;
         twigLib.renderFile(path, values, (err, html) => {
           if (err) {
             reject(err);

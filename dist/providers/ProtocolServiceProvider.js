@@ -46,7 +46,11 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
           App.log(err, _Log.default.ERROR());
         }
 
-        await App.dispatch(_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
+        let event = await App.dispatch(_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
+        if (event.break) return;
+        await App.dispatch(_KernelEvents.default.ROUTE(), '');
+        await App.dispatch(_KernelEvents.default.CONTROLLER(), '');
+        await App.dispatch(_KernelEvents.default.RESPONSE(), '');
         response.setResponse((await App.render('index', {
           title: 'test'
         })));

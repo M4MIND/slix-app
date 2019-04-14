@@ -7,10 +7,14 @@ import ControllerServiceProvider from "./providers/ControllerServiceProvider"
 import FileTransferServiceProvider from "./providers/FileTransferServiceProvider"
 import ExceptionServiceProvider from "./providers/ExceptionServiceProvider"
 
+let pathLib = require('path');
+
 let boot = false;
+
 export default class Slix extends Container {
-	constructor(__dir) {
+	constructor(__dir = pathLib.dirname(require.main.filename)) {
 		super();
+
 		this.set('DIR', __dir);
 		this.registrationProvider(new EventDispatcherServiceProvider());
 		this.registrationProvider(new ExceptionServiceProvider());

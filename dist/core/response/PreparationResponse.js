@@ -45,7 +45,7 @@ class PreparationResponse {
 
 
   setResponse(response) {
-    this.res.statusCode = response.statusCode;
+    this.res.writeHead(response.statusCode, response.headers);
     this.write(response.content);
   }
   /** @param {string} value */

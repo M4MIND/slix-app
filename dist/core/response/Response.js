@@ -6,9 +6,9 @@ class Response {
   /**
    * @param {string} content
    * @param {number} statusCode
-   * @param {Array} headers
+   * @param {Object} headers
    * */
-  constructor(content = '', statusCode = 200, headers = []) {
+  constructor(content = '', statusCode = 200, headers = {}) {
     this._content = content;
     this._statusCode = statusCode;
   }

@@ -12,38 +12,45 @@ import EventException from "./event/EventException"
  * @class ProtocolServiceProvider
  * */
 export default class ProtocolServiceProvider extends AbstractProvider {
-	registration(App) {
-		App.setParam(this.getName(), {
-			protocol: HTTP,
-			host: 'localhost',
-			port: 3000
-		})
-	}
+    registration(App) {
+        App.setParam(this.getName(), {
+            protocol: HTTP,
+            host: 'localhost',
+            port: 3000
+        })
+    }
 
-	boot(App) {
-		this.config = App.getParam(this.getName());
-		/**
-		 * @callback
-		 * @param {*} err
-		 * @param {Request} request
-		 * @param {PreparationResponse} response
-		 * */
-		this.config.callback = async (err = null, request, response) => {
-			try {
-				if (err) {
-					App.log(err, Log.ERROR());
-				}
+    boot(App) {
+        this.config = App.getParam(this.getName());
+        /**
+         * @callback
+         * @param {*} err
+         * @param {Request} request
+         * @param {PreparationResponse} response
+         * */
+        this.config.callback = async (err = null, request, response) => {
+            try {
+                if (err) {
+                    App.log(err, Log.ERROR());
+                }
 
-				await App.dispatch(KernelEvents.REQUEST(), new EventRequest(request, response));
+                let event = await App.dispatch(KernelEvents.REQUEST(), new EventRequest(request, response));
 
-				response.setResponse(await App.render('index', {title: 'test'}))
-			}
-			catch (e) {
-				App.log(e.message, Log.ERROR());
-				await await App.dispatch(KernelEvents.EXCEPTION(), new EventException(request, response, e));
-			}
-		}
-		/** @type {HTTP} */
-		new this.config.protocol(this.config);
-	}
+                if (event.break) return;
+
+                await App.dispatch(KernelEvents.ROUTE(), '');
+
+                await App.dispatch(KernelEvents.CONTROLLER(), '');
+
+                await App.dispatch(KernelEvents.RESPONSE(), '');
+                response.setResponse(await App.render('index', {title: 'test'}))
+            }
+            catch (e) {
+                App.log(e.message, Log.ERROR());
+                await await App.dispatch(KernelEvents.EXCEPTION(), new EventException(request, response, e));
+            }
+        };
+        /** @type {HTTP} */
+        new this.config.protocol(this.config);
+    }
 }

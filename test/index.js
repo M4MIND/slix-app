@@ -1,5 +1,5 @@
 import {Slix} from '../index';
 
-let server = new Slix(__dirname);
+let server = new Slix();
 
 server.run();

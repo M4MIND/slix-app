@@ -18,10 +18,12 @@ var _FileTransferServiceProvider = require("./providers/FileTransferServiceProvi
 
 var _ExceptionServiceProvider = require("./providers/ExceptionServiceProvider");
 
+let pathLib = require('path');
+
 let boot = false;
 
 class Slix extends _Container.default {
-  constructor(__dir) {
+  constructor(__dir = pathLib.dirname(require.main.filename)) {
     super();
     this.set('DIR', __dir);
     this.registrationProvider(new _EventDispatcherServiceProvider.default());
