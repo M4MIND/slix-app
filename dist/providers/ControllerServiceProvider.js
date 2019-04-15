@@ -16,12 +16,11 @@ class ControllerServiceProvider extends _AbstractProvider.default {
       path: pathLib.join(App.get('ROOT_DIR'), '/controllers/')
     });
 
-    App._runControllers = async (handlers, request) => {
+    App._runControllers = async (controllers, request) => {
       let controllerResponse = await (async () => {
         let response;
 
-        for (let controller of handlers) {
-          /** @type {AbstractEvent}*/
+        for (let controller of controllers.handlers) {
           let out = await controller(request);
 
           if (out) {

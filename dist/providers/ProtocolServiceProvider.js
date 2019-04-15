@@ -18,6 +18,8 @@ var _Log = require("./logger/Log");
 
 var _EventException = require("./event/EventException");
 
+var _EventCallController = require("./event/EventCallController");
+
 /**
  * @export
  * @class ProtocolServiceProvider
@@ -42,15 +44,14 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
 
     this.config.callback = async (err = null, request, response) => {
       try {
-        if (err) {
-          App.log(err, _Log.default.ERROR());
-        }
-
         let event = await App.dispatch(_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
         if (event.break) return;
-        await App.dispatch(_KernelEvents.default.ROUTE(), '');
-        await App.dispatch(_KernelEvents.default.CONTROLLER(), '');
-        let controllerResponse = await App._runControllers(App._getController(request), request);
+
+        let controllers = App._getController(request);
+
+        event = await App.dispatch(_KernelEvents.default.CALL_CONTROLLER(), new _EventCallController.default(request, response, controllers));
+        if (event.break) return;
+        let controllerResponse = await App._runControllers(controllers, request);
         await App.dispatch(_KernelEvents.default.RESPONSE(), '');
         response.setResponse(controllerResponse);
       } catch (e) {

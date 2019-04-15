@@ -12,7 +12,7 @@ class EventDispatcher {
   constructor() {
     _defineProperty(this, "dispatch", async (typeEvent, event) => {
       if (!this.collection.has(typeEvent)) {
-        return;
+        return event;
       }
 
       return await (async () => {

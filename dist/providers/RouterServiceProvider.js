@@ -30,15 +30,20 @@ class RouterServiceProvider extends _AbstractProvider.default {
       }
 
       if (!this.collection.get(route).has(method)) {
-        this.collection.get(route).set(method, []);
+        this.collection.get(route).set(method, null);
       } else {
-        this.collection.get(route).set(method, []);
+        this.collection.get(route).set(method, null);
       }
 
+      let callChain = {};
+
       if (controller) {
-        this.collection.get(route).get(method).push(controller.before, handler, controller.after);
+        callChain.handlers = [controller.before, handler, controller.after];
+        callChain.controller = controller;
+        this.collection.get(route).set(method, callChain);
       } else {
-        this.collection.get(route).get(method).push(handler);
+        callChain.handlers = [handler];
+        this.collection.get(route).set(method, callChain);
       }
 
       this.collection = new Map([...this.collection.entries()].sort((a, b) => {

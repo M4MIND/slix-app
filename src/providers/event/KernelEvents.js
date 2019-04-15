@@ -9,7 +9,7 @@ KernelEvents {
 		return "KernelEvents::ROUTE"
 	}
 
-	static CONTROLLER() {
+	static CALL_CONTROLLER() {
 		return "KernelEvents::CONTROLLER"
 	}
 

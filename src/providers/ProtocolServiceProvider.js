@@ -6,6 +6,7 @@ import KernelEvents from "./event/KernelEvents"
 import EventRequest from "./event/EventRequest"
 import Log from "./logger/Log"
 import EventException from "./event/EventException"
+import EventCallController from "./event/EventCallController";
 
 /**
  * @export
@@ -30,19 +31,15 @@ export default class ProtocolServiceProvider extends AbstractProvider {
          * */
         this.config.callback = async (err = null, request, response) => {
             try {
-                if (err) {
-                    App.log(err, Log.ERROR());
-                }
-
-                let event = await App.dispatch(KernelEvents.REQUEST(), new EventRequest(request, response));
-
+                let event  = await App.dispatch(KernelEvents.REQUEST(), new EventRequest(request, response));
                 if (event.break) return;
 
-                await App.dispatch(KernelEvents.ROUTE(), '');
+                let controllers = App._getController(request);
 
-                await App.dispatch(KernelEvents.CONTROLLER(), '');
+                event = await App.dispatch(KernelEvents.CALL_CONTROLLER(), new EventCallController(request, response, controllers));
+                if (event.break) return;
 
-                let controllerResponse = await App._runControllers(App._getController(request), request);
+                let controllerResponse = await App._runControllers(controllers, request);
 
                 await App.dispatch(KernelEvents.RESPONSE(), '');
 

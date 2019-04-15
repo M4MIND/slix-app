@@ -5,64 +5,65 @@ let pathLib = require('path');
 let fsLib = require('fs');
 
 export default class ControllerServiceProvider extends AbstractProvider {
-	registration(App) {
-		App.setParam(this.getName(), {
-			path: pathLib.join(App.get('ROOT_DIR'), '/controllers/')
-		});
+    registration(App) {
+        App.setParam(this.getName(), {
+            path: pathLib.join(App.get('ROOT_DIR'), '/controllers/')
+        });
 
-		App._runControllers = async (handlers, request) => {
-			let controllerResponse = await (async () => {
-				let response;
-				for (let controller of handlers) {
-					/** @type {AbstractEvent}*/
-					let out = await controller(request);
+        App._runControllers = async (controllers, request) => {
+            let controllerResponse = await (async () => {
 
-					if (out) {
-						response = out;
-					}
-				}
+                let response;
 
-				return response;
-			})();
+                for (let controller of controllers.handlers) {
+                    let out = await controller(request);
 
-			if (controllerResponse) {
-				return controllerResponse;
-			}
+                    if (out) {
+                        response = out;
+                    }
+                }
 
-			throw new Error('The controller did not return an answer.');
-		}
-	}
+                return response;
+            })();
 
-	boot(App) {
-		this.config = App.getParam(this.getName());
-		readDir(this.config.path, App);
-	}
+            if (controllerResponse) {
+                return controllerResponse;
+            }
+
+            throw new Error('The controller did not return an answer.');
+        }
+    }
+
+    boot(App) {
+        this.config = App.getParam(this.getName());
+        readDir(this.config.path, App);
+    }
 }
 
 function readDir(path, App) {
-	fsLib.readdir(path, (err, collection) => {
-		if (err) {
-			throw err;
-		}
+    fsLib.readdir(path, (err, collection) => {
+        if (err) {
+            throw err;
+        }
 
-		for (let file of collection) {
-			file = pathLib.join(path, file);
+        for (let file of collection) {
+            file = pathLib.join(path, file);
 
-			fsLib.stat(file, (err, stat) => {
-				if (err) {
-					throw err;
-				}
+            fsLib.stat(file, (err, stat) => {
+                if (err) {
+                    throw err;
+                }
 
-				if (stat.isFile()) {
-					let controller = require(file).default;
-					/** @type {AbstractController} */
-					controller = new controller(App);
-					controller.mount();
-				}
-				else {
-					readDir(file, App)
-				}
-			})
-		}
-	})
+                if (stat.isFile()) {
+                    let controller = require(file).default;
+                    /** @type {AbstractController} */
+                    controller = new controller(App);
+                    controller.mount();
+                }
+                else {
+                    readDir(file, App)
+                }
+            })
+        }
+    })
 }

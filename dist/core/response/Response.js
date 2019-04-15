@@ -11,6 +11,7 @@ class Response {
   constructor(content = '', statusCode = 200, headers = {}) {
     this._content = content;
     this._statusCode = statusCode;
+    this._headers = headers;
   }
 
   get content() {
@@ -27,6 +28,14 @@ class Response {
 
   set statusCode(value) {
     this._statusCode = value;
+  }
+
+  get headers() {
+    return this._headers;
+  }
+
+  set headers(value) {
+    this._headers = value;
   }
 
 }
