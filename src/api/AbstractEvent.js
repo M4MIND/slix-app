@@ -8,8 +8,8 @@ export default class AbstractEvent {
 
 	constructor(request, response) {
 		this._break = false;
-		this._request = request
-		this._response = response
+		this._request = request;
+		this._response = response;
 	}
 
 	get break() {
@@ -18,10 +18,6 @@ export default class AbstractEvent {
 
 	set break(value) {
 		this._break = value
-	}
-
-	breakEvent() {
-		this._break = true;
 	}
 
 	get request() {
@@ -44,4 +40,8 @@ export default class AbstractEvent {
 		this.breakEvent();
 		this.response.setResponse(response);
 	}
+
+    breakEvent() {
+        this._break = true;
+    }
 }

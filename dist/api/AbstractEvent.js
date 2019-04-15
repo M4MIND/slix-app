@@ -23,10 +23,6 @@ class AbstractEvent {
     this._break = value;
   }
 
-  breakEvent() {
-    this._break = true;
-  }
-
   get request() {
     return this._request;
   }
@@ -46,6 +42,10 @@ class AbstractEvent {
   setResponse(response) {
     this.breakEvent();
     this.response.setResponse(response);
+  }
+
+  breakEvent() {
+    this._break = true;
   }
 
 }
