@@ -15,7 +15,7 @@ let pathLib = require('path');
 class FileTransferServiceProvider extends _AbstractProvider.default {
   registration(App) {
     App.setParam(this.getName(), {
-      path: pathLib.join(App.get('DIR'), '/static/'),
+      path: pathLib.join(App.get('ROOT_DIR'), '/static/'),
       filesWithoutAccess: [],
       defaultContentType: {
         '.css': 'text/css',
@@ -31,7 +31,7 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
   subscribe(App, EventDispatcher) {
     this.config = App.getParam(this.getName());
     EventDispatcher.addEventListener(_KernelEvents.default.REQUEST(), async event => {
-      let path = pathLib.join(this.config.path, event.request.getUri());
+      let path = pathLib.join(this.config.path, event.request.url);
       let isFile = await (async () => {
         return new Promise((resolve, reject) => {
           fsLib.lstat(path, (err, stat) => {

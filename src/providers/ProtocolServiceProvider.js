@@ -42,8 +42,11 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 
                 await App.dispatch(KernelEvents.CONTROLLER(), '');
 
+                let controllerResponse = await App._runControllers(App._getController(request), request);
+
                 await App.dispatch(KernelEvents.RESPONSE(), '');
-                response.setResponse(await App.render('index', {title: 'test'}))
+
+                response.setResponse(controllerResponse);
             }
             catch (e) {
                 App.log(e.message, Log.ERROR());

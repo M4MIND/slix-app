@@ -13,7 +13,7 @@ let pathLib = require('path');
 class TwigServiceProvider extends _AbstractProvider.default {
   registration(App) {
     App.setParam(this.getName(), {
-      path: pathLib.join(App.get('DIR'), '/views/'),
+      path: pathLib.join(App.get('ROOT_DIR'), '/views/'),
       cache: false,
       typeFile: '.twig'
     });

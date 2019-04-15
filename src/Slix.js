@@ -6,22 +6,27 @@ import TwigServiceProvider from "./providers/TwigServiceProvider"
 import ControllerServiceProvider from "./providers/ControllerServiceProvider"
 import FileTransferServiceProvider from "./providers/FileTransferServiceProvider"
 import ExceptionServiceProvider from "./providers/ExceptionServiceProvider"
+import RouterServiceProvider from "./providers/RouterServiceProvider"
 
 let pathLib = require('path');
 
 let boot = false;
 
 export default class Slix extends Container {
+	/**
+	 * @param {string} __dir
+	 * */
 	constructor(__dir = pathLib.dirname(require.main.filename)) {
 		super();
 
-		this.set('DIR', __dir);
+		this.set('ROOT_DIR', __dir);
 		this.registrationProvider(new EventDispatcherServiceProvider());
 		this.registrationProvider(new ExceptionServiceProvider());
 		this.registrationProvider(new LoggerServiceProvider());
 		this.registrationProvider(new FileTransferServiceProvider());
 		this.registrationProvider(new ProtocolServiceProvider());
 		this.registrationProvider(new TwigServiceProvider());
+		this.registrationProvider(new RouterServiceProvider());
 		this.registrationProvider(new ControllerServiceProvider());
 	}
 
