@@ -30,7 +30,7 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
 
   subscribe(App, EventDispatcher) {
     this.config = App.getParam(this.getName());
-    EventDispatcher.addEventListener(_KernelEvents.default.REQUEST(), async event => {
+    EventDispatcher.addEventListener(_KernelEvents.default.REQUEST, async event => {
       let path = pathLib.join(this.config.path, event.request.url);
       let isFile = await (async () => {
         return new Promise((resolve, reject) => {

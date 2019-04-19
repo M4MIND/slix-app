@@ -1,36 +1,55 @@
+import ResponseHeader from "./header/ResponseHeader"
+
 export default class Response {
-    /**
-     * @param {string} content
-     * @param {number} statusCode
-     * @param {Object} headers
-     * */
-    constructor(content = '', statusCode = 200, headers = {}) {
-        this._content = content;
-        this._statusCode = statusCode;
-        this._headers = headers;
-    }
+	/**
+	 * @param {string} content
+	 * @param {number} statusCode
+	 * @param {Object} headers
+	 * */
+	constructor(content = '', statusCode = this.constructor.HTTP_OK, headers = {}) {
+		this.headers = new ResponseHeader(headers);
+		this.content = content;
+		this.statusCode = statusCode;
 
-    get content() {
-        return this._content
-    }
+		return this;
+	}
 
-    set content(value) {
-        this._content = value
-    }
+	get content() {
+		return this._content
+	}
 
-    get statusCode() {
-        return this._statusCode
-    }
+	set content(value) {
+		this._content = value
+	}
 
-    set statusCode(value) {
-        this._statusCode = value
-    }
+	get statusCode() {
+		return this._statusCode
+	}
 
-    get headers() {
-        return this._headers;
-    }
+	set statusCode(value) {
+		this._statusCode = value
+	}
 
-    set headers(value) {
-        this._headers = value;
-    }
+	get headers() {
+		return this._headers;
+	}
+
+	set headers(value) {
+		this._headers = value;
+	}
+
+	setContentType(value) {
+		this.headers['Content-Type'] = value;
+		return this;
+	}
+}
+
+Response.HTTP_OK = 200;
+Response.HTTP_FOUND = 302;
+Response.ContentType = {
+	css: 'text/css',
+	js: 'text/javascript',
+	json: 'application/json',
+	png: 'image/png',
+	jpg: 'image/jpg'
 }

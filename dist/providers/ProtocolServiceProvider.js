@@ -44,19 +44,19 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
 
     this.config.callback = async (err = null, request, response) => {
       try {
-        let event = await App.dispatch(_KernelEvents.default.REQUEST(), new _EventRequest.default(request, response));
+        let event = await App.dispatch(_KernelEvents.default.REQUEST, new _EventRequest.default(request, response));
         if (event.break) return;
 
         let controllers = App._getController(request);
 
-        event = await App.dispatch(_KernelEvents.default.CALL_CONTROLLER(), new _EventCallController.default(request, response, controllers));
+        event = await App.dispatch(_KernelEvents.default.CALL_CONTROLLER, new _EventCallController.default(request, response, controllers));
         if (event.break) return;
         let controllerResponse = await App._runControllers(controllers, request);
-        await App.dispatch(_KernelEvents.default.RESPONSE(), '');
+        await App.dispatch(_KernelEvents.default.RESPONSE, '');
         response.setResponse(controllerResponse);
       } catch (e) {
         App.log(e.message, _Log.default.ERROR());
-        await await App.dispatch(_KernelEvents.default.EXCEPTION(), new _EventException.default(request, response, e));
+        await await App.dispatch(_KernelEvents.default.EXCEPTION, new _EventException.default(request, response, e));
       }
     };
     /** @type {HTTP} */

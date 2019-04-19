@@ -9,6 +9,7 @@ module.exports.FileResponse = require('./dist/core/response/FileResponse').defau
 module.exports.JsonResponse = require('./dist/core/response/JsonResponse').default;
 module.exports.Response = require('./dist/core/response/Response').default;
 module.exports.Request = require('./dist/core/request/Request').default;
+module.exports.Cookie = require('./dist/core/cookie/Cookie').default;
 
 /** API **/
 module.exports.AbstractController = require('./dist/api/AbstractController').default;

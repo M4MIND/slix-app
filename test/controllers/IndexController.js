@@ -1,4 +1,4 @@
-import AbstractController from "../../src/api/AbstractController"
+import {AbstractController, Cookie} from "../../index"
 
 export default class IndexController extends AbstractController {
 	mount() {
@@ -6,8 +6,11 @@ export default class IndexController extends AbstractController {
 	}
 
 	index = async (request) => {
-		return await this.App.render('index', {
+		let response = await this.App.render('index', {
 			title: request.url
 		});
+
+		response.headers.removeCookie('newCookie');
+		return response;
 	}
 }

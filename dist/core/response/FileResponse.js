@@ -6,9 +6,9 @@ var _Response = require("./Response");
 
 class FileResponse extends _Response.default {
   constructor(content, contentType) {
-    super(content, 200, {
-      'Content-Type': contentType
-    });
+    super(content);
+    this.headers.setContentType(contentType);
+    return this;
   }
 
 }

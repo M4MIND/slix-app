@@ -31,23 +31,23 @@ export default class ProtocolServiceProvider extends AbstractProvider {
          * */
         this.config.callback = async (err = null, request, response) => {
             try {
-                let event  = await App.dispatch(KernelEvents.REQUEST(), new EventRequest(request, response));
+                let event  = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request, response));
                 if (event.break) return;
 
                 let controllers = App._getController(request);
 
-                event = await App.dispatch(KernelEvents.CALL_CONTROLLER(), new EventCallController(request, response, controllers));
+                event = await App.dispatch(KernelEvents.CALL_CONTROLLER, new EventCallController(request, response, controllers));
                 if (event.break) return;
 
                 let controllerResponse = await App._runControllers(controllers, request);
 
-                await App.dispatch(KernelEvents.RESPONSE(), '');
+                await App.dispatch(KernelEvents.RESPONSE, '');
 
                 response.setResponse(controllerResponse);
             }
             catch (e) {
                 App.log(e.message, Log.ERROR());
-                await await App.dispatch(KernelEvents.EXCEPTION(), new EventException(request, response, e));
+                await await App.dispatch(KernelEvents.EXCEPTION, new EventException(request, response, e));
             }
         };
         /** @type {HTTP} */

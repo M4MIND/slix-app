@@ -7,7 +7,7 @@ let clean = require('gulp-clean');
 
 let path = {
 	src: {
-		backend: ['./src/**']
+		backend: ['./src/**/*.js']
 	},
 	dist: {
 		backendOut: ['./dist/']

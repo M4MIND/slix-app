@@ -17,12 +17,14 @@ class RequestCookie {
   constructor(request) {
     this.collection = new Map();
 
-    for (let value of request.headers.cookie.split(';')) {
-      value = value.trim().split('=');
-      this.collection.set(value[0], value[1]);
-    }
+    if (request.headers.cookie) {
+      for (let value of request.headers.cookie.split(';')) {
+        value = value.trim().split('=');
+        this.collection.set(value[0], value[1]);
+      }
 
-    delete request.headers.cookie;
+      delete request.headers.cookie;
+    }
   }
   /** @param {string} name */
 

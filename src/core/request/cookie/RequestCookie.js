@@ -2,17 +2,20 @@ import {IncomingMessage} from 'http';
 
 export default class RequestCookie {
 	/** @param {IncomingMessage} request */
-	constructor (request) {
+	constructor(request) {
 		this.collection = new Map();
-		for (let value of request.headers.cookie.split(';')) {
-			value = value.trim().split('=');
-			this.collection.set(value[0], value[1]);
+
+		if (request.headers.cookie) {
+			for (let value of request.headers.cookie.split(';')) {
+				value = value.trim().split('=');
+				this.collection.set(value[0], value[1]);
+			}
+			delete request.headers.cookie
 		}
-		delete request.headers.cookie;
 	}
 
 	/** @param {string} name */
-	get (name) {
+	get(name) {
 		return this.collection.get(name);
 	}
 

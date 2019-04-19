@@ -1,13 +1,11 @@
-import AbstractController from "../../src/api/AbstractController"
+import {AbstractController, Response} from "../../index"
 
 export default class PageNotFound extends AbstractController {
-    mount() {
-        this.ALL('*', this.index);
-    }
+	mount() {
+		this.ALL('*', this.index);
+	}
 
-    index = async (request) => {
-        return await this.App.render('index', {
-            title: request.url
-        })
-    }
+	index = async (request) => {
+		return new Response('All')
+	}
 }

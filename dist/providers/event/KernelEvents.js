@@ -2,27 +2,11 @@
 
 exports.default = void 0;
 
-class KernelEvents {
-  static REQUEST() {
-    return "KernelEvents::REQUEST";
-  }
-
-  static ROUTE() {
-    return "KernelEvents::ROUTE";
-  }
-
-  static CALL_CONTROLLER() {
-    return "KernelEvents::CONTROLLER";
-  }
-
-  static RESPONSE() {
-    return "KernelEvents::RESPONSE";
-  }
-
-  static EXCEPTION() {
-    return "KernelEvents::EXCEPTION";
-  }
-
-}
+class KernelEvents {}
 
 exports.default = KernelEvents;
+KernelEvents.REQUEST = "KernelEvents::REQUEST";
+KernelEvents.ROUTE = "KernelEvents::ROUTE";
+KernelEvents.CALL_CONTROLLER = "KernelEvents::CONTROLLER";
+KernelEvents.RESPONSE = "KernelEvents::RESPONSE";
+KernelEvents.EXCEPTION = "KernelEvents::EXCEPTION";
