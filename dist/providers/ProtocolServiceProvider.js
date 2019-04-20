@@ -20,6 +20,8 @@ var _EventException = require("./event/EventException");
 
 var _EventCallController = require("./event/EventCallController");
 
+var _EventResponse = require("./event/EventResponse");
+
 /**
  * @export
  * @class ProtocolServiceProvider
@@ -52,7 +54,7 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
         event = await App.dispatch(_KernelEvents.default.CALL_CONTROLLER, new _EventCallController.default(request, response, controllers));
         if (event.break) return;
         let controllerResponse = await App._runControllers(controllers, request);
-        await App.dispatch(_KernelEvents.default.RESPONSE, '');
+        await App.dispatch(_KernelEvents.default.RESPONSE, new _EventResponse.default(request, controllerResponse));
         response.setResponse(controllerResponse);
       } catch (e) {
         App.log(e.message, _Log.default.ERROR());

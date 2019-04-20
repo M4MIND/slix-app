@@ -4,7 +4,7 @@ exports.default = void 0;
 
 class AbstractHeader {
   constructor(headers) {
-    this._headers = headers;
+    this.headers = headers;
   }
 
   get headers() {
@@ -22,6 +22,14 @@ class AbstractHeader {
 
   set(key, value) {
     this.headers[key] = value;
+  }
+  /**
+   * @param {string} name
+   * */
+
+
+  get(name) {
+    return this.headers[name] ? this.headers[name] : null;
   }
 
   setContentType(value) {

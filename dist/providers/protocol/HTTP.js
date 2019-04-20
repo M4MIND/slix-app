@@ -33,7 +33,9 @@ class HTTP {
         body.push(data);
       }).on('end', () => {
         req.body = body;
-        config.callback(null, new _Request.default(req), new _PreparationResponse.default(res));
+        let Request = new Request(req);
+        let Response = new _PreparationResponse.default(res, Request);
+        config.callback(null, Request, Response);
       });
     });
     this.http.listen({

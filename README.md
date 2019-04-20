@@ -96,5 +96,12 @@ In controllers that inherit from AbstractController, there is a `mount` method t
 ```javascript
 this.GET('/', this.index); // Mounts a handler to listen for a GET request.
 this.POST('/', this.index); // Mounts a handler to listen for a POST request.
-this.ALL('*', this.index); // Mounts a handler to listen for a ALL request all routes. (GET/POST)
+this.PUT('/', this.index); // Mounts a handler to listen for a PUT request.
+this.DELETE('/', this.index); // Mounts a handler to listen for a DELETE request.
+this.HEAD('/', this.index); // Mounts a handler to listen for a HEAD request.
+this.OPTIONS('/', this.index); // Mounts a handler to listen for a OPTIONS request.
+this.CONNECT('/', this.index); // Mounts a handler to listen for a CONNECT` request.
+this.TRACE('/', this.index); // Mounts a handler to listen for a TRACE request.
+
+this.ALL('/', this.index); // Mounts a handler to listen for a ALL request.
 ```

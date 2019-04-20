@@ -19,7 +19,9 @@ export default class HTTP {
                 body.push(data);
             }).on('end', () => {
                 req.body = body;
-                config.callback(null, new Request(req), new PreparationResponse(res));
+                let Request = new Request(req);
+                let Response = new PreparationResponse(res, Request);
+                config.callback(null, Request, Response);
             })
         });
 

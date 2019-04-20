@@ -7,6 +7,7 @@ import EventRequest from "./event/EventRequest"
 import Log from "./logger/Log"
 import EventException from "./event/EventException"
 import EventCallController from "./event/EventCallController";
+import EventResponse from "./event/EventResponse";
 
 /**
  * @export
@@ -31,7 +32,7 @@ export default class ProtocolServiceProvider extends AbstractProvider {
          * */
         this.config.callback = async (err = null, request, response) => {
             try {
-                let event  = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request, response));
+                let event = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request, response));
                 if (event.break) return;
 
                 let controllers = App._getController(request);
@@ -41,7 +42,7 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 
                 let controllerResponse = await App._runControllers(controllers, request);
 
-                await App.dispatch(KernelEvents.RESPONSE, '');
+                await App.dispatch(KernelEvents.RESPONSE, new EventResponse(request, controllerResponse));
 
                 response.setResponse(controllerResponse);
             }

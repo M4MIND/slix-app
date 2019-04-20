@@ -21,12 +21,12 @@ var _RequestQuery = require("./query/RequestQuery");
 class Request {
   /** @param {IncomingMessage} req */
   constructor(req) {
-    this._req = req;
-    this._url = req.url;
-    this._method = req.method.toUpperCase();
-    this._cookie = new _RequestCookie.default(this.req);
-    this._header = new _RequestHeader.default(this.req);
-    this._query = new _RequestQuery.default(this.req);
+    this.req = req;
+    this.url = req.url;
+    this.method = req.method.toUpperCase();
+    this.cookie = new _RequestCookie.default(this.req);
+    this.header = new _RequestHeader.default(this.req);
+    this.query = new _RequestQuery.default(this.req);
   }
   /** @return {IncomingMessage} */
 

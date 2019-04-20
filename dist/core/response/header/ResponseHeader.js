@@ -49,6 +49,7 @@ class ResponseHeader extends _AbstractHeader.default {
 
   removeCookie(name) {
     this.setCookie(new _Cookie.default(name, null, new Date(0)));
+    return this;
   }
 
   getAllCookies() {

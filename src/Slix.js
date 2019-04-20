@@ -7,44 +7,46 @@ import ControllerServiceProvider from "./providers/ControllerServiceProvider"
 import FileTransferServiceProvider from "./providers/FileTransferServiceProvider"
 import ExceptionServiceProvider from "./providers/ExceptionServiceProvider"
 import RouterServiceProvider from "./providers/RouterServiceProvider"
+import CompressionServiceProvider from "./providers/CompressionServiceProvider";
 
 let pathLib = require('path');
 
 let boot = false;
 
 export default class Slix extends Container {
-	/**
-	 * @param {string} __dir
-	 * */
-	constructor(__dir = pathLib.dirname(require.main.filename)) {
-		super();
+    /**
+     * @param {string} __dir
+     * */
+    constructor(__dir = pathLib.dirname(require.main.filename)) {
+        super();
 
-		this.set('ROOT_DIR', __dir);
-		this.registrationProvider(new EventDispatcherServiceProvider());
-		this.registrationProvider(new ExceptionServiceProvider());
-		this.registrationProvider(new LoggerServiceProvider());
-		this.registrationProvider(new FileTransferServiceProvider());
-		this.registrationProvider(new ProtocolServiceProvider());
-		this.registrationProvider(new TwigServiceProvider());
-		this.registrationProvider(new RouterServiceProvider());
-		this.registrationProvider(new ControllerServiceProvider());
-	}
+        this.set('ROOT_DIR', __dir);
+        this.registrationProvider(new EventDispatcherServiceProvider());
+        this.registrationProvider(new ExceptionServiceProvider());
+        this.registrationProvider(new LoggerServiceProvider());
+        this.registrationProvider(new ProtocolServiceProvider());
+        this.registrationProvider(new CompressionServiceProvider());
+        this.registrationProvider(new FileTransferServiceProvider());
+        this.registrationProvider(new TwigServiceProvider());
+        this.registrationProvider(new RouterServiceProvider());
+        this.registrationProvider(new ControllerServiceProvider());
+    }
 
-	run() {
-		if (!boot) {
-			boot = true;
-			this.boot();
-		}
-	}
+    run() {
+        if (!boot) {
+            boot = true;
+            this.boot();
+        }
+    }
 
-	boot() {
-		if (boot) {
-			for (let provider of this.getAllProviders()) {
-				provider.boot(this);
-			}
-			for (let provider of this.getAllProviders()) {
-				provider.subscribe(this, this.get('eventDispatcher'));
-			}
-		}
-	}
+    boot() {
+        if (boot) {
+            for (let provider of this.getAllProviders()) {
+                provider.boot(this);
+            }
+            for (let provider of this.getAllProviders()) {
+                provider.subscribe(this, this.get('eventDispatcher'));
+            }
+        }
+    }
 }

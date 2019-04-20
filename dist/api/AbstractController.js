@@ -33,20 +33,33 @@ class AbstractController {
       this.App._mount(route, 'POST', handler, this);
     });
 
+    _defineProperty(this, "HEAD", (route, handler) => {
+      this.App._mount(route, 'HEAD', handler, this);
+    });
+
+    _defineProperty(this, "DELETE", (route, handler) => {
+      this.App._mount(route, 'DELETE', handler, this);
+    });
+
+    _defineProperty(this, "CONNECT", (route, handler) => {
+      this.App._mount(route, 'CONNECT', handler, this);
+    });
+
+    _defineProperty(this, "OPTIONS", (route, handler) => {
+      this.App._mount(route, 'OPTIONS', handler, this);
+    });
+
+    _defineProperty(this, "TRACE", (route, handler) => {
+      this.App._mount(route, 'TRACE', handler, this);
+    });
+
     this._App = App;
   }
-  /** @param {Request} request */
-
 
   /** Function: Mounts the controller's request handler. */
   mount() {
     return null;
   }
-  /**
-   * @param {string} route
-   * @param {function} handler
-   * */
-
 
   /** @return {Slix} */
   get App() {
