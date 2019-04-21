@@ -46,7 +46,7 @@ export default class FileTransferServiceProvider extends AbstractProvider {
             })();
 
             if (isFile.status) {
-                await (async () => {
+                return await (async () => {
                     return new Promise((resolve, reject) => {
                         let typeFile = pathLib.extname(path);
                         let contentType = 'text/html';
@@ -58,13 +58,12 @@ export default class FileTransferServiceProvider extends AbstractProvider {
                         }
 
                         fsLib.readFile(path, (err, content) => {
-                            event.setResponse(new FileResponse(content, contentType));
+                            event.response = new FileResponse(content, contentType);
+                            resolve(true)
                         })
                     })
                 })();
             }
-
-            return event;
         }, -20, this);
     }
 }

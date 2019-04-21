@@ -3,11 +3,18 @@ import PreparationResponse from "../../core/response/PreparationResponse"
 import AbstractEvent from "../../api/AbstractEvent"
 
 export default class EventRequest extends AbstractEvent {
-	/**
-	 * @param {Request} request
-	 * @param {PreparationResponse} response
-	 * */
-	constructor(request, response) {
-		super(request, response)
-	}
+    constructor(request) {
+        super(request);
+
+        this.response = null;
+    }
+
+    get response() {
+        return this._response;
+    }
+
+    set response(value) {
+        this._response = value;
+        this.break = true;
+    }
 }

@@ -5,8 +5,17 @@ exports.default = void 0;
 var _AbstractEvent = require("../../api/AbstractEvent");
 
 class EventResponse extends _AbstractEvent.default {
-  constructor(Request, Response) {
-    super(Request, Response);
+  constructor(request, response) {
+    super(request);
+    this.response = response;
+  }
+
+  get response() {
+    return this._response;
+  }
+
+  set response(value) {
+    this._response = value;
   }
 
 }

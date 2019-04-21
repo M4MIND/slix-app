@@ -19,17 +19,13 @@ export default class EventDispatcher {
         return await (async () => {
             for (let listener of this.collection.get(typeEvent)) {
                 /** @type {AbstractEvent}*/
-                event = await listener.callback(event);
 
-                if (!event) {
-                    throw new Error(`The provider did not return the event object. Event: ${typeEvent}\r\n${JSON.stringify(listener, null, '\t')}`);
-                }
+                await listener.callback(event);
 
                 if (event.break) {
-                    return event;
+                    break;
                 }
             }
-            return event;
         })();
     };
 

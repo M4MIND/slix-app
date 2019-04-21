@@ -3,16 +3,11 @@ import FileResponse from "./FileResponse"
 import RedirectResponse from "./RedirectResponse"
 import Response from "./Response"
 import JsonResponse from "./JsonResponse"
-import Request from "../request/Request";
 
 export default class PreparationResponse {
-	/**
-	 * @param {ServerResponse} response
-	 * @param {Request} request
-	 * */
-	constructor(response, request) {
-		this.res = response;
-        this.request = request;
+	/** @param {ServerResponse} res */
+	constructor(res) {
+		this._res = res
 	}
 
 	/** @return {ServerResponse} */
@@ -28,16 +23,7 @@ export default class PreparationResponse {
 		this._res = value
 	}
 
-
-    get request() {
-        return this._request;
-    }
-
-    set request(value) {
-        this._request = value;
-    }
-
-    /** @param {Response|RedirectResponse|JsonResponse|FileResponse} response */
+	/** @param {Response|RedirectResponse|JsonResponse|FileResponse} response */
 	setResponse(response) {
 		this.res.writeHead(response.statusCode, response.headers.preparationHeaders());
 		this.write(response.content);

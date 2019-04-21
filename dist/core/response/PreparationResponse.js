@@ -20,16 +20,10 @@ var _Response = require("./Response");
 
 var _JsonResponse = require("./JsonResponse");
 
-var _Request = require("../request/Request");
-
 class PreparationResponse {
-  /**
-   * @param {ServerResponse} response
-   * @param {Request} request
-   * */
-  constructor(response, request) {
-    this.res = response;
-    this.request = request;
+  /** @param {ServerResponse} res */
+  constructor(res) {
+    this._res = res;
   }
   /** @return {ServerResponse} */
 
@@ -46,14 +40,6 @@ class PreparationResponse {
     }
 
     this._res = value;
-  }
-
-  get request() {
-    return this._request;
-  }
-
-  set request(value) {
-    this._request = value;
   }
   /** @param {Response|RedirectResponse|JsonResponse|FileResponse} response */
 

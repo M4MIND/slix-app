@@ -1,9 +1,18 @@
 import AbstractEvent from "../../api/AbstractEvent"
 
 export default class EventException extends AbstractEvent {
-    constructor(request, response, ex) {
-        super(request, response);
-        this._ex = ex
+    constructor(request, ex) {
+        super(request);
+        this.ex = ex;
+        this.response = null;
+    }
+
+    get response() {
+        return this._response;
+    }
+
+    set response(value) {
+        this._response = value;
     }
 
     get ex() {

@@ -1,6 +1,6 @@
 import AbstractEvent from "../../api/AbstractEvent";
 
-export default class EventCallController extends AbstractEvent {
+export default class EventControllerArguments extends AbstractEvent {
     constructor(request, controller) {
         super(request);
         this.controller = controller;

@@ -12,7 +12,7 @@ function _http() {
   return data;
 }
 
-var _Request = require("../../core/request/Request");
+var _Request2 = require("../../core/request/Request");
 
 var _PreparationResponse = require("../../core/response/PreparationResponse");
 
@@ -33,9 +33,12 @@ class HTTP {
         body.push(data);
       }).on('end', () => {
         req.body = body;
-        let Request = new Request(req);
-        let Response = new _PreparationResponse.default(res, Request);
-        config.callback(null, Request, Response);
+
+        let _Request = new _Request2.default(req);
+
+        let _Response = new _PreparationResponse.default(res, _Request);
+
+        config.processingRequest(null, _Request, _Response);
       });
     });
     this.http.listen({

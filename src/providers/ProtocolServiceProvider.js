@@ -8,6 +8,8 @@ import Log from "./logger/Log"
 import EventException from "./event/EventException"
 import EventCallController from "./event/EventCallController";
 import EventResponse from "./event/EventResponse";
+import EventControllerArguments from "./event/EventControllerArguments";
+import Response from "../core/response/Response";
 
 /**
  * @export
@@ -15,11 +17,13 @@ import EventResponse from "./event/EventResponse";
  * */
 export default class ProtocolServiceProvider extends AbstractProvider {
     registration(App) {
+        this.App = App;
+
         App.setParam(this.getName(), {
             protocol: HTTP,
             host: 'localhost',
             port: 3000
-        })
+        });
     }
 
     boot(App) {
@@ -28,30 +32,117 @@ export default class ProtocolServiceProvider extends AbstractProvider {
          * @callback
          * @param {*} err
          * @param {Request} request
-         * @param {PreparationResponse} response
+         * @param {PreparationResponse} preparationResponse
          * */
-        this.config.callback = async (err = null, request, response) => {
+        this.config.callback = async (request, preparationResponse) => {
+
             try {
-                let event = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request, response));
-                if (event.break) return;
+                let $event = new EventRequest(request);
 
-                let controllers = App._getController(request);
+                if ($event.request) {
+                    return this.filterResponse(request, preparationResponse);
+                }
 
-                event = await App.dispatch(KernelEvents.CALL_CONTROLLER, new EventCallController(request, response, controllers));
-                if (event.break) return;
+            }
+            catch (e) {
+                console.dir(e);
+            }
 
-                let controllerResponse = await App._runControllers(controllers, request);
+            /*try {
+                let event = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request));
 
-                await App.dispatch(KernelEvents.RESPONSE, new EventResponse(request, controllerResponse));
+                if (!preparationResponse.response) {
 
-                response.setResponse(controllerResponse);
+                    let controllers = App._getController(request);
+
+                    event = await App.dispatch(KernelEvents.CALL_CONTROLLER, new EventCallController(request, preparationResponse, controllers));
+
+                    let controllerResponse = await App._runControllers(controllers, request);
+
+                    await App.dispatch(KernelEvents.RESPONSE, new EventResponse(request, controllerResponse));
+
+                    preparationResponse.setResponse(controllerResponse);
+                }
+
+                preparationResponse.end();
             }
             catch (e) {
                 App.log(e.message, Log.ERROR());
-                await await App.dispatch(KernelEvents.EXCEPTION, new EventException(request, response, e));
-            }
+                await await App.dispatch(KernelEvents.EXCEPTION, new EventException(request, preparationResponse, e));
+            }*/
         };
+
+        /**
+         * @callback
+         * @param {*} err
+         * @param {Request} request
+         * @param {PreparationResponse} preparationResponse
+         * */
+        this.config.processingRequest = this.processingRequest;
+
         /** @type {HTTP} */
         new this.config.protocol(this.config);
+    }
+
+    processingRequest = async (err, request, preparationResponse) => {
+        preparationResponse.setResponse(await this.handleRaw(request));
+    };
+
+    /**
+     * @callback
+     * @param {Request} request
+     * */
+    handleRaw = async (request) => {
+        try {
+
+            let $event = new EventRequest(request);
+            await this.App.dispatch(KernelEvents.REQUEST, $event);
+
+            if ($event.response) {
+                return this.filterResponse(request, $event.response);
+            }
+
+            let controller = this.App._getController(request);
+
+            if (controller === false) {
+                throw new Error(`Unable to find the controller for path "${request.url}". The route is wrongly configured.`)
+            }
+
+            $event = new EventCallController(request, controller);
+            this.App.dispatch(KernelEvents.CALL_CONTROLLER, $event);
+            controller = $event.controller;
+
+            $event = new EventControllerArguments(request, controller);
+            this.App.dispatch(KernelEvents.CONTROLLER_ARGUMENTS, $event);
+
+            controller = $event.controller;
+
+            let response = await this.App._runControllers(controller, request);
+
+            return this.filterResponse(request, response);
+
+        } catch (e) {
+            let $event = new EventException(request, e);
+            await this.App.dispatch(KernelEvents.EXCEPTION, $event);
+
+            if ($event.response) {
+                return this.filterResponse(request, $event.response);
+            }
+
+            return this.filterResponse(request, new Response('Error', 500));
+        }
+    };
+
+    filterResponse(request, response) {
+
+        let $event = new EventResponse(request, response);
+        this.App.dispatch(KernelEvents.RESPONSE, $event);
+        this.finishRequest(request);
+
+        return $event.response;
+    }
+
+
+    finishRequest(request) {
     }
 }

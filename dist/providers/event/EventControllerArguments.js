@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _AbstractEvent = require("../../api/AbstractEvent");
 
-class EventCallController extends _AbstractEvent.default {
+class EventControllerArguments extends _AbstractEvent.default {
   constructor(request, controller) {
     super(request);
     this.controller = controller;
@@ -20,4 +20,4 @@ class EventCallController extends _AbstractEvent.default {
 
 }
 
-exports.default = EventCallController;
+exports.default = EventControllerArguments;

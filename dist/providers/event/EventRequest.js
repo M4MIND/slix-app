@@ -9,12 +9,18 @@ var _PreparationResponse = require("../../core/response/PreparationResponse");
 var _AbstractEvent = require("../../api/AbstractEvent");
 
 class EventRequest extends _AbstractEvent.default {
-  /**
-   * @param {Request} request
-   * @param {PreparationResponse} response
-   * */
-  constructor(request, response) {
-    super(request, response);
+  constructor(request) {
+    super(request);
+    this.response = null;
+  }
+
+  get response() {
+    return this._response;
+  }
+
+  set response(value) {
+    this._response = value;
+    this.break = true;
   }
 
 }

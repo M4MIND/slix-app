@@ -28,6 +28,13 @@ class Container {
 
     provider.registration(this);
   }
+  /** @param {AbstractProvider} provider */
+
+
+  removeProvider(provider) {
+    this.providers.delete(provider.getName());
+    this.params.delete(provider.getName());
+  }
   /** @return [AbstractProvider]*/
 
 
