@@ -104,7 +104,7 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 
             let controller = this.App._getController(request);
 
-            if (controller === false) {
+            if (!controller) {
                 throw new Error(`Unable to find the controller for path "${request.url}". The route is wrongly configured.`)
             }
 

@@ -29,8 +29,6 @@ export default class ControllerServiceProvider extends AbstractProvider {
             if (controllerResponse) {
                 return controllerResponse;
             }
-
-            throw new Error('The controller did not return an answer.');
         }
     }
 

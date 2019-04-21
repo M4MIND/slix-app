@@ -70,8 +70,6 @@ class RouterServiceProvider extends _AbstractProvider.default {
           return this.collection.get('*').get('*');
         }
       }
-
-      throw new Error('Not mounted controller serving 404 pages');
     };
   }
 

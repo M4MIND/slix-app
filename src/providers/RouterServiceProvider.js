@@ -64,9 +64,7 @@ export default class RouterServiceProvider extends AbstractProvider {
                 if (this.collection.get('*').has('*')) {
                     return this.collection.get('*').get('*');
                 }
-
             }
-            throw new Error('Not mounted controller serving 404 pages')
         }
     }
 }

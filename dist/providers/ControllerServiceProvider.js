@@ -34,8 +34,6 @@ class ControllerServiceProvider extends _AbstractProvider.default {
       if (controllerResponse) {
         return controllerResponse;
       }
-
-      throw new Error('The controller did not return an answer.');
     };
   }
 
