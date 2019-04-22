@@ -6,11 +6,8 @@ export default class IndexController extends AbstractController {
 	}
 
 	index = async (request) => {
-		let response = await this.App.render('index', {
+		return await this.App.render('index', {
 			title: request.url
 		});
-
-		response.headers.removeCookie('newCookie');
-		return response;
 	}
 }

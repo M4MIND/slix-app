@@ -15,7 +15,8 @@ export default class FileTransferServiceProvider extends AbstractProvider {
                 '.js': 'text/javascript',
                 '.json': 'application/json',
                 '.png': 'image/png',
-                '.jpg': 'image/jpg'
+                '.jpg': 'image/jpg',
+                '.ico': 'image/x-icon'
             },
             customContentType: {},
         })

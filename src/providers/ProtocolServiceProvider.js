@@ -135,7 +135,6 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 	};
 
 	filterResponse = async (request, response) => {
-
 		let $event = new EventResponse(request, response);
 		await this.App.dispatch(KernelEvents.RESPONSE, $event);
 		await this.finishRequest(request);

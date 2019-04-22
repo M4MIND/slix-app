@@ -26,6 +26,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.4.0",
     "@babel/polyfill": "^7.4.3",
     "@babel/preset-env": "^7.4.2",
+    "babel-plugin-add-jsdoc-properties": "^0.1.4",
     "babel-plugin-add-module-exports": "^1.0.0",
     "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
@@ -37,7 +38,6 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "babel-plugin-add-jsdoc-properties": "^0.1.4",
     "http": "0.0.0",
     "natives": "^1.1.6",
     "twig": "^1.13.2"

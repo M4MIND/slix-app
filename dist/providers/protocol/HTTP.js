@@ -25,7 +25,7 @@ class HTTP {
    * }} config
    * */
   constructor(config) {
-    this.http = (0, _http().createServer)((req, res) => {
+    this.http = (0, _http().createServer)(async (req, res) => {
       let body = [];
       req.on('err', err => {
         config.callback(err);
@@ -38,7 +38,9 @@ class HTTP {
 
         let _Response = new _PreparationResponse.default(res, _Request);
 
+        console.log("Start: ", _Request.url);
         config.processingRequest(null, _Request, _Response);
+        console.log("End: ", _Request.url);
       });
     });
     this.http.listen({

@@ -17,6 +17,7 @@ module.exports.AbstractProvider = require('./dist/api/AbstractProvider').default
 module.exports.AbstractEvent = require('./dist/api/AbstractEvent').default;
 
 /** PROVIDERS **/
+module.exports.CompressionResponseServiceProvider = require('./dist/providers/CompressionResponseServerProvider').default;
 module.exports.EventDispatcherServiceProvider = require('./dist/providers/EventDispatcherServiceProvider').default;
 module.exports.FileTransferServiceProvider = require('./dist/providers/FileTransferServiceProvider').default;
 module.exports.ControllerServiceProvider = require('./dist/providers/ControllerServiceProvider').default;
