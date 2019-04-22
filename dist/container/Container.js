@@ -9,6 +9,30 @@ class Container {
     this.providers = new Map();
     this.params = new Map();
   }
+  /** @return {Map<string, AbstractProvider>} */
+
+
+  get providers() {
+    return this._providers;
+  }
+  /** @param {Map<string, AbstractProvider>} value */
+
+
+  set providers(value) {
+    this._providers = this._providers ? this._providers : value;
+  }
+  /** @return {Map<string, Object>} */
+
+
+  get params() {
+    return this._params;
+  }
+  /** @param {Map<string, Object>} value */
+
+
+  set params(value) {
+    this._params = this._params ? this._params : value;
+  }
   /**
    * @param {AbstractProvider} provider
    * @param {Object|?} value
@@ -18,8 +42,8 @@ class Container {
   registrationProvider(provider, value = {}) {
     value.__provider = provider.getName();
 
-    if (!this.providers.has(provider.getName())) {
-      this.providers.set(provider.getName(), provider);
+    if (!this._providers.has(provider.getName())) {
+      this._providers.set(provider.getName(), provider);
     }
 
     if (value) {
@@ -32,18 +56,19 @@ class Container {
 
 
   removeProvider(provider) {
-    this.providers.delete(provider.getName());
-    this.params.delete(provider.getName());
+    this._providers.get(provider.getName()).remove();
   }
   /** @return [AbstractProvider]*/
 
 
   getAllProviders() {
-    return [...this.providers.values()];
+    return [...this._providers.values()];
   }
+  /** @return [Object] */
+
 
   getAllParams() {
-    return [...this.params.values()];
+    return [...this._params.values()];
   }
   /**
    * @param {string} key
@@ -52,12 +77,12 @@ class Container {
 
 
   setParam(key, value) {
-    if (!this.params.has(key)) {
-      this.params.set(key, value);
+    if (!this._params.has(key)) {
+      this._params.set(key, value);
     } else {
-      if (typeof this.params.get(key) === "object") {
+      if (typeof this._params.get(key) === "object") {
         for (let property of Object.keys(value)) {
-          this.params.get(key)[property] = value[property];
+          this._params.get(key)[property] = value[property];
         }
       }
     }
@@ -66,8 +91,8 @@ class Container {
 
 
   getParam(key) {
-    if (this.params.has(key)) {
-      return this.params.get(key);
+    if (this._params.has(key)) {
+      return this._params.get(key);
     }
 
     return null;

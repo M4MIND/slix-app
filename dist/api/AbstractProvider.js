@@ -25,6 +25,13 @@ class AbstractProvider {
 
 
   subscribe(App, EventDispatcher) {}
+  /** @param {Slix} App */
+
+
+  remove(App) {
+    App.providers.delete(this.getName());
+    App.params.delete(this.getName());
+  }
   /** @return {string} */
 
 

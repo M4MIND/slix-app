@@ -27,9 +27,15 @@ module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceProvid
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcher = require('./dist/providers/event/EventDispatcher').default;
-module.exports.EventException = require('./dist/providers/event/EventException').default;
-module.exports.EventRequest = require('./dist/providers/event/EventRequest').default;
-module.exports.KernelEvents = require('./dist/providers/event/KernelEvents').default;
 module.exports.LogFile = require('./dist/providers/logger/LogFile').default;
 module.exports.HTTP = require('./dist/providers/protocol/HTTP').default;
 module.exports.Log = require('./dist/providers/logger/Log').default;
+
+/** EVENTS */
+module.exports.EventControllerArguments = require('./dist/providers/event/EventControllerArguments').default;
+module.exports.EventCallController = require('./dist/providers/event/EventCallController').default;
+module.exports.EventException = require('./dist/providers/event/EventException').default;
+module.exports.EventTerminate = require('./dist/providers/event/EventTerminate').default;
+module.exports.EventResponse = require('./dist/providers/event/EventResponse').default;
+module.exports.EventRequest = require('./dist/providers/event/EventRequest').default;
+module.exports.KernelEvents = require('./dist/providers/event/KernelEvents').default;

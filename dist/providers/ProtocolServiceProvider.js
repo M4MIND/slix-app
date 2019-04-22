@@ -26,6 +26,8 @@ var _EventControllerArguments = require("./event/EventControllerArguments");
 
 var _Response = require("../core/response/Response");
 
+var _EventTerminate = require("./event/EventTerminate");
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
@@ -46,7 +48,7 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
         await this.App.dispatch(_KernelEvents.default.REQUEST, $event);
 
         if ($event.response) {
-          return this.filterResponse(request, $event.response);
+          return await this.filterResponse(request, $event.response);
         }
 
         let controller = this.App._getController(request);
@@ -62,17 +64,29 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
         this.App.dispatch(_KernelEvents.default.CONTROLLER_ARGUMENTS, $event);
         controller = $event.controller;
         let response = await this.App._runControllers(controller, request);
-        return this.filterResponse(request, response);
+        return await this.filterResponse(request, response);
       } catch (e) {
         let $event = new _EventException.default(request, e);
         await this.App.dispatch(_KernelEvents.default.EXCEPTION, $event);
 
         if ($event.response) {
-          return this.filterResponse(request, $event.response);
+          return await this.filterResponse(request, $event.response);
         }
 
-        return this.filterResponse(request, new _Response.default('Error', 500));
+        return await this.filterResponse(request, new _Response.default('Error', 500));
       }
+    });
+
+    _defineProperty(this, "filterResponse", async (request, response) => {
+      let $event = new _EventResponse.default(request, response);
+      await this.App.dispatch(_KernelEvents.default.RESPONSE, $event);
+      await this.finishRequest(request);
+      return $event.response;
+    });
+
+    _defineProperty(this, "finishRequest", async request => {
+      let $event = new _EventTerminate.default(request);
+      await this.App.dispatch(_KernelEvents.default.TERMINATE, $event);
     });
   }
 
@@ -105,19 +119,19 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
         console.dir(e);
       }
       /*try {
-          let event = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request));
-            if (!preparationResponse.response) {
-                let controllers = App._getController(request);
-                event = await App.dispatch(KernelEvents.CALL_CONTROLLER, new EventCallController(request, preparationResponse, controllers));
-                let controllerResponse = await App._runControllers(controllers, request);
-                await App.dispatch(KernelEvents.RESPONSE, new EventResponse(request, controllerResponse));
-                preparationResponse.setResponse(controllerResponse);
-          }
-            preparationResponse.end();
+      	let event = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request));
+      			if (!preparationResponse.response) {
+      				let controllers = App._getController(request);
+      				event = await App.dispatch(KernelEvents.CALL_CONTROLLER, new EventCallController(request, preparationResponse, controllers));
+      				let controllerResponse = await App._runControllers(controllers, request);
+      				await App.dispatch(KernelEvents.RESPONSE, new EventResponse(request, controllerResponse));
+      				preparationResponse.setResponse(controllerResponse);
+      	}
+      			preparationResponse.end();
       }
       catch (e) {
-          App.log(e.message, Log.ERROR());
-          await await App.dispatch(KernelEvents.EXCEPTION, new EventException(request, preparationResponse, e));
+      	App.log(e.message, Log.ERROR());
+      	await await App.dispatch(KernelEvents.EXCEPTION, new EventException(request, preparationResponse, e));
       }*/
 
     };
@@ -134,15 +148,6 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
 
     new this.config.protocol(this.config);
   }
-
-  filterResponse(request, response) {
-    let $event = new _EventResponse.default(request, response);
-    this.App.dispatch(_KernelEvents.default.RESPONSE, $event);
-    this.finishRequest(request);
-    return $event.response;
-  }
-
-  finishRequest(request) {}
 
 }
 
