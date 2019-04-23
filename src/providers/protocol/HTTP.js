@@ -22,9 +22,7 @@ export default class HTTP {
 				let _Request = new Request(req);
 				let _Response = new PreparationResponse(res, _Request);
 
-				console.log("Start: ", _Request.url);
 				config.processingRequest(null, _Request, _Response);
-				console.log("End: ", _Request.url);
 			})
 		});
 

@@ -17,15 +17,21 @@ export default class EventDispatcher {
         }
 
         return await (async () => {
-            for (let listener of this.collection.get(typeEvent)) {
-                /** @type {AbstractEvent}*/
+            let collection = this.collection.get(typeEvent).map(item => item.callback(event));
+
+            await Promise.all(collection).then(result => {}).catch(err => {
+                throw err;
+            });
+
+            /*for (let listener of this.collection.get(typeEvent)) {
+                /!** @type {AbstractEvent}*!/
 
                 await listener.callback(event);
 
                 if (event.break) {
                     break;
                 }
-            }
+            }*/
         })();
     };
 

@@ -29,59 +29,7 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 
 	boot(App) {
 		this.config = App.getParam(this.getName());
-		/**
-		 * @callback
-		 * @param {*} err
-		 * @param {Request} request
-		 * @param {PreparationResponse} preparationResponse
-		 * */
-		this.config.callback = async (request, preparationResponse) => {
-
-			try {
-				let $event = new EventRequest(request);
-
-				if ($event.request) {
-					return this.filterResponse(request, preparationResponse);
-				}
-
-			}
-			catch (e) {
-				console.dir(e);
-			}
-
-			/*try {
-				let event = await App.dispatch(KernelEvents.REQUEST, new EventRequest(request));
-
-				if (!preparationResponse.response) {
-
-					let controllers = App._getController(request);
-
-					event = await App.dispatch(KernelEvents.CALL_CONTROLLER, new EventCallController(request, preparationResponse, controllers));
-
-					let controllerResponse = await App._runControllers(controllers, request);
-
-					await App.dispatch(KernelEvents.RESPONSE, new EventResponse(request, controllerResponse));
-
-					preparationResponse.setResponse(controllerResponse);
-				}
-
-				preparationResponse.end();
-			}
-			catch (e) {
-				App.log(e.message, Log.ERROR());
-				await await App.dispatch(KernelEvents.EXCEPTION, new EventException(request, preparationResponse, e));
-			}*/
-		};
-
-		/**
-		 * @callback
-		 * @param {*} err
-		 * @param {Request} request
-		 * @param {PreparationResponse} preparationResponse
-		 * */
 		this.config.processingRequest = this.processingRequest;
-
-		/** @type {HTTP} */
 		new this.config.protocol(this.config);
 	}
 

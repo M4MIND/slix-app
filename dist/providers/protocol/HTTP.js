@@ -38,9 +38,7 @@ class HTTP {
 
         let _Response = new _PreparationResponse.default(res, _Request);
 
-        console.log("Start: ", _Request.url);
         config.processingRequest(null, _Request, _Response);
-        console.log("End: ", _Request.url);
       });
     });
     this.http.listen({
