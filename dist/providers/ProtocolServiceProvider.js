@@ -78,6 +78,7 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
     });
 
     _defineProperty(this, "filterResponse", async (request, response) => {
+      if (!response) throw new Error('Response object not found!');
       let $event = new _EventResponse.default(request, response);
       await this.App.dispatch(_KernelEvents.default.RESPONSE, $event);
       await this.finishRequest(request);

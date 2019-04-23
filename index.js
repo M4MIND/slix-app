@@ -20,6 +20,7 @@ module.exports.AbstractEvent = require('./dist/api/AbstractEvent').default;
 module.exports.CompressionResponseServiceProvider = require('./dist/providers/CompressionResponseServerProvider').default;
 module.exports.EventDispatcherServiceProvider = require('./dist/providers/EventDispatcherServiceProvider').default;
 module.exports.FileTransferServiceProvider = require('./dist/providers/FileTransferServiceProvider').default;
+module.exports.ValidateURIServiceProvider = require('./dist/providers/ValidateURIServiceProvider').default;
 module.exports.ControllerServiceProvider = require('./dist/providers/ControllerServiceProvider').default;
 module.exports.ProtocolServiceProvider = require('./dist/providers/ProtocolServiceProvider').default;
 module.exports.RouterServiceProvider = require('./dist/providers/RouterServiceProvider').default;
@@ -28,6 +29,7 @@ module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceProvid
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcher = require('./dist/providers/event/EventDispatcher').default;
+module.exports.Validator = require('./dist/providers/validator/Validator').default;
 module.exports.LogFile = require('./dist/providers/logger/LogFile').default;
 module.exports.HTTP = require('./dist/providers/protocol/HTTP').default;
 module.exports.Log = require('./dist/providers/logger/Log').default;

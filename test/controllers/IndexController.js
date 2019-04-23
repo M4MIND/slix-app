@@ -7,7 +7,7 @@ export default class IndexController extends AbstractController {
 
 	index = async (request) => {
 		return await this.App.render('index', {
-			title: request.url
+			title: 'Index page'
 		});
 	}
 }

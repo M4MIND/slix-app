@@ -2,7 +2,7 @@ INSTALLATION:
 -------------
 
 Create a new project using the npm package manager.<br>
-Then install the Slix package using the npm i command:<br>
+Then install the Slix<br>
 
 ```bash
 npm install https://github.com/M4MIND/Slix.git

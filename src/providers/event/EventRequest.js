@@ -5,7 +5,6 @@ import AbstractEvent from "../../api/AbstractEvent"
 export default class EventRequest extends AbstractEvent {
     constructor(request) {
         super(request);
-
         this.response = null;
     }
 
@@ -14,7 +13,6 @@ export default class EventRequest extends AbstractEvent {
     }
 
     set response(value) {
-        this._response = value;
-        this.break = true;
+        this._response = this._response ? this._response : value;
     }
 }

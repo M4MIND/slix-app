@@ -19,8 +19,7 @@ class EventRequest extends _AbstractEvent.default {
   }
 
   set response(value) {
-    this._response = value;
-    this.break = true;
+    this._response = this._response ? this._response : value;
   }
 
 }

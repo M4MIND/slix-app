@@ -18,6 +18,8 @@ export default class RouterServiceProvider extends AbstractProvider {
          * @param {AbstractController} controller
          * */
         App._mount = (route, method, handler, controller = null) => {
+            route = route.replace(new RegExp(':(\\w+):', 'g'), '');
+
             if (!this.collection.has(route)) {
                 this.collection.set(route, new Map());
             }
@@ -47,6 +49,8 @@ export default class RouterServiceProvider extends AbstractProvider {
 
                 return b - a;
             }));
+
+            console.dir(this.collection);
         };
 
         /**

@@ -22,6 +22,8 @@ var _RouterServiceProvider = require("./providers/RouterServiceProvider");
 
 var _CompressionResponseServiceProvider = require("./providers/CompressionResponseServiceProvider");
 
+var _ValidateURIServiceProvider = require("./providers/ValidateURIServiceProvider");
+
 let pathLib = require('path');
 
 let boot = false;
@@ -33,10 +35,12 @@ class Slix extends _Container.default {
   constructor(__dir = pathLib.dirname(require.main.filename)) {
     super();
     this.set('ROOT_DIR', __dir);
+    this.set('_DEBUG', true);
     this.registrationProvider(new _EventDispatcherServiceProvider.default());
     this.registrationProvider(new _ExceptionServiceProvider.default());
     this.registrationProvider(new _LoggerServiceProvider.default());
     this.registrationProvider(new _ProtocolServiceProvider.default());
+    this.registrationProvider(new _ValidateURIServiceProvider.default());
     this.registrationProvider(new _CompressionResponseServiceProvider.default());
     this.registrationProvider(new _FileTransferServiceProvider.default());
     this.registrationProvider(new _TwigServiceProvider.default());

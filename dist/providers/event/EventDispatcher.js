@@ -20,13 +20,6 @@ class EventDispatcher {
         await Promise.all(collection).then(result => {}).catch(err => {
           throw err;
         });
-        /*for (let listener of this.collection.get(typeEvent)) {
-            /!** @type {AbstractEvent}*!/
-              await listener.callback(event);
-              if (event.break) {
-                break;
-            }
-        }*/
       })();
     });
 
