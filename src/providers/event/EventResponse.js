@@ -12,6 +12,6 @@ export default class EventResponse extends AbstractEvent {
     }
 
     set response(value) {
-        this._response = value;
+		this._response = this._response ? this._response : value;
     }
 }

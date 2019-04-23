@@ -8,7 +8,7 @@ class EventException extends _AbstractEvent.default {
   constructor(request, ex) {
     super(request);
     this.ex = ex;
-    this.response = null;
+    this.response = undefined;
   }
 
   get response() {
@@ -16,7 +16,7 @@ class EventException extends _AbstractEvent.default {
   }
 
   set response(value) {
-    this._response = value;
+    this._response = this._response ? this._response : value;
   }
 
   get ex() {

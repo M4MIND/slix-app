@@ -6,7 +6,7 @@ export default class RedirectResponse extends Response {
 	 * @param {number} status
 	 * @param {Object} headers
 	 * */
-	constructor(url, status = Response.HTTP_FOUND, headers = {}) {
+	constructor(url, status = Response.HTTP_FOUND, headers = {Location: url}) {
 		super('', status, headers);
 		this._targetUrl = null;
 		this.targetUrl = url;
