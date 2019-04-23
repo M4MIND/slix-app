@@ -1,5 +1,5 @@
-INSTALLATION:
--------------
+INSTALLATION
+------------
 
 Create a new project using the npm package manager.<br>
 Then install the Slix<br>
@@ -8,8 +8,8 @@ Then install the Slix<br>
 npm install https://github.com/M4MIND/Slix.git
 ```  
     
-QUICK START:
-------------
+QUICK START
+-----------
 
 Create new file in your project `index.js` and add in this code:
 
@@ -35,8 +35,8 @@ Then add new folders `views`, `static`, `controllers`
 + `controllers` - The folder in which the controllers are stored
 + `static` - Folder in which various files are stored
 
-CREATE CONTROLLERS:
--------------------
+CREATE CONTROLLERS
+------------------
 
 In folder `controllers` create files `IndexController.js` and `PageNotFoundController.js`<br>
 then add in files this code:
@@ -68,13 +68,13 @@ export default class PageNotFoundController extends AbstractController {
 	}
 
 	index = async (request) => {
-		return new Response('Error 404')
+		return new Response('Error 404', Response.HTTP_NOT_FOUND)
 	}
 }
 ```
 
-RENDERING TEMPLATES:
---------------------
+RENDERING TEMPLATES
+-------------------
 > This framework use `Twig template engine` [Twig](https://twig.symfony.com/)
 
 Create file `index.twig` in folder `views` and add this code in method controller:
@@ -88,8 +88,8 @@ index = async (request) => {
 }
 ```
 
-ROUTING:
---------
+ROUTING
+-------
 
 In controllers that inherit from AbstractController, there is a `mount` method that performs controller mounting
 
