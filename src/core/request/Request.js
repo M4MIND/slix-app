@@ -8,10 +8,11 @@ export default class Request {
     constructor(req) {
         this.req = req;
         this.url = req.url;
+        this._path = this.url.match(new RegExp('([^?#]*)', 'g'))[0];
         this.method = req.method.toUpperCase();
         this.cookie = new RequestCookie(this.req);
         this.header = new RequestHeader(this.req);
-        this.query = new RequestQuery(this.req);
+        this.query = new RequestQuery();
     }
 
     /** @return {IncomingMessage} */
@@ -70,5 +71,15 @@ export default class Request {
 
     set query(value) {
         this._query = value
+    }
+
+    /** @return {string} */
+    get path() {
+        return this._path;
+    }
+
+    /** @param {string} value */
+    set path(value) {
+        this._path = value;
     }
 }

@@ -6,6 +6,8 @@ var _Slix = require("../Slix");
 
 var _Request = require("../core/request/Request");
 
+var _Router = require("../providers/router/Router");
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class AbstractController {
@@ -22,35 +24,35 @@ class AbstractController {
     });
 
     _defineProperty(this, "ALL", (route, handler) => {
-      this.App._mount(route, '*', handler, this);
+      this.App._mount(route, _Router.default.METHOD.ALL, handler, this);
     });
 
     _defineProperty(this, "GET", (route, handler) => {
-      this.App._mount(route, 'GET', handler, this);
+      this.App._mount(route, _Router.default.METHOD.GET, handler, this);
     });
 
     _defineProperty(this, "POST", (route, handler) => {
-      this.App._mount(route, 'POST', handler, this);
+      this.App._mount(route, _Router.default.METHOD.POST, handler, this);
     });
 
     _defineProperty(this, "HEAD", (route, handler) => {
-      this.App._mount(route, 'HEAD', handler, this);
+      this.App._mount(route, _Router.default.METHOD.HEAD, handler, this);
     });
 
     _defineProperty(this, "DELETE", (route, handler) => {
-      this.App._mount(route, 'DELETE', handler, this);
+      this.App._mount(route, _Router.default.METHOD.DELETE, handler, this);
     });
 
     _defineProperty(this, "CONNECT", (route, handler) => {
-      this.App._mount(route, 'CONNECT', handler, this);
+      this.App._mount(route, _Router.default.METHOD.CONNECT, handler, this);
     });
 
     _defineProperty(this, "OPTIONS", (route, handler) => {
-      this.App._mount(route, 'OPTIONS', handler, this);
+      this.App._mount(route, _Router.default.METHOD.OPTIONS, handler, this);
     });
 
     _defineProperty(this, "TRACE", (route, handler) => {
-      this.App._mount(route, 'TRACE', handler, this);
+      this.App._mount(route, _Router.default.METHOD.TRACE, handler, this);
     });
 
     this._App = App;

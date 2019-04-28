@@ -1,5 +1,7 @@
 import AbstractProvider from "../api/AbstractProvider"
 import AbstractController from "../api/AbstractController"
+import Route from "./router/Route";
+import Request from "../core/request/Request";
 
 let pathLib = require('path');
 let fsLib = require('fs');
@@ -10,12 +12,25 @@ export default class ControllerServiceProvider extends AbstractProvider {
             path: pathLib.join(App.get('ROOT_DIR'), '/controllers/')
         });
 
-        App._runControllers = async (controllers, request) => {
+        /**
+         * @param {Route} route
+         * @param {Request} request
+         * */
+        App._runControllers = async (route, request) => {
             let controllerResponse = await (async () => {
-
                 let response;
 
-                for (let controller of controllers.handlers) {
+                let collection = [];
+
+                if (route.controller) {
+                    collection.push(route.controller.before);
+                    collection.push(route.handler);
+                    collection.push(route.controller.after);
+                } else {
+                    collection.push(route.handler);
+                }
+
+                for (let controller of collection) {
                     let out = await controller(request);
 
                     if (out) {
@@ -57,8 +72,7 @@ function readDir(path, App) {
                     /** @type {AbstractController} */
                     controller = new controller(App);
                     controller.mount();
-                }
-                else {
+                } else {
                     readDir(file, App)
                 }
             })

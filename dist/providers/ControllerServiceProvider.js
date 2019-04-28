@@ -6,6 +6,10 @@ var _AbstractProvider = require("../api/AbstractProvider");
 
 var _AbstractController = require("../api/AbstractController");
 
+var _Route = require("./router/Route");
+
+var _Request = require("../core/request/Request");
+
 let pathLib = require('path');
 
 let fsLib = require('fs');
@@ -15,12 +19,25 @@ class ControllerServiceProvider extends _AbstractProvider.default {
     App.setParam(this.getName(), {
       path: pathLib.join(App.get('ROOT_DIR'), '/controllers/')
     });
+    /**
+     * @param {Route} route
+     * @param {Request} request
+     * */
 
-    App._runControllers = async (controllers, request) => {
+    App._runControllers = async (route, request) => {
       let controllerResponse = await (async () => {
         let response;
+        let collection = [];
 
-        for (let controller of controllers.handlers) {
+        if (route.controller) {
+          collection.push(route.controller.before);
+          collection.push(route.handler);
+          collection.push(route.controller.after);
+        } else {
+          collection.push(route.handler);
+        }
+
+        for (let controller of collection) {
           let out = await controller(request);
 
           if (out) {

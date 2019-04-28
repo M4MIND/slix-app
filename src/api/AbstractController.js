@@ -1,5 +1,6 @@
 import Slix from "../Slix"
 import Request from "../core/request/Request"
+import Router from "../providers/router/Router";
 
 export default class AbstractController {
 
@@ -30,7 +31,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     ALL = (route, handler) => {
-        this.App._mount(route, '*', handler, this);
+        this.App._mount(route, Router.METHOD.ALL, handler, this);
     };
 
     /**
@@ -38,7 +39,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     GET = (route, handler) => {
-        this.App._mount(route, 'GET', handler, this);
+        this.App._mount(route, Router.METHOD.GET, handler, this);
     };
 
     /**
@@ -46,7 +47,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     POST = (route, handler) => {
-        this.App._mount(route, 'POST', handler, this);
+        this.App._mount(route, Router.METHOD.POST, handler, this);
     };
 
     /**
@@ -54,7 +55,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     HEAD = (route, handler) => {
-        this.App._mount(route, 'HEAD', handler, this);
+        this.App._mount(route, Router.METHOD.HEAD, handler, this);
     };
 
     /**
@@ -62,7 +63,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     DELETE = (route, handler) => {
-        this.App._mount(route, 'DELETE', handler, this);
+        this.App._mount(route, Router.METHOD.DELETE, handler, this);
     };
 
     /**
@@ -70,7 +71,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     CONNECT = (route, handler) => {
-        this.App._mount(route, 'CONNECT', handler, this);
+        this.App._mount(route, Router.METHOD.CONNECT, handler, this);
     };
 
     /**
@@ -78,7 +79,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     OPTIONS = (route, handler) => {
-        this.App._mount(route, 'OPTIONS', handler, this);
+        this.App._mount(route, Router.METHOD.OPTIONS, handler, this);
     };
 
     /**
@@ -86,7 +87,7 @@ export default class AbstractController {
      * @param {function} handler
      * */
     TRACE = (route, handler) => {
-        this.App._mount(route, 'TRACE', handler, this);
+        this.App._mount(route, Router.METHOD.TRACE, handler, this);
     };
 
     /** @return {Slix} */

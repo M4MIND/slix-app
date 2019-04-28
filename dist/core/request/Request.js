@@ -23,10 +23,11 @@ class Request {
   constructor(req) {
     this.req = req;
     this.url = req.url;
+    this._path = this.url.match(new RegExp('([^?#]*)', 'g'))[0];
     this.method = req.method.toUpperCase();
     this.cookie = new _RequestCookie.default(this.req);
     this.header = new _RequestHeader.default(this.req);
-    this.query = new _RequestQuery.default(this.req);
+    this.query = new _RequestQuery.default();
   }
   /** @return {IncomingMessage} */
 
@@ -95,6 +96,18 @@ class Request {
 
   set query(value) {
     this._query = value;
+  }
+  /** @return {string} */
+
+
+  get path() {
+    return this._path;
+  }
+  /** @param {string} value */
+
+
+  set path(value) {
+    this._path = value;
   }
 
 }

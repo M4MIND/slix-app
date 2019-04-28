@@ -8,13 +8,9 @@ var _HTTP = require("./protocol/HTTP");
 
 var _Request = require("../core/request/Request");
 
-var _PreparationResponse = require("../core/response/PreparationResponse");
-
 var _KernelEvents = require("./event/KernelEvents");
 
 var _EventRequest = require("./event/EventRequest");
-
-var _Log = require("./logger/Log");
 
 var _EventException = require("./event/EventException");
 
