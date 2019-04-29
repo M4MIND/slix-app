@@ -18,16 +18,18 @@ var _RequestHeader = require("./headers/RequestHeader");
 
 var _RequestQuery = require("./query/RequestQuery");
 
+var _RequestPath = require("./query/RequestPath");
+
 class Request {
   /** @param {IncomingMessage} req */
   constructor(req) {
     this.req = req;
     this.url = req.url;
-    this._path = this.url.match(new RegExp('([^?#]*)', 'g'))[0];
     this.method = req.method.toUpperCase();
+    this.path = new _RequestPath.default(this.url.match(new RegExp('([^?#]*)', 'g'))[0]);
+    this.query = new _RequestQuery.default(this.url.match(new RegExp('\\?([^#]*)', 'g')) ? this.url.match(new RegExp('\\?([^#]*)', 'g'))[0] : '');
     this.cookie = new _RequestCookie.default(this.req);
     this.header = new _RequestHeader.default(this.req);
-    this.query = new _RequestQuery.default();
   }
   /** @return {IncomingMessage} */
 
@@ -89,21 +91,25 @@ class Request {
   set method(value) {
     this._method = value;
   }
+  /** @return {RequestQuery} */
+
 
   get query() {
     return this._query;
   }
+  /** @param {RequestQuery} value */
+
 
   set query(value) {
     this._query = value;
   }
-  /** @return {string} */
+  /** @return {RequestPath} */
 
 
   get path() {
     return this._path;
   }
-  /** @param {string} value */
+  /** @param {RequestPath} value */
 
 
   set path(value) {

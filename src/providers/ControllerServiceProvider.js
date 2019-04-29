@@ -20,21 +20,12 @@ export default class ControllerServiceProvider extends AbstractProvider {
             let controllerResponse = await (async () => {
                 let response;
 
-                let collection = [];
-
-                if (route.controller) {
-                    collection.push(route.controller.before);
-                    collection.push(route.handler);
-                    collection.push(route.controller.after);
-                } else {
-                    collection.push(route.handler);
-                }
-
-                for (let controller of collection) {
+                for (let controller of route.handlerQueue) {
                     let out = await controller(request);
 
-                    if (out) {
+                    if (out && !response) {
                         response = out;
+                        break;
                     }
                 }
 

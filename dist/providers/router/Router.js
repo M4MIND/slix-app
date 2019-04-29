@@ -8,8 +8,6 @@ var _Route = require("./Route");
 
 var _Request = require("../../core/request/Request");
 
-var _RequestQuery = require("../../core/request/query/RequestQuery");
-
 class Router {
   constructor() {
     /** @type {Map<string, Map<string, Route>>} */
@@ -26,6 +24,7 @@ class Router {
   mount(route, method, handler, controller = null) {
     let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), this.constructor.pattern.full);
     let dynamic = !!route.match(new RegExp(':(\\w+):', 'g'));
+    if (dynamic) regExpRoute += "$";
 
     if (!this.collection.has(regExpRoute)) {
       this.collection.set(regExpRoute, new Map());
@@ -52,26 +51,26 @@ class Router {
 
 
   findRoute(request) {
-    /** Поиск статических путей */
-    if (this.collection.has(request.path)) {
-      if (this.collection.get(request.path).has(request.method)) {
-        return this.collection.get(request.path).get(request.method);
+    /** Find static rout controller */
+    if (this.collection.has(request.path.full)) {
+      if (this.collection.get(request.path.full).has(request.method)) {
+        return this.collection.get(request.path.full).get(request.method);
       }
     }
-    /** Поиск диамических путей */
+    /** Find dynamic rout controller */
 
 
     for (let key of this.collection.keys()) {
       if (key === '*') break;
-      let matches = request.path.match(new RegExp(key, 'g'));
+      let matches = request.path.full.match(new RegExp(key, 'g'));
       if (!matches) continue;
       if (!this.collection.get(key).has(request.method)) continue;
       if (!this.collection.get(key).get(request.method).dynamic) continue;
       let route = this.collection.get(key).get(request.method);
-      request.query.parse(route.pattern, route.route, request.path);
+      request.path.parse(route.pattern, route.route, request.path.full);
       return route;
     }
-    /** 404 */
+    /** Find 404 page controller */
 
 
     if (this.collection.has('*')) {
@@ -82,6 +81,8 @@ class Router {
   }
 
 }
+/** @type {Object} */
+
 
 exports.default = Router;
 Router.METHOD = {
@@ -95,6 +96,8 @@ Router.METHOD = {
   TRACE: "TRACE",
   ALL: "*"
 };
+/** @type {Object} */
+
 Router.pattern = {
   full: "([^?\\/]+)"
 };

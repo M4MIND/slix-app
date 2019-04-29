@@ -2,17 +2,19 @@ import {IncomingMessage} from 'http';
 import RequestCookie from "./cookie/RequestCookie"
 import RequestHeader from "./headers/RequestHeader"
 import RequestQuery from "./query/RequestQuery"
+import RequestPath from "./query/RequestPath";
 
 export default class Request {
     /** @param {IncomingMessage} req */
     constructor(req) {
         this.req = req;
         this.url = req.url;
-        this._path = this.url.match(new RegExp('([^?#]*)', 'g'))[0];
+
         this.method = req.method.toUpperCase();
+        this.path = new RequestPath(this.url.match(new RegExp('([^?#]*)', 'g'))[0]);
+        this.query = new RequestQuery(this.url.match(new RegExp('\\?([^#]*)', 'g')) ? this.url.match(new RegExp('\\?([^#]*)', 'g'))[0] : '');
         this.cookie = new RequestCookie(this.req);
         this.header = new RequestHeader(this.req);
-        this.query = new RequestQuery();
     }
 
     /** @return {IncomingMessage} */
@@ -65,20 +67,22 @@ export default class Request {
         this._method = value
     }
 
+    /** @return {RequestQuery} */
     get query() {
         return this._query
     }
 
+    /** @param {RequestQuery} value */
     set query(value) {
         this._query = value
     }
 
-    /** @return {string} */
+    /** @return {RequestPath} */
     get path() {
         return this._path;
     }
 
-    /** @param {string} value */
+    /** @param {RequestPath} value */
     set path(value) {
         this._path = value;
     }

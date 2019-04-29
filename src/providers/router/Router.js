@@ -1,7 +1,6 @@
 import AbstractController from "../../api/AbstractController";
 import Route from "./Route";
 import Request from "../../core/request/Request";
-import RequestQuery from "../../core/request/query/RequestQuery";
 
 export default class Router {
     constructor() {
@@ -18,6 +17,8 @@ export default class Router {
     mount(route, method, handler, controller = null) {
         let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), this.constructor.pattern.full);
         let dynamic = !!route.match(new RegExp(':(\\w+):', 'g'));
+
+        if (dynamic) regExpRoute += "$";
 
         if (!this.collection.has(regExpRoute)) {
             this.collection.set(regExpRoute, new Map());
@@ -44,18 +45,18 @@ export default class Router {
      * @return Route
      * */
     findRoute(request) {
-        /** Поиск статических путей */
-        if (this.collection.has(request.path)) {
-            if (this.collection.get(request.path).has(request.method)) {
-                return this.collection.get(request.path).get(request.method);
+        /** Find static rout controller */
+        if (this.collection.has(request.path.full)) {
+            if (this.collection.get(request.path.full).has(request.method)) {
+                return this.collection.get(request.path.full).get(request.method);
             }
         }
 
-        /** Поиск диамических путей */
+        /** Find dynamic rout controller */
         for (let key of this.collection.keys()) {
             if (key === '*') break;
 
-            let matches = request.path.match(new RegExp(key, 'g'));
+            let matches = request.path.full.match(new RegExp(key, 'g'));
 
             if (!matches) continue;
             if (!this.collection.get(key).has(request.method)) continue;
@@ -63,11 +64,11 @@ export default class Router {
 
             let route = this.collection.get(key).get(request.method);
 
-            request.query.parse(route.pattern, route.route, request.path);
+            request.path.parse(route.pattern, route.route, request.path.full);
             return route;
         }
 
-        /** 404 */
+        /** Find 404 page controller */
         if (this.collection.has('*')) {
             if (this.collection.get('*').has('*')) {
                 return this.collection.get('*').get('*');
@@ -76,6 +77,7 @@ export default class Router {
     }
 }
 
+/** @type {Object} */
 Router.METHOD = {
     GET: "GET",
     POST: "POST",
@@ -88,6 +90,7 @@ Router.METHOD = {
     ALL: "*"
 };
 
+/** @type {Object} */
 Router.pattern = {
     full: "([^?\\/]+)",
 };

@@ -3,37 +3,67 @@
 exports.default = void 0;
 
 class RequestQuery {
-  constructor() {
-    this.collection = new Map();
+  /**  @param {string} query */
+  constructor(query) {
+    this.full = query;
+    this.collection = this.full;
   }
-  /**
-   * @param {string} pattern
-   * @param {string} route
-   * @param {string} path
-   * */
+  /** @return {string} */
 
 
-  parse(pattern, route, path) {
-    let data = path.split(new RegExp(pattern, 'g'));
-    let keys = route.split(new RegExp(pattern, 'g'));
+  get full() {
+    return this._full;
+  }
+  /** @param {string} value */
 
-    for (let key in keys) {
-      if (keys[key]) {
-        this.collection.set(keys[key].replace(new RegExp(':', 'g'), ""), data[key]);
+
+  set full(value) {
+    value = value ? value.replace('?', '') : '';
+    value = value.trim();
+    this._full = value;
+  }
+  /** @return {Map<string, string>} */
+
+
+  get collection() {
+    return this._collection;
+  }
+  /** @param {string} value */
+
+
+  set collection(value) {
+    let query = new Map();
+
+    if (value) {
+      for (let chunk of value.split('&')) {
+        chunk = chunk.split('=');
+        query.set(chunk[0], chunk[1]);
       }
     }
-  }
 
-  set(key, value) {
-    this.collection.set(key, value);
+    this._collection = query;
   }
+  /** @return {string|?} */
+
 
   get(key) {
     return this.collection.get(key);
   }
+  /** @return {boolean} */
+
 
   has(key) {
     return this.collection.has(key);
+  }
+  /** @return {Object} */
+
+
+  all() {
+    let Object = {};
+    this.collection.forEach((value, key) => {
+      Object[key] = value;
+    });
+    return Object;
   }
 
 }
