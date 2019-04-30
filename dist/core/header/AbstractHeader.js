@@ -27,9 +27,7 @@ class AbstractHeader {
   set(key, value) {
     this.headers[key] = value;
   }
-  /**
-   * @param {string} name
-   * */
+  /** @param {string} name */
 
 
   get(name) {

@@ -21,9 +21,7 @@ export default class AbstractHeader {
 		this.headers[key] = value;
 	}
 
-	/**
-	 * @param {string} name
-	 * */
+	/** @param {string} name */
 	get(name) {
 		return this.headers[name] ? this.headers[name] : null;
 	}

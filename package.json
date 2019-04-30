@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "slix": "cli.js"
+  },
   "scripts": {
     "test": "nodemon --exec babel-node ./test/index.js"
   },
