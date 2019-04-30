@@ -1,6 +1,4 @@
-import AbstractController from "../../src/api/AbstractController"
-import Response from "../../src/core/response/Response"
-import JsonResponse from "../../src/core/response/JsonResponse";
+import {AbstractController, Response, JsonResponse} from "../../index"
 
 export default class DynamicPathController extends AbstractController {
     mount() {

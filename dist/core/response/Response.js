@@ -10,27 +10,39 @@ class Response {
    * @param {number} statusCode
    * @param {Object} headers
    * */
-  constructor(content = '', statusCode = this.constructor.HTTP_OK, headers = {}) {
+  constructor(content = '', statusCode = Response.HTTP_OK, headers = {}) {
     this.headers = new _ResponseHeader.default(headers);
     this.content = content;
     this.statusCode = statusCode;
+    this.encoding = 'UTF-8';
+    this.setContentType(Response.ContentType.html);
     return this;
   }
+  /** @return {string} */
+
 
   get content() {
     return this._content;
   }
+  /** @param {string} value */
+
 
   set content(value) {
     this._content = value;
+    return this;
   }
+  /** @return {number} */
+
 
   get statusCode() {
     return this._statusCode;
   }
+  /** @param {number} value */
+
 
   set statusCode(value) {
     this._statusCode = value;
+    return this;
   }
   /** @return {ResponseHeader} */
 
@@ -43,11 +55,22 @@ class Response {
 
   set headers(value) {
     this._headers = value;
+    return this;
   }
+  /** @param {string} value */
+
 
   setContentType(value) {
-    this.headers['Content-Type'] = value;
+    this.headers.set('Content-Type', value + "; charset=" + this.encoding);
     return this;
+  }
+
+  get encoding() {
+    return this._encoding;
+  }
+
+  set encoding(value) {
+    this._encoding = value;
   }
 
 }
@@ -118,6 +141,7 @@ Response.HTTP_LOOP_DETECTED = 508;
 Response.HTTP_NOT_EXTENDED = 510;
 Response.HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;
 Response.ContentType = {
+  html: 'text/html',
   css: 'text/css',
   js: 'text/javascript',
   json: 'application/json',

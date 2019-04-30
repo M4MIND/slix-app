@@ -18,7 +18,7 @@ var _RequestHeader = require("./headers/RequestHeader");
 
 var _RequestQuery = require("./query/RequestQuery");
 
-var _RequestPath = require("./query/RequestPath");
+var _RequestPath = require("./path/RequestPath");
 
 class Request {
   /** @param {IncomingMessage} req */
@@ -26,10 +26,11 @@ class Request {
     this.req = req;
     this.url = req.url;
     this.method = req.method.toUpperCase();
-    this.path = new _RequestPath.default(this.url.match(new RegExp('([^?#]*)', 'g'))[0]);
-    this.query = new _RequestQuery.default(this.url.match(new RegExp('\\?([^#]*)', 'g')) ? this.url.match(new RegExp('\\?([^#]*)', 'g'))[0] : '');
+    this.path = new _RequestPath.default(this.url.match(new RegExp('([^?#]*)|$', 'g'))[0]);
+    this.query = new _RequestQuery.default(this.url.match(new RegExp('(?<=\\?)([^#]*)|$', 'g'))[0]);
     this.cookie = new _RequestCookie.default(this.req);
     this.header = new _RequestHeader.default(this.req);
+    this.hash = this.url.match(new RegExp('((?<=#)(.*))|$', 'g'))[0];
   }
   /** @return {IncomingMessage} */
 

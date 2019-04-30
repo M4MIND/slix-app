@@ -26,6 +26,7 @@ export default class PreparationResponse {
 	/** @param {Response|RedirectResponse|JsonResponse|FileResponse} response */
 	setResponse(response) {
 		this.res.writeHead(response.statusCode, response.headers.preparationHeaders());
+		this.res
 		this.write(response.content);
 	}
 

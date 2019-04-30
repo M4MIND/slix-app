@@ -14,7 +14,6 @@ class RedirectResponse extends _Response.default {
     Location: url
   }) {
     super('', status, headers);
-    this._targetUrl = null;
     this.targetUrl = url;
     return this;
   }

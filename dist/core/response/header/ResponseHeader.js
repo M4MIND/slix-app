@@ -21,6 +21,14 @@ class ResponseHeader extends _AbstractHeader.default {
     if (!this.headers['date']) {
       this.set('Date', new Date().toUTCString());
     }
+
+    return this;
+  }
+  /** @param {string} value */
+
+
+  setContentType(value) {
+    this.headers['Content-Type'] = value;
   }
   /** @param {Cookie} value */
 
@@ -46,22 +54,27 @@ class ResponseHeader extends _AbstractHeader.default {
     let find = this.cookies.find(item => item.name === name);
     return find ? find : null;
   }
+  /** @param {string} name */
+
 
   removeCookie(name) {
     this.setCookie(new _Cookie.default(name, null, new Date(0)));
     return this;
   }
+  /** @return Array<Cookie> */
+
 
   getAllCookies() {
     return this.cookies;
   }
+  /** @return Array<Array<>>*/
+
 
   preparationHeaders() {
     let out = [];
-    let headers = this.getAll();
 
-    for (let key of Object.keys(headers)) {
-      out.push([key, headers[key]]);
+    for (let key of Object.keys(this.headers)) {
+      out.push([key, this.headers[key]]);
     }
 
     for (let cookie of this.getAllCookies()) {

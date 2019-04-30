@@ -3,66 +3,75 @@ import Cookie from "../../cookie/Cookie"
 
 export default class ResponseHeader extends AbstractHeader {
 
-    /** @param {Object} headers */
-    constructor(headers) {
-        super(headers);
+	/** @param {Object} headers */
+	constructor(headers) {
+		super(headers);
 
-        /** @type [Cookie] */
-        this.cookies = [];
+		/** @type [Cookie] */
+		this.cookies = [];
 
-        if (!this.headers['cache-control']) {
-            this.set('Cache-Control', '');
-        }
+		if (!this.headers['cache-control']) {
+			this.set('Cache-Control', '');
+		}
 
-        if (!this.headers['date']) {
-            this.set('Date', (new Date()).toUTCString());
-        }
-    }
+		if (!this.headers['date']) {
+			this.set('Date', (new Date()).toUTCString());
+		}
 
-    /** @param {Cookie} value */
-    setCookie(value) {
-        if (!this.hasCookie(value.name)) {
-            this.cookies.push(value);
-        }
+		return this;
+	}
 
-        return this;
-    }
+	/** @param {string} value */
+	setContentType(value) {
+		this.headers['Content-Type'] = value;
+	}
 
-    /** @param {string} name */
-    hasCookie(name) {
-        let find = this.cookies.findIndex(item => item.name === name);
+	/** @param {Cookie} value */
+	setCookie(value) {
+		if (!this.hasCookie(value.name)) {
+			this.cookies.push(value);
+		}
 
-        return find !== -1;
-    }
+		return this;
+	}
 
-    /** @param {string} name */
-    getCookie(name) {
-        let find = this.cookies.find(item => item.name === name);
+	/** @param {string} name */
+	hasCookie(name) {
+		let find = this.cookies.findIndex(item => item.name === name);
 
-        return find ? find : null;
-    }
+		return find !== -1;
+	}
 
-    removeCookie(name) {
-        this.setCookie(new Cookie(name, null, new Date(0)));
+	/** @param {string} name */
+	getCookie(name) {
+		let find = this.cookies.find(item => item.name === name);
 
-        return this;
-    }
+		return find ? find : null;
+	}
 
-    getAllCookies() {
-        return this.cookies;
-    }
+	/** @param {string} name */
+	removeCookie(name) {
+		this.setCookie(new Cookie(name, null, new Date(0)));
 
-    preparationHeaders() {
-        let out = [];
-        let headers = this.getAll();
-        for (let key of Object.keys(headers)) {
-            out.push([key, headers[key]])
-        }
+		return this;
+	}
 
-        for (let cookie of this.getAllCookies()) {
-            out.push(['Set-Cookie', cookie.raw()]);
-        }
+	/** @return Array<Cookie> */
+	getAllCookies() {
+		return this.cookies;
+	}
 
-        return out;
-    }
+	/** @return Array<Array<>>*/
+	preparationHeaders() {
+		let out = [];
+		for (let key of Object.keys(this.headers)) {
+			out.push([key, this.headers[key]])
+		}
+
+		for (let cookie of this.getAllCookies()) {
+			out.push(['Set-Cookie', cookie.raw()]);
+		}
+
+		return out;
+	}
 }

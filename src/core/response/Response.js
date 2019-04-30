@@ -1,49 +1,71 @@
 import ResponseHeader from "./header/ResponseHeader"
 
 export default class Response {
-    /**
-     * @param {string} content
-     * @param {number} statusCode
-     * @param {Object} headers
-     * */
-    constructor(content = '', statusCode = this.constructor.HTTP_OK, headers = {}) {
-        this.headers = new ResponseHeader(headers);
-        this.content = content;
-        this.statusCode = statusCode;
+	/**
+	 * @param {string} content
+	 * @param {number} statusCode
+	 * @param {Object} headers
+	 * */
+	constructor(content = '', statusCode = Response.HTTP_OK, headers = {}) {
+		this.headers = new ResponseHeader(headers);
+		this.content = content;
+		this.statusCode = statusCode;
+		this.encoding = 'UTF-8';
+		this.setContentType(Response.ContentType.html)
 
-        return this;
-    }
+		return this;
+	}
 
-    get content() {
-        return this._content
-    }
+	/** @return {string} */
+	get content() {
+		return this._content
+	}
 
-    set content(value) {
-        this._content = value
-    }
+	/** @param {string} value */
+	set content(value) {
+		this._content = value
 
-    get statusCode() {
-        return this._statusCode
-    }
+		return this;
+	}
 
-    set statusCode(value) {
-        this._statusCode = value
-    }
+	/** @return {number} */
+	get statusCode() {
+		return this._statusCode
+	}
 
-    /** @return {ResponseHeader} */
-    get headers() {
-        return this._headers;
-    }
+	/** @param {number} value */
+	set statusCode(value) {
+		this._statusCode = value
 
-    /** @param {ResponseHeader} value */
-    set headers(value) {
-        this._headers = value;
-    }
+		return this;
+	}
 
-    setContentType(value) {
-        this.headers['Content-Type'] = value;
-        return this;
-    }
+	/** @return {ResponseHeader} */
+	get headers() {
+		return this._headers;
+	}
+
+	/** @param {ResponseHeader} value */
+	set headers(value) {
+		this._headers = value;
+
+		return this;
+	}
+
+	/** @param {string} value */
+	setContentType(value) {
+		this.headers.set('Content-Type', value + "; charset=" + this.encoding);
+
+		return this;
+	}
+
+	get encoding() {
+		return this._encoding
+	}
+
+	set encoding(value) {
+		this._encoding = value
+	}
 }
 
 Response.HTTP_CONTINUE = 100;
@@ -112,9 +134,10 @@ Response.HTTP_NOT_EXTENDED = 510;
 Response.HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;
 
 Response.ContentType = {
-    css: 'text/css',
-    js: 'text/javascript',
-    json: 'application/json',
-    png: 'image/png',
-    jpg: 'image/jpg'
+	html: 'text/html',
+	css: 'text/css',
+	js: 'text/javascript',
+	json: 'application/json',
+	png: 'image/png',
+	jpg: 'image/jpg'
 };

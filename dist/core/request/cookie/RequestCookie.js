@@ -12,6 +12,8 @@ function _http() {
   return data;
 }
 
+var _Cookie = require("../../cookie/Cookie");
+
 class RequestCookie {
   /** @param {IncomingMessage} request */
   constructor(request) {
@@ -20,13 +22,11 @@ class RequestCookie {
     if (request.headers.cookie) {
       for (let value of request.headers.cookie.split(';')) {
         value = value.trim().split('=');
-        this.collection.set(value[0], value[1]);
+        this.collection.set(value[0], new _Cookie.default(value[0], value[1]));
       }
-
-      delete request.headers.cookie;
     }
   }
-  /** @param {string} name */
+  /** @param {Cookie} name */
 
 
   get(name) {

@@ -1,4 +1,5 @@
 import {IncomingMessage} from 'http';
+import Cookie from "../../cookie/Cookie"
 
 export default class RequestCookie {
 	/** @param {IncomingMessage} request */
@@ -8,13 +9,12 @@ export default class RequestCookie {
 		if (request.headers.cookie) {
 			for (let value of request.headers.cookie.split(';')) {
 				value = value.trim().split('=');
-				this.collection.set(value[0], value[1]);
+				this.collection.set(value[0], new Cookie(value[0], value[1]));
 			}
-			delete request.headers.cookie
 		}
 	}
 
-	/** @param {string} name */
+	/** @param {Cookie} name */
 	get(name) {
 		return this.collection.get(name);
 	}

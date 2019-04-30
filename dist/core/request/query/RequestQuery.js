@@ -18,8 +18,6 @@ class RequestQuery {
 
 
   set full(value) {
-    value = value ? value.replace('?', '') : '';
-    value = value.trim();
     this._full = value;
   }
   /** @return {Map<string, string>} */

@@ -6,10 +6,14 @@ class AbstractHeader {
   constructor(headers) {
     this.headers = headers;
   }
+  /** @return {Object} */
+
 
   get headers() {
     return this._headers;
   }
+  /** @param {Object} value */
+
 
   set headers(value) {
     this._headers = value;
@@ -30,14 +34,6 @@ class AbstractHeader {
 
   get(name) {
     return this.headers[name] ? this.headers[name] : null;
-  }
-
-  setContentType(value) {
-    this.headers['Content-Type'] = value;
-  }
-
-  getAll() {
-    return this.headers;
   }
 
 }
