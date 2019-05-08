@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _Request = require("../Request");
 
-class RequestQuery {
+class RequestGet {
   /**  @param {Request} request */
   constructor(request) {
     this.full = request.url.match(new RegExp('(?<=\\?)([^#]*)|$', 'g'))[0];
@@ -68,4 +68,4 @@ class RequestQuery {
 
 }
 
-exports.default = RequestQuery;
+exports.default = RequestGet;

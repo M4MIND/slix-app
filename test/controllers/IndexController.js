@@ -3,6 +3,7 @@ import {AbstractController, Cookie} from "../../index"
 export default class IndexController extends AbstractController {
 	mount() {
 		this.GET('/', this.index);
+		this.POST('/', this.post);
 	}
 
 	index = async (request) => {
@@ -13,5 +14,9 @@ export default class IndexController extends AbstractController {
 		response.headers.setCookie(new Cookie('index', 'index'));
 
 		return response;
-	}
+	};
+
+	post = async (request) => {
+		console.dir(request.post);
+	};
 }

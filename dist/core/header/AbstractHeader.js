@@ -33,6 +33,18 @@ class AbstractHeader {
   get(name) {
     return this.headers[name] ? this.headers[name] : null;
   }
+  /** @return {boolean} */
+
+
+  has(name) {
+    return this.headers.hasOwnProperty(name);
+  }
+  /** @return {Object} */
+
+
+  all() {
+    return this.headers;
+  }
 
 }
 

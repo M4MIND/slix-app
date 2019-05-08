@@ -2,25 +2,18 @@
 
 exports.default = void 0;
 
-function _http() {
-  const data = require("http");
-
-  _http = function () {
-    return data;
-  };
-
-  return data;
-}
-
 var _Cookie = require("../../cookie/Cookie");
 
+var _Request = require("../Request");
+
 class RequestCookie {
-  /** @param {IncomingMessage} request */
+  /** @param {Request} request */
   constructor(request) {
+    /** @type {Map<string, Cookie>} */
     this.collection = new Map();
 
-    if (request.headers.cookie) {
-      for (let value of request.headers.cookie.split(';')) {
+    if (request.header.all().cookie) {
+      for (let value of request.header.all().cookie.split(';')) {
         value = value.trim().split('=');
         this.collection.set(value[0], new _Cookie.default(value[0], value[1]));
       }
@@ -37,6 +30,12 @@ class RequestCookie {
 
   has(name) {
     return this.collection.has(name);
+  }
+  /** @return {Array<Cookie>}*/
+
+
+  all() {
+    return [...this.collection.values()];
   }
 
 }

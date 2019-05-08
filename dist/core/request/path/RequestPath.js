@@ -2,10 +2,12 @@
 
 exports.default = void 0;
 
+var _Request = require("../Request");
+
 class RequestPath {
-  /** @param {string} path - URL Path */
-  constructor(path) {
-    this.full = path;
+  /** @param {Request} request */
+  constructor(request) {
+    this.full = request.url.match(new RegExp('([^?#]*)|$', 'g'))[0];
     this.collection = new Map();
   }
   /** @return {string} */

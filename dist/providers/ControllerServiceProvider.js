@@ -29,7 +29,7 @@ class ControllerServiceProvider extends _AbstractProvider.default {
         let response;
 
         for (let controller of route.handlerQueue) {
-          let out = await controller(request);
+          let out = await controller(request, request.query, request.post, request.file);
 
           if (out && !response) {
             response = out;

@@ -12,7 +12,7 @@ class CompressionResponseServiceProvider extends _AbstractProvider.default {
   subscribe(App, EventDispatcher) {
     EventDispatcher.addEventListener(_KernelEvents.default.RESPONSE, async event => {
       /*if (event.request.header.has('accept-encoding')) {
-      	let typeCompression = event.request.header.get('accept-encoding');
+      	let typeCompression = event.request.header.query('accept-encoding');
       			if (typeCompression.indexOf('br') > 1) {
       		let buffer = await new Promise((resolve, reject) => {
       			zlib.brotliCompress(event.response.content, (err, buffer) => {

@@ -14,11 +14,11 @@ export default class HTTP {
 		this.http = createServer(async (req, res) => {
 			let body = [];
 			req.on('err', err => {
-				config.callback(err);
+				throw new Error(err);
 			}).on('data', data => {
 				body.push(data);
 			}).on('end', () => {
-				req.body = body;
+				req.body = Buffer.concat(body);
 				let _Request = new Request(req);
 				let _Response = new PreparationResponse(res, _Request);
 

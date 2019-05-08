@@ -81,13 +81,13 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 	};
 
 	filterResponse = async (request, response) => {
-		if (!response) throw new Error('Response object not found!')
+		if (!response) throw new Error('Response object not found!');
 		let $event = new EventResponse(request, response);
 		await this.App.dispatch(KernelEvents.RESPONSE, $event);
 		await this.finishRequest(request);
 
 		return $event.response;
-	}
+	};
 
 	finishRequest = async (request) => {
 		let $event = new EventTerminate(request);

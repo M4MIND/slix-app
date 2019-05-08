@@ -1,4 +1,5 @@
-# Created by .ignore support plugin (hsz.mobi)
 src
-.babelrc
-gulpfile.js
+/.babelrc
+/gulpfile.js
+/test
+.idea

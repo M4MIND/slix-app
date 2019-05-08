@@ -20,17 +20,22 @@ var _RequestQuery = require("./query/RequestQuery");
 
 var _RequestPath = require("./path/RequestPath");
 
+var _RequestFile = require("./file/RequestFile");
+
+var _RequestPost = require("./post/RequestPost");
+
 class Request {
   /** @param {IncomingMessage} req */
   constructor(req) {
     this.req = req;
     this.url = req.url;
     this.method = req.method.toUpperCase();
-    this.path = new _RequestPath.default(this.url.match(new RegExp('([^?#]*)|$', 'g'))[0]);
-    this.query = new _RequestQuery.default(this.url.match(new RegExp('(?<=\\?)([^#]*)|$', 'g'))[0]);
-    this.cookie = new _RequestCookie.default(this.req);
-    this.header = new _RequestHeader.default(this.req);
-    this.hash = this.url.match(new RegExp('((?<=#)(.*))|$', 'g'))[0];
+    this.path = new _RequestPath.default(this);
+    this.header = new _RequestHeader.default(this);
+    this.cookie = new _RequestCookie.default(this);
+    this.query = new _RequestQuery.default(this);
+    this.post = new _RequestPost.default(this);
+    this.file = new _RequestFile.default(this);
   }
   /** @return {IncomingMessage} */
 
@@ -115,6 +120,30 @@ class Request {
 
   set path(value) {
     this._path = value;
+  }
+  /** @return {RequestPost} */
+
+
+  get post() {
+    return this._post;
+  }
+  /** @param {RequestPost} value */
+
+
+  set post(value) {
+    this._post = value;
+  }
+  /** @return {RequestFile} */
+
+
+  get file() {
+    return this._file;
+  }
+  /** @param {RequestFile} value */
+
+
+  set file(value) {
+    this._file = value;
   }
 
 }

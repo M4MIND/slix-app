@@ -4,10 +4,12 @@ exports.default = void 0;
 
 var _AbstractHeader = require("../../header/AbstractHeader");
 
+var _Request = require("../Request");
+
 class RequestHeader extends _AbstractHeader.default {
-  /** @param {IncomingMessage} request */
+  /** @param {Request} request */
   constructor(request) {
-    super(request.headers);
+    super(request.req.headers);
   }
 
 }
