@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "natives": "^1.1.6",
+    "rigel-ui": "git+https://github.com/proyavin/rigel-ui.git",
     "twig": "^1.13.2"
   }
 }

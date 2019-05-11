@@ -15,8 +15,8 @@ let pathLib = require('path');
 class FileTransferServiceProvider extends _AbstractProvider.default {
   registration(App) {
     App.setParam(this.getName(), {
-      path: pathLib.join(App.get('ROOT_DIR'), '/static/'),
-      filesWithoutAccess: [],
+      path: '/static/',
+      foldersWithAccess: {},
       defaultContentType: {
         '.css': 'text/css',
         '.js': 'text/javascript',
@@ -27,14 +27,40 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
       },
       customContentType: {}
     });
+    this.config = App.getParam(this.getName());
+  }
+
+  boot(App) {
+    let foldersWithAccess = {};
+
+    for (let key of Object.keys(this.config.foldersWithAccess)) {
+      foldersWithAccess[key] = pathLib.join(App.get('ROOT_DIR'), this.config.foldersWithAccess[key]);
+    }
+
+    App.setParam(this.getName(), {
+      path: pathLib.join(App.get('ROOT_DIR'), this.config.path),
+      foldersWithAccess: foldersWithAccess
+    });
   }
 
   subscribe(App, EventDispatcher) {
-    this.config = App.getParam(this.getName());
     EventDispatcher.addEventListener(_KernelEvents.default.REQUEST, event => {
       if (event.response) return;
       return new Promise((resolve, reject) => {
-        let path = pathLib.join(this.config.path, event.request.url);
+        let path;
+
+        for (let key of Object.keys(this.config.foldersWithAccess)) {
+          if (event.request.url.indexOf(key) >= 0) {
+            let file = event.request.url.replace(key, "");
+            path = pathLib.join(this.config.foldersWithAccess[key], file);
+            break;
+          }
+        }
+
+        if (!path) {
+          path = pathLib.join(this.config.path, event.request.url);
+        }
+
         let typeFile = pathLib.extname(path);
         fsLib.lstat(path, (err, stat) => {
           if (err) {
@@ -63,6 +89,7 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
               resolve(false);
             }
           } else {
+            console.log("file not found", path);
             resolve(false);
           }
         });
