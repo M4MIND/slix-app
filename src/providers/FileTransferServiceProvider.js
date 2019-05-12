@@ -41,8 +41,8 @@ export default class FileTransferServiceProvider extends AbstractProvider {
         EventDispatcher.addEventListener(KernelEvents.REQUEST, (event) => {
             if (event.response) return;
             return new Promise((resolve, reject) => {
-
                 let path;
+
                 for (let key of Object.keys(this.config.foldersWithAccess)) {
                     if (event.request.url.indexOf(key) >= 0) {
                         let file = event.request.url.replace(key, "");
@@ -84,7 +84,6 @@ export default class FileTransferServiceProvider extends AbstractProvider {
                             resolve(false);
                         }
                     } else {
-                        console.log("file not found", path);
                         resolve(false);
                     }
                 })

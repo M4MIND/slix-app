@@ -1,4 +1,4 @@
-let {Slix, ProtocolServiceProvider, FileTransferServiceProvider} = require('../index');
+import {Slix, ProtocolServiceProvider, FileTransferServiceProvider} from '../index'
 
 let server = new Slix();
 
