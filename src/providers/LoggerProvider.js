@@ -10,7 +10,7 @@ export default class LoggerProvider extends AbstractProvider {
     }
 
     boot(App) {
-        App.set('log', (message, level = Log.DEFAULT()) => {
+        App.set('log', (message, level = Log.DEFAULT) => {
             if (App.getParam(this.getName()).console) {
                 Log.console(message, level);
             }
@@ -18,27 +18,45 @@ export default class LoggerProvider extends AbstractProvider {
     }
 
     subscribe(App, EventDispatcher) {
-        EventDispatcher.addEventListener(KernelEvents.REQUEST, (Event) => {
-            App.log(
-                `${Event.request.method}: ${Event.request.url}`,
-                Log.INFO()
-            );
-        });
+        EventDispatcher.addEventListener(
+            KernelEvents.REQUEST,
+            (Event) => {
+                Event.request.time = Date.now();
+                Event.request.log = `[ ${Event.request.method} : ${
+                    Event.request.url
+                } ]`;
+            },
+            -99999
+        );
 
         EventDispatcher.addEventListener(
             KernelEvents.CALL_CONTROLLER,
             (Event) => {
-                App.log(
-                    `Handler [${
-                        Event.controller.controller.constructor.name
-                    }] => ${Event.controller.pattern}`,
-                    Log.INFO()
-                );
+                Event.request.log += ` [ Controller: ${
+                    Event.controller.controller.constructor.name
+                } ${Event.controller.pattern} ]`;
             }
         );
 
-        EventDispatcher.addEventListener(KernelEvents.EXCEPTION, (Event) => {
-            App.log(`${Event.ex.message}`, Log.ERROR());
-        });
+        EventDispatcher.addEventListener(
+            KernelEvents.EXCEPTION,
+            (Event) => {
+                Event.request.log = null;
+                App.log(`${Event.ex.message}`, Log.ERROR);
+            },
+            -99999
+        );
+
+        EventDispatcher.addEventListener(
+            KernelEvents.TERMINATE,
+            (Event) => {
+                if (Event.request.log) {
+                    Event.request.log += ` [ time: ${Date.now() -
+                        Event.request.time}ms ] `;
+                    App.log(Event.request.log, Log.INFO);
+                }
+            },
+            999999
+        );
     }
 }

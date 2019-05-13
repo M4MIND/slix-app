@@ -24,8 +24,6 @@ var _ValidateURIProvider = require("./providers/ValidateURIProvider");
 
 let pathLib = require('path');
 
-let boot = false;
-
 class Slix extends _Container.default {
   /**
    * @param {string} __dir
@@ -46,14 +44,9 @@ class Slix extends _Container.default {
   }
 
   run() {
-    if (!boot) {
-      boot = true;
-      this.boot();
-    }
-  }
+    if (!this.constructor.boot) {
+      this.constructor.boot = true;
 
-  boot() {
-    if (boot) {
       for (let provider of this.getAllProviders()) {
         provider.boot(this);
       }
@@ -68,3 +61,4 @@ class Slix extends _Container.default {
 
 exports.default = Slix;
 Slix.this = null;
+Slix.boot = false;

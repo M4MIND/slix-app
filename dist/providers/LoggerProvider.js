@@ -21,7 +21,7 @@ class LoggerProvider extends _AbstractProvider.default {
     }
 
     boot(App) {
-        App.set('log', (message, level = _Log.default.DEFAULT()) => {
+        App.set('log', (message, level = _Log.default.DEFAULT) => {
             if (App.getParam(this.getName()).console) {
                 _Log.default.console(message, level);
             }
@@ -32,28 +32,39 @@ class LoggerProvider extends _AbstractProvider.default {
         EventDispatcher.addEventListener(
             _KernelEvents.default.REQUEST,
             (Event) => {
-                App.log(
-                    `${Event.request.method}: ${Event.request.url}`,
-                    _Log.default.INFO()
-                );
-            }
+                Event.request.time = Date.now();
+                Event.request.log = `[ ${Event.request.method} : ${
+                    Event.request.url
+                } ]`;
+            },
+            -99999
         );
         EventDispatcher.addEventListener(
             _KernelEvents.default.CALL_CONTROLLER,
             (Event) => {
-                App.log(
-                    `Handler [${
-                        Event.controller.controller.constructor.name
-                    }] => ${Event.controller.pattern}`,
-                    _Log.default.INFO()
-                );
+                Event.request.log += ` [ Controller: ${
+                    Event.controller.controller.constructor.name
+                } ${Event.controller.pattern} ]`;
             }
         );
         EventDispatcher.addEventListener(
             _KernelEvents.default.EXCEPTION,
             (Event) => {
-                App.log(`${Event.ex.message}`, _Log.default.ERROR());
-            }
+                Event.request.log = null;
+                App.log(`${Event.ex.message}`, _Log.default.ERROR);
+            },
+            -99999
+        );
+        EventDispatcher.addEventListener(
+            _KernelEvents.default.TERMINATE,
+            (Event) => {
+                if (Event.request.log) {
+                    Event.request.log += ` [ time: ${Date.now() -
+                        Event.request.time}ms ] `;
+                    App.log(Event.request.log, _Log.default.INFO);
+                }
+            },
+            999999
         );
     }
 }

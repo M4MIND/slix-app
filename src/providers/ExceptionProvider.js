@@ -1,6 +1,5 @@
 import AbstractProvider from '../api/AbstractProvider';
 import KernelEvents from './eventProvider/KernelEvents';
-import Log from './loggerProvider/Log';
 import Response from '../core/response/Response';
 
 export default class ExceptionProvider extends AbstractProvider {
@@ -8,7 +7,6 @@ export default class ExceptionProvider extends AbstractProvider {
         EventDispatcher.addEventListener(
             KernelEvents.EXCEPTION,
             async (event) => {
-                App.log(event.ex, Log.ERROR());
                 if (App.get('_DEBUG')) {
                     event.response = new Response(
                         `<h1>${

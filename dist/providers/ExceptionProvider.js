@@ -6,8 +6,6 @@ var _AbstractProvider = require('../api/AbstractProvider');
 
 var _KernelEvents = require('./eventProvider/KernelEvents');
 
-var _Log = require('./loggerProvider/Log');
-
 var _Response = require('../core/response/Response');
 
 class ExceptionProvider extends _AbstractProvider.default {
@@ -15,8 +13,6 @@ class ExceptionProvider extends _AbstractProvider.default {
         EventDispatcher.addEventListener(
             _KernelEvents.default.EXCEPTION,
             async (event) => {
-                App.log(event.ex, _Log.default.ERROR());
-
                 if (App.get('_DEBUG')) {
                     event.response = new _Response.default(
                         `<h1>${

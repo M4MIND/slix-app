@@ -53,7 +53,7 @@ export default class ProtocolProvider extends AbstractProvider {
                 throw new Error(
                     `Unable to find the controller for path "${
                         request.url
-                        }". The route is wrongly configured.`
+                    }". The route is wrongly configured.`
                 );
             }
 

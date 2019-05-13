@@ -3,43 +3,32 @@ export default class Log {
      * @param {string} message
      * @param {number} level
      * */
-    static console(message, level = this.constructor.DEFAULT()) {
+    static console(message, level = this.DEFAULT) {
         console.log(this.getColor(level) + message);
     }
 
-    /** @return {number} */
-    static DEFAULT() {
-        return 100;
-    }
-
-    /** @return {number} */
-    static INFO() {
-        return 200;
-    }
-
-    /** @return {number} */
-    static WARNING() {
-        return 300;
-    }
-
-    /** @return {number} */
-    static ERROR() {
-        return 500;
-    }
-
     /** @return {string} */
-    static getColor(level = this.constructor.DEFAULT()) {
-        if (level === this.DEFAULT()) {
+    static getColor(level = this.DEFAULT) {
+        if (level === this.DEFAULT) {
             return '\x1b[37m';
         }
-        if (level === this.INFO()) {
+        if (level === this.INFO) {
             return '\x1b[34m';
         }
-        if (level === this.WARNING()) {
+        if (level === this.SUCCESS) {
+            return '\x1b[32m';
+        }
+        if (level === this.WARNING) {
             return '\x1b[33m';
         }
-        if (level === this.ERROR()) {
+        if (level === this.ERROR) {
             return '\x1b[31m';
         }
     }
 }
+
+Log.DEFAULT = 100;
+Log.INFO = 200;
+Log.WARNING = 300;
+Log.SUCCESS = 400;
+Log.ERROR = 500;

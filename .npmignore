@@ -4,3 +4,4 @@
 /test
 .idea
 *.log
+package-lock.json
