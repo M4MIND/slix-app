@@ -5,6 +5,8 @@ let console = require('child_process').spawn;
 let concat = require('gulp-concat');
 let clean = require('gulp-clean');
 let cached = require('gulp-cached');
+let fs = require('fs');
+let pathLib = require('path');
 
 let path = {
 	src: {
@@ -37,6 +39,10 @@ task('copy-json', () => {
 });
 
 task('dist-clean', gulp.parallel(() => {
+	if (!fs.existsSync('./dist/')) {
+		fs.mkdirSync('dist');
+	}
+
 	return gulp.src(path.dist.dist, {read: false})
 		.pipe(clean());
 }));
@@ -50,5 +56,5 @@ task('watch-test', gulp.parallel(() => {
 	watch(path.test.backend)
 }));
 
-task('dev', gulp.series('dist-clean','compile-src', 'copy-json', gulp.parallel('watch-dev')));
+task('dev', gulp.series('dist-clean', 'compile-src', 'copy-json', gulp.parallel('watch-dev')));
 // task('test', gulp.series(gulp.parallel()))

@@ -26,6 +26,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.4.0",
     "@babel/polyfill": "^7.4.3",
     "@babel/preset-env": "^7.4.2",
+    "babel-dts-generator": "^0.6.3",
     "babel-plugin-add-jsdoc-properties": "^0.1.4",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-inline-json-import": "^0.3.2",

@@ -33,12 +33,12 @@ module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceProvid
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcher = require('./dist/providers/eventServiceProvider/EventDispatcher').default;
-module.exports.Validator = require('./dist/providers/validator/Validator').default;
-module.exports.LogFile = require('./dist/providers/logger/LogFile').default;
+module.exports.Validator = require('./dist/providers/validatorServiceProvider/Validator').default;
+module.exports.LogFile = require('./dist/providers/loggerServiceProvider/LogFile').default;
 module.exports.Router = require('./dist/providers/routerServiceProvider/Router').default;
 module.exports.Route = require('./dist/providers/routerServiceProvider/Route').default;
 module.exports.HTTP = require('./dist/providers/protocolServiceProvider/HTTP').default;
-module.exports.Log = require('./dist/providers/logger/Log').default;
+module.exports.Log = require('./dist/providers/loggerServiceProvider/Log').default;
 
 /** EVENTS */
 module.exports.EventControllerArguments = require('./dist/providers/eventServiceProvider/EventControllerArguments').default;
