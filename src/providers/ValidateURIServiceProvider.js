@@ -1,6 +1,6 @@
 import AbstractProvider from "../api/AbstractProvider"
-import KernelEvents from "./event/KernelEvents"
-import Validator from "./validator/Validator"
+import KernelEvents from "./eventServiceProvider/KernelEvents"
+import Validator from "./validatorServiceProvider/Validator"
 import Response from "../core/response/Response"
 
 export default class ValidateURIServiceProvider extends AbstractProvider {

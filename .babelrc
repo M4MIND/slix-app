@@ -20,6 +20,7 @@
         "lazy": true
       }
     ],
-    ["@babel/plugin-proposal-class-properties"]
+    ["@babel/plugin-proposal-class-properties"],
+    ["inline-json-import"]
   ]
 }

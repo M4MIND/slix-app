@@ -6,9 +6,13 @@ var _AbstractProvider = require("../api/AbstractProvider");
 
 var _AbstractController = require("../api/AbstractController");
 
-var _Route = require("./router/Route");
+var _Route = require("./routerServiceProvider/Route");
 
 var _Request = require("../core/request/Request");
+
+const config = {
+  path: "/controllers/"
+};
 
 let pathLib = require('path');
 
@@ -16,9 +20,8 @@ let fsLib = require('fs');
 
 class ControllerServiceProvider extends _AbstractProvider.default {
   registration(App) {
-    App.setParam(this.getName(), {
-      path: pathLib.join(App.get('ROOT_DIR'), '/controllers/')
-    });
+    config.path = pathLib.join(App.get('ROOT_DIR'), config.path);
+    App.setParam(this.getName(), config);
     /**
      * @param {Route} route
      * @param {Request} request

@@ -87,6 +87,15 @@ class Container {
       }
     }
   }
+  /**
+   * @param {AbstractProvider} provider
+   * @param {object} value
+   * */
+
+
+  replaceParamProvider(provider, value) {
+    this.setParam(provider.getName(), value);
+  }
   /** @param {string} key*/
 
 

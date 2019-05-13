@@ -1,14 +1,16 @@
-import AbstractProvider from "../api/AbstractProvider"
-import HTTP from "./protocol/HTTP";
-import Request from "../core/request/Request"
-import KernelEvents from "./event/KernelEvents"
-import EventRequest from "./event/EventRequest"
-import EventException from "./event/EventException"
-import EventCallController from "./event/EventCallController";
-import EventResponse from "./event/EventResponse";
-import EventControllerArguments from "./event/EventControllerArguments";
+import AbstractProvider from "../api/AbstractProvider";
+import HTTP from "./protocolServiceProvider/HTTP";
+import Request from "../core/request/Request";
+import KernelEvents from "./eventServiceProvider/KernelEvents";
+import EventRequest from "./eventServiceProvider/EventRequest";
+import EventException from "./eventServiceProvider/EventException";
+import EventCallController from "./eventServiceProvider/EventCallController";
+import EventResponse from "./eventServiceProvider/EventResponse";
+import EventControllerArguments from "./eventServiceProvider/EventControllerArguments";
 import Response from "../core/response/Response";
-import EventTerminate from "./event/EventTerminate"
+import EventTerminate from "./eventServiceProvider/EventTerminate";
+
+import config from "./protocolServiceProvider/config.json";
 
 /**
  * @export
@@ -16,19 +18,16 @@ import EventTerminate from "./event/EventTerminate"
  * */
 export default class ProtocolServiceProvider extends AbstractProvider {
 	registration(App) {
+		App.setParam(this.getName(), config);
 		this.App = App;
-
-		App.setParam(this.getName(), {
-			protocol: HTTP,
-			host: 'localhost',
-			port: 3000
-		});
+		this.config = App.getParam(this.getName());
 	}
 
 	boot(App) {
-		this.config = App.getParam(this.getName());
 		this.config.processingRequest = this.processingRequest;
-		new this.config.protocol(this.config);
+		if (this.config.protocol === 'http') {
+			new HTTP(this.config);
+		}
 	}
 
 	processingRequest = async (err, request, preparationResponse) => {
@@ -81,7 +80,9 @@ export default class ProtocolServiceProvider extends AbstractProvider {
 	};
 
 	filterResponse = async (request, response) => {
-		if (!response) throw new Error('Response object not found!');
+		if (!response) {
+			throw new Error('Response object not found!');
+		}
 		let $event = new EventResponse(request, response);
 		await this.App.dispatch(KernelEvents.RESPONSE, $event);
 		await this.finishRequest(request);

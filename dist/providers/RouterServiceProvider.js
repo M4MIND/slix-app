@@ -8,14 +8,11 @@ var _AbstractController = require("../api/AbstractController");
 
 var _Request = require("../core/request/Request");
 
-var _Router = require("./router/Router");
+var _Router = require("./routerServiceProvider/Router");
 
 class RouterServiceProvider extends _AbstractProvider.default {
   constructor() {
     super();
-    /** @type {Map<string, Map<string, Array<function>>>} */
-
-    this.collection = new Map();
     this.router = new _Router.default();
   }
 

@@ -7,7 +7,6 @@ import ControllerServiceProvider from "./providers/ControllerServiceProvider"
 import FileTransferServiceProvider from "./providers/FileTransferServiceProvider"
 import ExceptionServiceProvider from "./providers/ExceptionServiceProvider"
 import RouterServiceProvider from "./providers/RouterServiceProvider"
-import CompressionResponseServiceProvider from "./providers/CompressionResponseServiceProvider"
 import ValidateURIServiceProvider from "./providers/ValidateURIServiceProvider"
 
 let pathLib = require('path');
@@ -28,7 +27,6 @@ export default class Slix extends Container {
 		this.registrationProvider(new LoggerServiceProvider());
 		this.registrationProvider(new ProtocolServiceProvider());
 		this.registrationProvider(new ValidateURIServiceProvider());
-		this.registrationProvider(new CompressionResponseServiceProvider());
 		this.registrationProvider(new FileTransferServiceProvider());
 		this.registrationProvider(new TwigServiceProvider());
 		this.registrationProvider(new RouterServiceProvider());

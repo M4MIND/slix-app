@@ -1,5 +1,5 @@
 import AbstractProvider from "../api/AbstractProvider"
-import KernelEvents from "./event/KernelEvents"
+import KernelEvents from "./eventServiceProvider/KernelEvents"
 import FileResponse from "../core/response/FileResponse";
 
 let fsLib = require('fs');

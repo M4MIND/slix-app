@@ -1,4 +1,4 @@
-import EventDispatcher from "./event/EventDispatcher"
+import EventDispatcher from "./eventServiceProvider/EventDispatcher"
 import AbstractProvider from "../api/AbstractProvider"
 
 export default class EventDispatcherServiceProvider extends AbstractProvider {

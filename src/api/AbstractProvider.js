@@ -1,5 +1,5 @@
 import Slix from "../Slix";
-import EventDispatcher from '../providers/event/EventDispatcher';
+import EventDispatcher from '../providers/eventServiceProvider/EventDispatcher';
 
 export default class AbstractProvider {
 	constructor() {

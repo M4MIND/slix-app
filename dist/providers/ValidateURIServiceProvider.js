@@ -4,9 +4,9 @@ exports.default = void 0;
 
 var _AbstractProvider = require("../api/AbstractProvider");
 
-var _KernelEvents = require("./event/KernelEvents");
+var _KernelEvents = require("./eventServiceProvider/KernelEvents");
 
-var _Validator = require("./validator/Validator");
+var _Validator = require("./validatorServiceProvider/Validator");
 
 var _Response = require("../core/response/Response");
 

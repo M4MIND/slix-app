@@ -28,6 +28,7 @@
     "@babel/preset-env": "^7.4.2",
     "babel-plugin-add-jsdoc-properties": "^0.1.4",
     "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-inline-json-import": "^0.3.2",
     "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
@@ -35,12 +36,10 @@
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "jsdoc-babel": "^0.4.0-alpha.0",
-    "nodemon": "^1.18.10",
-    "typescript": "^3.4.5"
+    "nodemon": "^1.18.10"
   },
   "dependencies": {
     "natives": "^1.1.6",
-    "rigel-ui": "git+https://github.com/proyavin/rigel-ui.git",
     "twig": "^1.13.2"
   }
 }

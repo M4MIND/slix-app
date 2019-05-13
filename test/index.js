@@ -1,15 +1,9 @@
-import {Slix, ProtocolServiceProvider, FileTransferServiceProvider} from '../index'
+import {Slix, ProtocolServiceProvider, FileTransferServiceProvider} from '../index';
+import config from "./config/config.json";
 
 let server = new Slix();
 
-server.setParam(ProtocolServiceProvider.getName(), {
-    port: 10000,
-});
-
-server.setParam(FileTransferServiceProvider.getName(), {
-    foldersWithAccess: {
-        "rigel-ui": '..\\node_modules\\rigel-ui\\dist\\css\\'
-    }
-});
+server.replaceParamProvider(ProtocolServiceProvider, config.protocol);
+server.replaceParamProvider(FileTransferServiceProvider, config.fileTransfer);
 
 server.run();

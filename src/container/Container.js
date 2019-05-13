@@ -67,14 +67,21 @@ export default class Container {
 	setParam(key, value) {
 		if (!this._params.has(key)) {
 			this._params.set(key, value);
-		}
-		else {
+		} else {
 			if (typeof this._params.get(key) === "object") {
 				for (let property of Object.keys(value)) {
 					this._params.get(key)[property] = value[property];
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param {AbstractProvider} provider
+	 * @param {object} value
+	 * */
+	replaceParamProvider(provider, value) {
+		this.setParam(provider.getName(), value);
 	}
 
 	/** @param {string} key*/

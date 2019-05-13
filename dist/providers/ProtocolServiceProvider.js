@@ -4,32 +4,38 @@ exports.default = void 0;
 
 var _AbstractProvider = require("../api/AbstractProvider");
 
-var _HTTP = require("./protocol/HTTP");
+var _HTTP = require("./protocolServiceProvider/HTTP");
 
 var _Request = require("../core/request/Request");
 
-var _KernelEvents = require("./event/KernelEvents");
+var _KernelEvents = require("./eventServiceProvider/KernelEvents");
 
-var _EventRequest = require("./event/EventRequest");
+var _EventRequest = require("./eventServiceProvider/EventRequest");
 
-var _EventException = require("./event/EventException");
+var _EventException = require("./eventServiceProvider/EventException");
 
-var _EventCallController = require("./event/EventCallController");
+var _EventCallController = require("./eventServiceProvider/EventCallController");
 
-var _EventResponse = require("./event/EventResponse");
+var _EventResponse = require("./eventServiceProvider/EventResponse");
 
-var _EventControllerArguments = require("./event/EventControllerArguments");
+var _EventControllerArguments = require("./eventServiceProvider/EventControllerArguments");
 
 var _Response = require("../core/response/Response");
 
-var _EventTerminate = require("./event/EventTerminate");
+var _EventTerminate = require("./eventServiceProvider/EventTerminate");
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+const config = {
+  protocol: "http",
+  host: "localhost",
+  port: 10000
+};
 /**
  * @export
  * @class ProtocolServiceProvider
  * */
+
 class ProtocolServiceProvider extends _AbstractProvider.default {
   constructor(...args) {
     super(...args);
@@ -74,7 +80,10 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
     });
 
     _defineProperty(this, "filterResponse", async (request, response) => {
-      if (!response) throw new Error('Response object not found!');
+      if (!response) {
+        throw new Error('Response object not found!');
+      }
+
       let $event = new _EventResponse.default(request, response);
       await this.App.dispatch(_KernelEvents.default.RESPONSE, $event);
       await this.finishRequest(request);
@@ -88,18 +97,17 @@ class ProtocolServiceProvider extends _AbstractProvider.default {
   }
 
   registration(App) {
+    App.setParam(this.getName(), config);
     this.App = App;
-    App.setParam(this.getName(), {
-      protocol: _HTTP.default,
-      host: 'localhost',
-      port: 3000
-    });
+    this.config = App.getParam(this.getName());
   }
 
   boot(App) {
-    this.config = App.getParam(this.getName());
     this.config.processingRequest = this.processingRequest;
-    new this.config.protocol(this.config);
+
+    if (this.config.protocol === 'http') {
+      new _HTTP.default(this.config);
+    }
   }
 
 }

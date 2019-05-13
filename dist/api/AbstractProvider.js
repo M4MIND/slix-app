@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _Slix = require("../Slix");
 
-var _EventDispatcher = require("../providers/event/EventDispatcher");
+var _EventDispatcher = require("../providers/eventServiceProvider/EventDispatcher");
 
 class AbstractProvider {
   constructor() {

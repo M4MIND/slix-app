@@ -1,16 +1,15 @@
 import AbstractProvider from "../api/AbstractProvider";
-import Log from "./logger/Log"
-import LogFile from "./logger/LogFile"
+import Log from "./loggerServiceProvider/Log"
+import LogFile from "./loggerServiceProvider/LogFile"
+
+import config from "./loggerServiceProvider/config.json";
 
 export default class LoggerServiceProvider extends AbstractProvider {
 	registration(App) {
-		App.setParam(this.getName(), {
-			console: App.get('debug') ? App.get('debug') : true,
-			writeFile: App.get('log') ? App.get('log') : true,
-			pathFile: '/logs/',
-			recordEventsLevel: [Log.DEFAULT(), Log.INFO(), Log.WARNING(), Log.ERROR()]
-		});
+		App.setParam(this.getName(), config);
+	}
 
+	boot(App) {
 		App.set('log', (message, level = Log.DEFAULT()) => {
 			if (App.getParam(this.getName()).console) {
 				Log.console(message, level)

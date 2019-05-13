@@ -6,17 +6,20 @@ var _AbstractProvider = require("../api/AbstractProvider");
 
 var _Response = require("../core/response/Response");
 
+const config = {
+  path: "/views/",
+  cache: false,
+  typeFile: ".twig"
+};
+
 let twigLib = require('twig');
 
 let pathLib = require('path');
 
 class TwigServiceProvider extends _AbstractProvider.default {
   registration(App) {
-    App.setParam(this.getName(), {
-      path: pathLib.join(App.get('ROOT_DIR'), '/views/'),
-      cache: false,
-      typeFile: '.twig'
-    });
+    config.path = pathLib.join(App.get('ROOT_DIR'), config.path);
+    App.setParam(this.getName(), config);
   }
 
   boot(App) {

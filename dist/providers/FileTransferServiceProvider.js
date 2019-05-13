@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _AbstractProvider = require("../api/AbstractProvider");
 
-var _KernelEvents = require("./event/KernelEvents");
+var _KernelEvents = require("./eventServiceProvider/KernelEvents");
 
 var _FileResponse = require("../core/response/FileResponse");
 
@@ -89,7 +89,6 @@ class FileTransferServiceProvider extends _AbstractProvider.default {
               resolve(false);
             }
           } else {
-            console.log("file not found", path);
             resolve(false);
           }
         });

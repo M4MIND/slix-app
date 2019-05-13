@@ -1,21 +1,19 @@
-import AbstractProvider from "../api/AbstractProvider"
-import Response from "../core/response/Response"
+import AbstractProvider from "../api/AbstractProvider";
+import Response from "../core/response/Response";
+
+import config from "./twigServiceProvider/config.json";
 
 let twigLib = require('twig');
 let pathLib = require('path');
 
 export default class TwigServiceProvider extends AbstractProvider {
 	registration(App) {
-		App.setParam(this.getName(), {
-			path: pathLib.join(App.get('ROOT_DIR'), '/views/'),
-			cache: false,
-			typeFile: '.twig'
-		})
+		config.path = pathLib.join(App.get('ROOT_DIR'), config.path);
+		App.setParam(this.getName(), config)
 	}
 
 	boot(App) {
 		this.config = App.getParam(this.getName());
-
 		twigLib.cache(this.config.cache);
 
 		App.render = async (path, values = {}) => {

@@ -1,6 +1,6 @@
 import Slix from "../Slix"
 import Request from "../core/request/Request"
-import Router from "../providers/router/Router";
+import Router from "../providers/routerServiceProvider/Router";
 
 export default class AbstractController {
 

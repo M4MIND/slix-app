@@ -1,13 +1,11 @@
 import AbstractProvider from "../api/AbstractProvider"
 import AbstractController from "../api/AbstractController"
 import Request from "../core/request/Request"
-import Router from "./router/Router";
+import Router from "./routerServiceProvider/Router";
 
 export default class RouterServiceProvider extends AbstractProvider {
     constructor() {
         super();
-        /** @type {Map<string, Map<string, Array<function>>>} */
-        this.collection = new Map();
         this.router = new Router();
     }
 

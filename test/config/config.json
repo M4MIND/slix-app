@@ -1,0 +1,10 @@
+{
+  "fileTransfer": {
+    "foldersWithAccess": {
+      "rigel-ui": "..\\node_modules\\rigel-ui\\dist\\css\\"
+    }
+  },
+  "protocol": {
+    "port": 10000
+  }
+}

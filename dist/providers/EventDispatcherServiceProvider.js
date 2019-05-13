@@ -2,7 +2,7 @@
 
 exports.default = void 0;
 
-var _EventDispatcher = require("./event/EventDispatcher");
+var _EventDispatcher = require("./eventServiceProvider/EventDispatcher");
 
 var _AbstractProvider = require("../api/AbstractProvider");
 

@@ -6,7 +6,7 @@ var _Slix = require("../Slix");
 
 var _Request = require("../core/request/Request");
 
-var _Router = require("../providers/router/Router");
+var _Router = require("../providers/routerServiceProvider/Router");
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
