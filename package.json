@@ -1,14 +1,15 @@
 {
   "name": "slix-app",
-  "version": "0.3.2",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "nodemon --exec babel-node ./test/index.js",
     "prettier-dist": "prettier --config .prettierrc --write src/**/*.js",
     "prettier-src": "prettier --config .prettierrc --write dist/**/*.js",
-    "version": "npm run prettier-src && npm run prettier-dist && git add . && git commit -m 'Changelog update' && npm version patch && npm publish && git push",
-    "publish": "npm version patch && npm publish"
+    "pret": "npm run prettier-dist && npm run prettier-src",
+    "version": "npm run pret && git add . && git commit -m 'Changelog update'",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
