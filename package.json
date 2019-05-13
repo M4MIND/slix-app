@@ -8,7 +8,7 @@
     "prettier-dist": "prettier --config .prettierrc --write src/**/*.js",
     "prettier-src": "prettier --config .prettierrc --write dist/**/*.js",
     "pret": "npm run prettier-src && npm run prettier-dist",
-    "version": "npm run pret && git add . && git commit -m 'Changelog update' && git push && git push --tags && npm version minor && npm publish"
+    "version": "npm run pret && git add . && git commit -m 'Changelog update' && git push && npm version minor && npm publish"
   },
   "repository": {
     "type": "git",
