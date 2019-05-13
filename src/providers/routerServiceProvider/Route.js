@@ -1,4 +1,4 @@
-import AbstractController from "../../api/AbstractController";
+import AbstractController from '../../api/AbstractController';
 
 export default class Route {
     /**

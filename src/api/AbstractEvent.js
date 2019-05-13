@@ -1,4 +1,4 @@
-import Request from "../core/request/Request"
+import Request from '../core/request/Request';
 
 export default class AbstractEvent {
     /**
@@ -11,18 +11,18 @@ export default class AbstractEvent {
     }
 
     get break() {
-        return this._break
+        return this._break;
     }
 
     set break(value) {
-        this._break = value
+        this._break = value;
     }
 
     get request() {
-        return this._request
+        return this._request;
     }
 
     set request(value) {
-        this._request = value
+        this._request = value;
     }
 }

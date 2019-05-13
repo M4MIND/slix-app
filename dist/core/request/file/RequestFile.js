@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _Request = require("../Request");
+var _Request = require('../Request');
 
 class RequestFile {
-  /** @param {Request} request */
-  constructor(request) {}
-
+    /** @param {Request} request */
+    constructor(request) {}
 }
 
 exports.default = RequestFile;

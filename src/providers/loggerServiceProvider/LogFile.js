@@ -1,9 +1,5 @@
 export default class LogFile {
-	constructor(message) {
+    constructor(message) {}
 
-	}
-
-	static record(message) {
-
-	}
+    static record(message) {}
 }

@@ -1,5 +1,3 @@
-import AbstractEvent from "../../api/AbstractEvent"
+import AbstractEvent from '../../api/AbstractEvent';
 
-export default class EventTerminate extends AbstractEvent {
-
-}
+export default class EventTerminate extends AbstractEvent {}

@@ -1,5 +1,5 @@
 export default class Validator {
-	static validatePath(path) {
-		return true
-	}
+    static validatePath(path) {
+        return true;
+    }
 }

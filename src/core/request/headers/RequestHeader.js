@@ -1,5 +1,5 @@
-import AbstractHeader from "../../header/AbstractHeader"
-import Request from "../Request";
+import AbstractHeader from '../../header/AbstractHeader';
+import Request from '../Request';
 
 export default class RequestHeader extends AbstractHeader {
     /** @param {Request} request */

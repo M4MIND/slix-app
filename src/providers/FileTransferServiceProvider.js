@@ -1,6 +1,6 @@
-import AbstractProvider from "../api/AbstractProvider"
-import KernelEvents from "./eventServiceProvider/KernelEvents"
-import FileResponse from "../core/response/FileResponse";
+import AbstractProvider from '../api/AbstractProvider';
+import KernelEvents from './eventServiceProvider/KernelEvents';
+import FileResponse from '../core/response/FileResponse';
 
 let fsLib = require('fs');
 let pathLib = require('path');
@@ -16,7 +16,7 @@ export default class FileTransferServiceProvider extends AbstractProvider {
                 '.json': 'application/json',
                 '.png': 'image/png',
                 '.jpg': 'image/jpg',
-                '.ico': 'image/x-icon'
+                '.ico': 'image/x-icon',
             },
             customContentType: {},
         });
@@ -28,66 +28,96 @@ export default class FileTransferServiceProvider extends AbstractProvider {
         let foldersWithAccess = {};
 
         for (let key of Object.keys(this.config.foldersWithAccess)) {
-            foldersWithAccess[key] = pathLib.join(App.get('ROOT_DIR'), this.config.foldersWithAccess[key]);
+            foldersWithAccess[key] = pathLib.join(
+                App.get('ROOT_DIR'),
+                this.config.foldersWithAccess[key]
+            );
         }
 
         App.setParam(this.getName(), {
             path: pathLib.join(App.get('ROOT_DIR'), this.config.path),
-            foldersWithAccess: foldersWithAccess
+            foldersWithAccess: foldersWithAccess,
         });
     }
 
     subscribe(App, EventDispatcher) {
-        EventDispatcher.addEventListener(KernelEvents.REQUEST, (event) => {
-            if (event.response) return;
-            return new Promise((resolve, reject) => {
-                let path;
+        EventDispatcher.addEventListener(
+            KernelEvents.REQUEST,
+            (event) => {
+                if (event.response) return;
+                return new Promise((resolve, reject) => {
+                    let path;
 
-                for (let key of Object.keys(this.config.foldersWithAccess)) {
-                    if (event.request.url.indexOf(key) >= 0) {
-                        let file = event.request.url.replace(key, "");
+                    for (let key of Object.keys(
+                        this.config.foldersWithAccess
+                    )) {
+                        if (event.request.url.indexOf(key) >= 0) {
+                            let file = event.request.url.replace(key, '');
 
-                        path = pathLib.join(this.config.foldersWithAccess[key], file);
-                        break;
-                    }
-                }
-
-                if (!path) {
-                    path = pathLib.join(this.config.path, event.request.url);
-                }
-
-                let typeFile = pathLib.extname(path);
-
-                fsLib.lstat(path, (err, stat) => {
-                    if (err) {
-                        resolve(false);
+                            path = pathLib.join(
+                                this.config.foldersWithAccess[key],
+                                file
+                            );
+                            break;
+                        }
                     }
 
-                    if (stat !== undefined) {
-                        if (stat.isFile()) {
-                            let contentType = 'text/html';
+                    if (!path) {
+                        path = pathLib.join(
+                            this.config.path,
+                            event.request.url
+                        );
+                    }
 
-                            if (this.config.defaultContentType.hasOwnProperty(typeFile)) {
-                                contentType = this.config.defaultContentType[typeFile];
-                            } else if (this.config.customContentType.hasOwnProperty(typeFile)) {
-                                contentType = this.config.customContentType[typeFile];
-                            }
+                    let typeFile = pathLib.extname(path);
 
-                            fsLib.readFile(path, (err, content) => {
-                                if (err) {
-                                    reject(err);
+                    fsLib.lstat(path, (err, stat) => {
+                        if (err) {
+                            resolve(false);
+                        }
+
+                        if (stat !== undefined) {
+                            if (stat.isFile()) {
+                                let contentType = 'text/html';
+
+                                if (
+                                    this.config.defaultContentType.hasOwnProperty(
+                                        typeFile
+                                    )
+                                ) {
+                                    contentType = this.config
+                                        .defaultContentType[typeFile];
+                                } else if (
+                                    this.config.customContentType.hasOwnProperty(
+                                        typeFile
+                                    )
+                                ) {
+                                    contentType = this.config.customContentType[
+                                        typeFile
+                                    ];
                                 }
-                                event.response = new FileResponse(content, contentType);
-                                resolve(true)
-                            })
+
+                                fsLib.readFile(path, (err, content) => {
+                                    if (err) {
+                                        reject(err);
+                                    }
+                                    event.response = new FileResponse(
+                                        content,
+                                        contentType
+                                    );
+                                    resolve(true);
+                                });
+                            } else {
+                                resolve(false);
+                            }
                         } else {
                             resolve(false);
                         }
-                    } else {
-                        resolve(false);
-                    }
-                })
-            });
-        }, -20, this);
+                    });
+                });
+            },
+            -20,
+            this
+        );
     }
 }

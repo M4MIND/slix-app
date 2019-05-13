@@ -4,7 +4,7 @@ export default class Cron {
         this.time = time;
 
         this.timer = setInterval(() => {
-            this._callback()
+            this._callback();
         }, this._time);
     }
 

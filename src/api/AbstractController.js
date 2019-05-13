@@ -1,15 +1,14 @@
-import Slix from "../Slix"
-import Request from "../core/request/Request"
-import Router from "../providers/routerServiceProvider/Router";
+import Slix from '../Slix';
+import Request from '../core/request/Request';
+import Router from '../providers/routerServiceProvider/Router';
 
 export default class AbstractController {
-
     /**
      * @param {Slix} App
      * */
     constructor(App) {
         this._App = App;
-    };
+    }
 
     /** @param {Request} request */
     before = async (request) => {
@@ -24,7 +23,7 @@ export default class AbstractController {
     /** Function: Mounts the controller's request handler. */
     mount() {
         return null;
-    };
+    }
 
     /**
      * @param {string} route
@@ -92,11 +91,11 @@ export default class AbstractController {
 
     /** @return {Slix} */
     get App() {
-        return this._App
+        return this._App;
     }
 
     /** @param {Slix} value */
     set App(value) {
-        this._App = value
+        this._App = value;
     }
 }

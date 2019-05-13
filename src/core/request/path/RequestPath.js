@@ -1,4 +1,4 @@
-import Request from "../Request";
+import Request from '../Request';
 
 export default class RequestPath {
     /** @param {Request} request */
@@ -9,22 +9,22 @@ export default class RequestPath {
 
     /** @return {string} */
     get full() {
-        return this._full
+        return this._full;
     }
 
     /** @param {string} value */
     set full(value) {
-        this._full = value
+        this._full = value;
     }
 
     /** @return {Map<string, string>} */
     get collection() {
-        return this._collection
+        return this._collection;
     }
 
     /** @param {Map<string, string>} value */
     set collection(value) {
-        this._collection = value
+        this._collection = value;
     }
 
     /**
@@ -38,7 +38,10 @@ export default class RequestPath {
 
         for (let key in keys) {
             if (keys[key]) {
-                this._collection.set(keys[key].replace(new RegExp(':', 'g'), ""), data[key]);
+                this._collection.set(
+                    keys[key].replace(new RegExp(':', 'g'), ''),
+                    data[key]
+                );
             }
         }
     }

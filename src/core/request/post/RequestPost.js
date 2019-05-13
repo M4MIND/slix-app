@@ -1,7 +1,6 @@
-import Request from "../Request";
+import Request from '../Request';
 
 export default class RequestPost {
     /** @param {Request} request */
-    constructor(request) {
-    }
+    constructor(request) {}
 }

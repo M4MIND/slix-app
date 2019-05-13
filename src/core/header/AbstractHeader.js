@@ -1,16 +1,16 @@
 export default class AbstractHeader {
     constructor(headers) {
-        this.headers = headers
+        this.headers = headers;
     }
 
     /** @return {Object} */
     get headers() {
-        return this._headers
+        return this._headers;
     }
 
     /** @param {Object} value */
     set headers(value) {
-        this._headers = value
+        this._headers = value;
     }
 
     /**

@@ -1,16 +1,15 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _Response = require("./Response");
+var _Response = require('./Response');
 
 class FileResponse extends _Response.default {
-  constructor(content, contentType) {
-    super(content);
-    this.headers.setContentType(contentType);
-    return this;
-  }
-
+    constructor(content, contentType) {
+        super(content);
+        this.headers.setContentType(contentType);
+        return this;
+    }
 }
 
 exports.default = FileResponse;

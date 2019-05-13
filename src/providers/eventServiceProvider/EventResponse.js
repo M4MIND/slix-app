@@ -1,10 +1,9 @@
-import AbstractEvent from "../../api/AbstractEvent";
+import AbstractEvent from '../../api/AbstractEvent';
 
 export default class EventResponse extends AbstractEvent {
     constructor(request, response) {
         super(request);
         this.response = response;
-
     }
 
     get response() {
@@ -12,6 +11,6 @@ export default class EventResponse extends AbstractEvent {
     }
 
     set response(value) {
-		this._response = this._response ? this._response : value;
+        this._response = this._response ? this._response : value;
     }
 }

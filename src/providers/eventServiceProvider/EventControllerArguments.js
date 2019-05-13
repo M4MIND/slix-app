@@ -1,4 +1,4 @@
-import AbstractEvent from "../../api/AbstractEvent";
+import AbstractEvent from '../../api/AbstractEvent';
 
 export default class EventControllerArguments extends AbstractEvent {
     constructor(request, controller) {

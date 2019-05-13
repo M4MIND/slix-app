@@ -1,5 +1,5 @@
-import AbstractEvent from "../../api/AbstractEvent"
-import AbstractProvider from "../../api/AbstractProvider"
+import AbstractEvent from '../../api/AbstractEvent';
+import AbstractProvider from '../../api/AbstractProvider';
 
 export default class EventDispatcher {
     constructor() {
@@ -17,11 +17,15 @@ export default class EventDispatcher {
         }
 
         return await (async () => {
-            let collection = this.collection.get(typeEvent).map(item => item.callback(event));
+            let collection = this.collection
+                .get(typeEvent)
+                .map((item) => item.callback(event));
 
-            await Promise.all(collection).then(result => {}).catch(err => {
-                throw err;
-            });
+            await Promise.all(collection)
+                .then((result) => {})
+                .catch((err) => {
+                    throw err;
+                });
         })();
     };
 
@@ -39,12 +43,15 @@ export default class EventDispatcher {
         let listener = {
             priority: priority,
             callback: callback,
-            provider: provider
+            provider: provider,
         };
 
         this.collection.get(typeEvent).push(listener);
-        this.collection.set(typeEvent, this.collection.get(typeEvent).sort((a, b) => {
-            return a.priority - b.priority;
-        }))
-    }
+        this.collection.set(
+            typeEvent,
+            this.collection.get(typeEvent).sort((a, b) => {
+                return a.priority - b.priority;
+            })
+        );
+    };
 }

@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec babel-node ./test/index.js"
+    "test": "nodemon --exec babel-node ./test/index.js",
+    "prettier-dist": "prettier --config .prettierrc --write src/**/*.js",
+    "prettier-src": "prettier --config .prettierrc --write dist/**/*.js",
+    "pret": "npm run prettier-src && npm run prettier-dist",
+    "version": "npm run pret && git add . && git commit -m 'Changelog update' && git push && git push --tags && npm version minor && npm publish"
   },
   "repository": {
     "type": "git",
@@ -35,7 +39,6 @@
     "gulp-cached": "^1.1.1",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
-    "jsdoc-babel": "^0.4.0-alpha.0",
     "nodemon": "^1.18.10"
   },
   "dependencies": {

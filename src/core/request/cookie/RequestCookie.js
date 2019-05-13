@@ -1,5 +1,5 @@
-import Cookie from "../../cookie/Cookie"
-import Request from "../Request";
+import Cookie from '../../cookie/Cookie';
+import Request from '../Request';
 
 export default class RequestCookie {
     /** @param {Request} request */

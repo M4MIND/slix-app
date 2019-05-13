@@ -1,10 +1,10 @@
-import {IncomingMessage} from 'http';
-import RequestCookie from "./cookie/RequestCookie"
-import RequestHeader from "./headers/RequestHeader"
-import RequestQuery from "./query/RequestQuery"
-import RequestPath from "./path/RequestPath";
-import RequestFile from "./file/RequestFile";
-import RequestPost from "./post/RequestPost";
+import { IncomingMessage } from 'http';
+import RequestCookie from './cookie/RequestCookie';
+import RequestHeader from './headers/RequestHeader';
+import RequestQuery from './query/RequestQuery';
+import RequestPath from './path/RequestPath';
+import RequestFile from './file/RequestFile';
+import RequestPost from './post/RequestPost';
 
 export default class Request {
     /** @param {IncomingMessage} req */
@@ -32,52 +32,52 @@ export default class Request {
 
     /** @return {RequestCookie} */
     get cookie() {
-        return this._cookie
+        return this._cookie;
     }
 
     /** @param {RequestCookie} value */
     set cookie(value) {
-        this._cookie = value
+        this._cookie = value;
     }
 
     /** @return {RequestHeader} */
     get header() {
-        return this._header
+        return this._header;
     }
 
     /** @param {RequestHeader} value */
     set header(value) {
-        this._header = value
+        this._header = value;
     }
 
     /** @return {string} */
     get url() {
-        return this._url
+        return this._url;
     }
 
     /** @param {string} value */
     set url(value) {
-        this._url = value
+        this._url = value;
     }
 
     /** @return {string} */
     get method() {
-        return this._method
+        return this._method;
     }
 
     /** @param {string} value */
     set method(value) {
-        this._method = value
+        this._method = value;
     }
 
     /** @return {RequestQuery} */
     get query() {
-        return this._query
+        return this._query;
     }
 
     /** @param {RequestQuery} value */
     set query(value) {
-        this._query = value
+        this._query = value;
     }
 
     /** @return {RequestPath} */
