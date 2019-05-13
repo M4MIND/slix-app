@@ -1,4 +1,4 @@
-import Request from '../core/request/Request';
+import Request from '../core/request/SlixRequest';
 
 export default class AbstractEvent {
     /**

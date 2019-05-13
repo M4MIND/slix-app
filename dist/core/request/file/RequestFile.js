@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _Request = require('../Request');
+var _SlixRequest = require("../SlixRequest");
 
 class RequestFile {
-    /** @param {Request} request */
-    constructor(request) {}
+  /** @param {Request} request */
+  constructor(request) {}
+
 }
 
 exports.default = RequestFile;

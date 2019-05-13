@@ -1,5 +1,5 @@
 import Cookie from '../../cookie/Cookie';
-import Request from '../Request';
+import Request from '../SlixRequest';
 
 export default class RequestCookie {
     /** @param {Request} request */
