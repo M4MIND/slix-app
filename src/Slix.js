@@ -20,7 +20,6 @@ export default class Slix extends Container {
     constructor(__dir = pathLib.dirname(require.main.filename)) {
         super();
 
-
         this.set('ROOT_DIR', __dir);
         this.set('_DEBUG', true);
         this.registrationProvider(new EventDispatcherServiceProvider());
