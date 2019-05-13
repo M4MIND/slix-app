@@ -13,118 +13,93 @@ let fsLib = require('fs');
 let pathLib = require('path');
 
 class FileTransferProvider extends _AbstractProvider.default {
-    registration(App) {
-        App.setParam(this.getName(), {
-            path: '/static/',
-            foldersWithAccess: {},
-            defaultContentType: {
-                '.css': 'text/css',
-                '.js': 'text/javascript',
-                '.json': 'application/json',
-                '.png': 'image/png',
-                '.jpg': 'image/jpg',
-                '.ico': 'image/x-icon',
-            },
-            customContentType: {},
-        });
-        this.config = App.getParam(this.getName());
+  registration(App) {
+    App.setParam(this.getName(), {
+      path: '/static/',
+      foldersWithAccess: {},
+      defaultContentType: {
+        '.css': 'text/css',
+        '.js': 'text/javascript',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpg',
+        '.ico': 'image/x-icon',
+      },
+      customContentType: {},
+    });
+    this.config = App.getParam(this.getName());
+  }
+
+  boot(App) {
+    let foldersWithAccess = {};
+
+    for (let key of Object.keys(this.config.foldersWithAccess)) {
+      foldersWithAccess[key] = pathLib.join(App.get('ROOT_DIR'), this.config.foldersWithAccess[key]);
     }
 
-    boot(App) {
-        let foldersWithAccess = {};
+    App.setParam(this.getName(), {
+      path: pathLib.join(App.get('ROOT_DIR'), this.config.path),
+      foldersWithAccess: foldersWithAccess,
+    });
+  }
 
-        for (let key of Object.keys(this.config.foldersWithAccess)) {
-            foldersWithAccess[key] = pathLib.join(
-                App.get('ROOT_DIR'),
-                this.config.foldersWithAccess[key]
-            );
-        }
+  subscribe(App, EventDispatcher) {
+    EventDispatcher.addEventListener(
+      _KernelEvents.default.REQUEST,
+      (event) => {
+        if (event.response) return;
+        return new Promise((resolve, reject) => {
+          let path;
 
-        App.setParam(this.getName(), {
-            path: pathLib.join(App.get('ROOT_DIR'), this.config.path),
-            foldersWithAccess: foldersWithAccess,
-        });
-    }
+          for (let key of Object.keys(this.config.foldersWithAccess)) {
+            if (event.request.url.indexOf(key) >= 0) {
+              let file = event.request.url.replace(key, '');
+              path = pathLib.join(this.config.foldersWithAccess[key], file);
+              break;
+            }
+          }
 
-    subscribe(App, EventDispatcher) {
-        EventDispatcher.addEventListener(
-            _KernelEvents.default.REQUEST,
-            (event) => {
-                if (event.response) return;
-                return new Promise((resolve, reject) => {
-                    let path;
+          if (!path) {
+            path = pathLib.join(this.config.path, event.request.url);
+          }
 
-                    for (let key of Object.keys(
-                        this.config.foldersWithAccess
-                    )) {
-                        if (event.request.url.indexOf(key) >= 0) {
-                            let file = event.request.url.replace(key, '');
-                            path = pathLib.join(
-                                this.config.foldersWithAccess[key],
-                                file
-                            );
-                            break;
-                        }
-                    }
+          let typeFile = pathLib.extname(path);
+          fsLib.lstat(path, (err, stat) => {
+            if (err) {
+              resolve(false);
+            }
 
-                    if (!path) {
-                        path = pathLib.join(
-                            this.config.path,
-                            event.request.url
-                        );
-                    }
+            if (stat !== undefined) {
+              if (stat.isFile()) {
+                let contentType = 'text/html';
 
-                    let typeFile = pathLib.extname(path);
-                    fsLib.lstat(path, (err, stat) => {
-                        if (err) {
-                            resolve(false);
-                        }
+                if (this.config.defaultContentType.hasOwnProperty(typeFile)) {
+                  contentType = this.config.defaultContentType[typeFile];
+                } else if (this.config.customContentType.hasOwnProperty(typeFile)) {
+                  contentType = this.config.customContentType[typeFile];
+                }
 
-                        if (stat !== undefined) {
-                            if (stat.isFile()) {
-                                let contentType = 'text/html';
+                fsLib.readFile(path, (err, content) => {
+                  if (err) {
+                    reject(err);
+                  }
 
-                                if (
-                                    this.config.defaultContentType.hasOwnProperty(
-                                        typeFile
-                                    )
-                                ) {
-                                    contentType = this.config
-                                        .defaultContentType[typeFile];
-                                } else if (
-                                    this.config.customContentType.hasOwnProperty(
-                                        typeFile
-                                    )
-                                ) {
-                                    contentType = this.config.customContentType[
-                                        typeFile
-                                    ];
-                                }
-
-                                fsLib.readFile(path, (err, content) => {
-                                    if (err) {
-                                        reject(err);
-                                    }
-
-                                    event.response = new _FileResponse.default(
-                                        content,
-                                        contentType
-                                    );
-                                    resolve(true);
-                                });
-                            } else {
-                                resolve(false);
-                            }
-                        } else {
-                            resolve(false);
-                        }
-                    });
+                  event.response = new _FileResponse.default(content, contentType);
+                  resolve(true);
                 });
-            },
-            -20,
-            this
-        );
-    }
+              } else {
+                resolve(false);
+              }
+            } else {
+              resolve(false);
+            }
+          });
+        });
+      },
+      -20,
+      this
+    );
+  }
 }
 
 exports.default = FileTransferProvider;

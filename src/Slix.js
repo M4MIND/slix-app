@@ -17,18 +17,20 @@ export default class Slix extends Container {
      * */
     constructor(__dir = pathLib.dirname(require.main.filename)) {
         super();
-        this.constructor.this = this;
+        if (!this.constructor.boot) {
+            this.constructor.this = this;
 
-        this.set('ROOT_DIR', __dir);
-        this.registrationProvider(new EventDispatcherProvider());
-        this.registrationProvider(new ExceptionProvider());
-        this.registrationProvider(new LoggerProvider());
-        this.registrationProvider(new ProtocolProvider());
-        this.registrationProvider(new ValidateURIProvider());
-        this.registrationProvider(new FileTransferProvider());
-        this.registrationProvider(new TwigProvider());
-        this.registrationProvider(new RouterProvider());
-        this.registrationProvider(new ControllerProvider());
+            this.set('ROOT_DIR', __dir);
+            this.registrationProvider(new EventDispatcherProvider());
+            this.registrationProvider(new ExceptionProvider());
+            this.registrationProvider(new LoggerProvider());
+            this.registrationProvider(new ProtocolProvider());
+            this.registrationProvider(new ValidateURIProvider());
+            this.registrationProvider(new FileTransferProvider());
+            this.registrationProvider(new TwigProvider());
+            this.registrationProvider(new RouterProvider());
+            this.registrationProvider(new ControllerProvider());
+        }
     }
 
     run() {

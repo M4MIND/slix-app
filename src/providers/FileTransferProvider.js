@@ -6,118 +6,93 @@ let fsLib = require('fs');
 let pathLib = require('path');
 
 export default class FileTransferProvider extends AbstractProvider {
-    registration(App) {
-        App.setParam(this.getName(), {
-            path: '/static/',
-            foldersWithAccess: {},
-            defaultContentType: {
-                '.css': 'text/css',
-                '.js': 'text/javascript',
-                '.json': 'application/json',
-                '.png': 'image/png',
-                '.jpg': 'image/jpg',
-                '.ico': 'image/x-icon',
-            },
-            customContentType: {},
-        });
+  registration(App) {
+    App.setParam(this.getName(), {
+      path: '/static/',
+      foldersWithAccess: {},
+      defaultContentType: {
+        '.css': 'text/css',
+        '.js': 'text/javascript',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpg',
+        '.ico': 'image/x-icon',
+      },
+      customContentType: {},
+    });
 
-        this.config = App.getParam(this.getName());
+    this.config = App.getParam(this.getName());
+  }
+
+  boot(App) {
+    let foldersWithAccess = {};
+
+    for (let key of Object.keys(this.config.foldersWithAccess)) {
+      foldersWithAccess[key] = pathLib.join(App.get('ROOT_DIR'), this.config.foldersWithAccess[key]);
     }
 
-    boot(App) {
-        let foldersWithAccess = {};
+    App.setParam(this.getName(), {
+      path: pathLib.join(App.get('ROOT_DIR'), this.config.path),
+      foldersWithAccess: foldersWithAccess,
+    });
+  }
 
-        for (let key of Object.keys(this.config.foldersWithAccess)) {
-            foldersWithAccess[key] = pathLib.join(
-                App.get('ROOT_DIR'),
-                this.config.foldersWithAccess[key]
-            );
-        }
+  subscribe(App, EventDispatcher) {
+    EventDispatcher.addEventListener(
+      KernelEvents.REQUEST,
+      (event) => {
+        if (event.response) return;
+        return new Promise((resolve, reject) => {
+          let path;
 
-        App.setParam(this.getName(), {
-            path: pathLib.join(App.get('ROOT_DIR'), this.config.path),
-            foldersWithAccess: foldersWithAccess,
-        });
-    }
+          for (let key of Object.keys(this.config.foldersWithAccess)) {
+            if (event.request.url.indexOf(key) >= 0) {
+              let file = event.request.url.replace(key, '');
 
-    subscribe(App, EventDispatcher) {
-        EventDispatcher.addEventListener(
-            KernelEvents.REQUEST,
-            (event) => {
-                if (event.response) return;
-                return new Promise((resolve, reject) => {
-                    let path;
+              path = pathLib.join(this.config.foldersWithAccess[key], file);
+              break;
+            }
+          }
 
-                    for (let key of Object.keys(
-                        this.config.foldersWithAccess
-                    )) {
-                        if (event.request.url.indexOf(key) >= 0) {
-                            let file = event.request.url.replace(key, '');
+          if (!path) {
+            path = pathLib.join(this.config.path, event.request.url);
+          }
 
-                            path = pathLib.join(
-                                this.config.foldersWithAccess[key],
-                                file
-                            );
-                            break;
-                        }
-                    }
+          let typeFile = pathLib.extname(path);
 
-                    if (!path) {
-                        path = pathLib.join(
-                            this.config.path,
-                            event.request.url
-                        );
-                    }
+          fsLib.lstat(path, (err, stat) => {
+            if (err) {
+              resolve(false);
+            }
 
-                    let typeFile = pathLib.extname(path);
+            if (stat !== undefined) {
+              if (stat.isFile()) {
+                let contentType = 'text/html';
 
-                    fsLib.lstat(path, (err, stat) => {
-                        if (err) {
-                            resolve(false);
-                        }
+                if (this.config.defaultContentType.hasOwnProperty(typeFile)) {
+                  contentType = this.config.defaultContentType[typeFile];
+                } else if (this.config.customContentType.hasOwnProperty(typeFile)) {
+                  contentType = this.config.customContentType[typeFile];
+                }
 
-                        if (stat !== undefined) {
-                            if (stat.isFile()) {
-                                let contentType = 'text/html';
-
-                                if (
-                                    this.config.defaultContentType.hasOwnProperty(
-                                        typeFile
-                                    )
-                                ) {
-                                    contentType = this.config
-                                        .defaultContentType[typeFile];
-                                } else if (
-                                    this.config.customContentType.hasOwnProperty(
-                                        typeFile
-                                    )
-                                ) {
-                                    contentType = this.config.customContentType[
-                                        typeFile
-                                    ];
-                                }
-
-                                fsLib.readFile(path, (err, content) => {
-                                    if (err) {
-                                        reject(err);
-                                    }
-                                    event.response = new FileResponse(
-                                        content,
-                                        contentType
-                                    );
-                                    resolve(true);
-                                });
-                            } else {
-                                resolve(false);
-                            }
-                        } else {
-                            resolve(false);
-                        }
-                    });
+                fsLib.readFile(path, (err, content) => {
+                  if (err) {
+                    reject(err);
+                  }
+                  event.response = new FileResponse(content, contentType);
+                  resolve(true);
                 });
-            },
-            -20,
-            this
-        );
-    }
+              } else {
+                resolve(false);
+              }
+            } else {
+              resolve(false);
+            }
+          });
+        });
+      },
+      -20,
+      this
+    );
+  }
 }
