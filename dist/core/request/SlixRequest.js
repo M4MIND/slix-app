@@ -32,10 +32,10 @@ class Request {
     this.method = req.method.toUpperCase();
     this.path = new _RequestPath.default(this);
     this.header = new _RequestHeader.default(this);
+    this.contentType = this.header.get('content-type');
     this.cookie = new _RequestCookie.default(this);
     this.query = new _RequestQuery.default(this);
     this.post = new _RequestPost.default(this);
-    this.file = new _RequestFile.default(this);
   }
   /** @return {IncomingMessage} */
 

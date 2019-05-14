@@ -14,10 +14,10 @@ export default class Request {
         this.method = req.method.toUpperCase();
         this.path = new RequestPath(this);
         this.header = new RequestHeader(this);
+        this.contentType = this.header.get('content-type');
         this.cookie = new RequestCookie(this);
         this.query = new RequestQuery(this);
         this.post = new RequestPost(this);
-        this.file = new RequestFile(this);
     }
 
     /** @return {IncomingMessage} */

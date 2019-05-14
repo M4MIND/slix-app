@@ -1,17 +1,17 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractProvider = require('../api/AbstractProvider');
+var _AbstractProvider = require("../api/AbstractProvider");
 
-var _AbstractController = require('../api/AbstractController');
+var _AbstractController = require("../api/AbstractController");
 
-var _Route = require('./routerProvider/Route');
+var _Route = require("./routerProvider/Route");
 
-var _SlixRequest = require('../core/request/SlixRequest');
+var _SlixRequest = require("../core/request/SlixRequest");
 
 const config = {
-  path: '/controllers/',
+  path: "/controllers/"
 };
 
 let pathLib = require('path');
@@ -53,6 +53,7 @@ class ControllerProvider extends _AbstractProvider.default {
     this.config = App.getParam(this.getName());
     readDir(this.config.path, App);
   }
+
 }
 
 exports.default = ControllerProvider;
@@ -73,6 +74,7 @@ function readDir(path, App) {
         if (stat.isFile()) {
           let controller = require(file).default;
           /** @type {AbstractController} */
+
 
           controller = new controller(App);
           controller.mount();

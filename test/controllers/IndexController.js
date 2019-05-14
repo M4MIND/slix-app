@@ -1,4 +1,4 @@
-import {AbstractController, Slix} from "../../index"
+import {AbstractController, Slix, RedirectResponse} from "../../index"
 
 export default class IndexController extends AbstractController {
 	mount() {
@@ -13,6 +13,7 @@ export default class IndexController extends AbstractController {
 	};
 
 	post = async (request) => {
-		console.dir(request.post);
+		await request.file.get('file').save();
+		return new RedirectResponse('/');
 	};
 }
