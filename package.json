@@ -1,6 +1,6 @@
 {
   "name": "slix-app",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "prettier-dist": "prettier --config .prettierrc --write src/**/*.js",
     "prettier-src": "prettier --config .prettierrc --write dist/**/*.js",
     "pret": "npm run prettier-dist && npm run prettier-src",
-    "version": "npm run pret && git add . && git commit -m 'Changelog update' && npm version patch && npm publish",
-    "postversion": "git push && git push --tags"
+    "version:patch":  "node utils/version.js",
+    "git:push": "npm run version:patch && npm run pret && git add . && git commit -m 'Changelog update' && git push && npm publish"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "natives": "^1.1.6",
-    "twig": "^1.13.2"
+    "twig": "^1.13.2",
+    "rigel-ui": "^0.0.1"
   }
 }

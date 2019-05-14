@@ -1,75 +1,81 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _Request = require('../Request');
+var _SlixRequest = require("../SlixRequest");
 
 class RequestPath {
-    /** @param {Request} request */
-    constructor(request) {
-        this.full = request.url.match(new RegExp('([^?#]*)|$', 'g'))[0];
-        this.collection = new Map();
+  /** @param {Request} request */
+  constructor(request) {
+    this.full = request.url.match(new RegExp('([^?#]*)|$', 'g'))[0];
+    this.collection = new Map();
+  }
+  /** @return {string} */
+
+
+  get full() {
+    return this._full;
+  }
+  /** @param {string} value */
+
+
+  set full(value) {
+    this._full = value;
+  }
+  /** @return {Map<string, string>} */
+
+
+  get collection() {
+    return this._collection;
+  }
+  /** @param {Map<string, string>} value */
+
+
+  set collection(value) {
+    this._collection = value;
+  }
+  /**
+   * @param {string} pattern
+   * @param {string} route
+   * @param {string} path
+   * */
+
+
+  parse(pattern, route, path) {
+    let data = path.split(new RegExp(pattern, 'g'));
+    let keys = route.split(new RegExp(pattern, 'g'));
+
+    for (let key in keys) {
+      if (keys[key]) {
+        this._collection.set(keys[key].replace(new RegExp(':', 'g'), ''), data[key]);
+      }
     }
-    /** @return {string} */
+  }
+  /** @return {string|?} */
 
-    get full() {
-        return this._full;
-    }
-    /** @param {string} value */
 
-    set full(value) {
-        this._full = value;
-    }
-    /** @return {Map<string, string>} */
+  get(key) {
+    return this._collection.get(key);
+  }
+  /** @return {boolean} */
 
-    get collection() {
-        return this._collection;
-    }
-    /** @param {Map<string, string>} value */
 
-    set collection(value) {
-        this._collection = value;
-    }
-    /**
-     * @param {string} pattern
-     * @param {string} route
-     * @param {string} path
-     * */
+  has(key) {
+    return this._collection.has(key);
+  }
+  /** @return {Object} */
 
-    parse(pattern, route, path) {
-        let data = path.split(new RegExp(pattern, 'g'));
-        let keys = route.split(new RegExp(pattern, 'g'));
 
-        for (let key in keys) {
-            if (keys[key]) {
-                this._collection.set(
-                    keys[key].replace(new RegExp(':', 'g'), ''),
-                    data[key]
-                );
-            }
-        }
-    }
-    /** @return {string|?} */
+  all() {
+    let out = {};
 
-    get(key) {
-        return this._collection.get(key);
-    }
-    /** @return {boolean} */
+    this._collection.forEach((value, key) => {
+      out[key] = value;
+    });
 
-    has(key) {
-        return this._collection.has(key);
-    }
-    /** @return {Object} */
+    return out;
+  }
 
-    all() {
-        let out = {};
-
-        this._collection.forEach((value, key) => {
-            out[key] = value;
-        });
-
-        return out;
-    }
 }
 
 exports.default = RequestPath;

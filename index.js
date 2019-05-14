@@ -13,7 +13,7 @@ module.exports.AbstractHeader = require('./dist/core/header/AbstractHeader').def
 module.exports.FileResponse = require('./dist/core/response/FileResponse').default;
 module.exports.JsonResponse = require('./dist/core/response/JsonResponse').default;
 module.exports.Response = require('./dist/core/response/Response').default;
-module.exports.Request = require('./dist/core/request/Request').default;
+module.exports.Request = require('./dist/core/request/SlixRequest').default;
 module.exports.Cookie = require('./dist/core/cookie/Cookie').default;
 
 /** API **/
@@ -22,29 +22,28 @@ module.exports.AbstractProvider = require('./dist/api/AbstractProvider').default
 module.exports.AbstractEvent = require('./dist/api/AbstractEvent').default;
 
 /** PROVIDERS **/
-module.exports.EventDispatcherServiceProvider = require('./dist/providers/EventDispatcherServiceProvider').default;
-module.exports.FileTransferServiceProvider = require('./dist/providers/FileTransferServiceProvider').default;
-module.exports.ValidateURIServiceProvider = require('./dist/providers/ValidateURIServiceProvider').default;
-module.exports.ControllerServiceProvider = require('./dist/providers/ControllerServiceProvider').default;
-module.exports.ProtocolServiceProvider = require('./dist/providers/ProtocolServiceProvider').default;
-module.exports.RouterServiceProvider = require('./dist/providers/RouterServiceProvider').default;
-module.exports.LoggerServiceProvider = require('./dist/providers/LoggerServiceProvider').default;
-module.exports.TwigServiceProvider = require('./dist/providers/TwigServiceProvider').default;
+module.exports.EventDispatcherProvider = require('./dist/providers/EventDispatcherProvider').default;
+module.exports.FileTransferProvider = require('./dist/providers/FileTransferProvider').default;
+module.exports.ValidateURIProvider = require('./dist/providers/ValidateURIProvider').default;
+module.exports.ControllerProvider = require('./dist/providers/ControllerProvider').default;
+module.exports.ProtocolProvider = require('./dist/providers/ProtocolProvider').default;
+module.exports.RouterProvider = require('./dist/providers/RouterProvider').default;
+module.exports.LoggerProvider = require('./dist/providers/LoggerProvider').default;
+module.exports.TwigProvider = require('./dist/providers/TwigProvider').default;
 
 /** PROVIDERS MODULE **/
-module.exports.EventDispatcher = require('./dist/providers/eventServiceProvider/EventDispatcher').default;
-module.exports.Validator = require('./dist/providers/validatorServiceProvider/Validator').default;
-module.exports.LogFile = require('./dist/providers/loggerServiceProvider/LogFile').default;
-module.exports.Router = require('./dist/providers/routerServiceProvider/Router').default;
-module.exports.Route = require('./dist/providers/routerServiceProvider/Route').default;
-module.exports.HTTP = require('./dist/providers/protocolServiceProvider/HTTP').default;
-module.exports.Log = require('./dist/providers/loggerServiceProvider/Log').default;
+module.exports.EventDispatcher = require('./dist/providers/eventProvider/EventDispatcher').default;
+module.exports.Validator = require('./dist/providers/validatorProvider/Validator').default;
+module.exports.Router = require('./dist/providers/routerProvider/Router').default;
+module.exports.Route = require('./dist/providers/routerProvider/Route').default;
+module.exports.HTTP = require('./dist/providers/protocolProvider/HTTP').default;
+module.exports.Log = require('./dist/providers/loggerProvider/Log').default;
 
 /** EVENTS */
-module.exports.EventControllerArguments = require('./dist/providers/eventServiceProvider/EventControllerArguments').default;
-module.exports.EventCallController = require('./dist/providers/eventServiceProvider/EventCallController').default;
-module.exports.EventException = require('./dist/providers/eventServiceProvider/EventException').default;
-module.exports.EventTerminate = require('./dist/providers/eventServiceProvider/EventTerminate').default;
-module.exports.EventResponse = require('./dist/providers/eventServiceProvider/EventResponse').default;
-module.exports.EventRequest = require('./dist/providers/eventServiceProvider/EventRequest').default;
-module.exports.KernelEvents = require('./dist/providers/eventServiceProvider/KernelEvents').default;
+module.exports.EventControllerArguments = require('./dist/providers/eventProvider/EventControllerArguments').default;
+module.exports.EventCallController = require('./dist/providers/eventProvider/EventCallController').default;
+module.exports.EventException = require('./dist/providers/eventProvider/EventException').default;
+module.exports.EventTerminate = require('./dist/providers/eventProvider/EventTerminate').default;
+module.exports.EventResponse = require('./dist/providers/eventProvider/EventResponse').default;
+module.exports.EventRequest = require('./dist/providers/eventProvider/EventRequest').default;
+module.exports.KernelEvents = require('./dist/providers/eventProvider/KernelEvents').default;

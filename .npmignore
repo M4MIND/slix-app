@@ -4,3 +4,6 @@
 /test
 .idea
 *.log
+package-lock.json
+utils
+.prettierrc

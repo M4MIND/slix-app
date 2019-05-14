@@ -1,70 +1,78 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _ResponseHeader = require('./header/ResponseHeader');
+var _ResponseHeader = require("./header/ResponseHeader");
 
 class Response {
-    /**
-     * @param {string} content
-     * @param {number} statusCode
-     * @param {Object} headers
-     * */
-    constructor(content = '', statusCode = Response.HTTP_OK, headers = {}) {
-        this.headers = new _ResponseHeader.default(headers);
-        this.content = content;
-        this.statusCode = statusCode;
-        this.encoding = 'UTF-8';
-        this.setContentType(Response.ContentType.html);
-        return this;
-    }
-    /** @return {string} */
+  /**
+   * @param {string} content
+   * @param {number} statusCode
+   * @param {Object} headers
+   * */
+  constructor(content = '', statusCode = Response.HTTP_OK, headers = {}) {
+    this.headers = new _ResponseHeader.default(headers);
+    this.content = content;
+    this.statusCode = statusCode;
+    this.encoding = 'UTF-8';
+    this.setContentType(Response.ContentType.html);
+    return this;
+  }
+  /** @return {string} */
 
-    get content() {
-        return this._content;
-    }
-    /** @param {string} value */
 
-    set content(value) {
-        this._content = value;
-        return this;
-    }
-    /** @return {number} */
+  get content() {
+    return this._content;
+  }
+  /** @param {string} value */
 
-    get statusCode() {
-        return this._statusCode;
-    }
-    /** @param {number} value */
 
-    set statusCode(value) {
-        this._statusCode = value;
-        return this;
-    }
-    /** @return {ResponseHeader} */
+  set content(value) {
+    this._content = value;
+    return this;
+  }
+  /** @return {number} */
 
-    get headers() {
-        return this._headers;
-    }
-    /** @param {ResponseHeader} value */
 
-    set headers(value) {
-        this._headers = value;
-        return this;
-    }
-    /** @param {string} value */
+  get statusCode() {
+    return this._statusCode;
+  }
+  /** @param {number} value */
 
-    setContentType(value) {
-        this.headers.set('Content-Type', value + '; charset=' + this.encoding);
-        return this;
-    }
 
-    get encoding() {
-        return this._encoding;
-    }
+  set statusCode(value) {
+    this._statusCode = value;
+    return this;
+  }
+  /** @return {ResponseHeader} */
 
-    set encoding(value) {
-        this._encoding = value;
-    }
+
+  get headers() {
+    return this._headers;
+  }
+  /** @param {ResponseHeader} value */
+
+
+  set headers(value) {
+    this._headers = value;
+    return this;
+  }
+  /** @param {string} value */
+
+
+  setContentType(value) {
+    this.headers.set('Content-Type', value + '; charset=' + this.encoding);
+    return this;
+  }
+
+  get encoding() {
+    return this._encoding;
+  }
+
+  set encoding(value) {
+    this._encoding = value;
+  }
+
 }
 
 exports.default = Response;
@@ -133,10 +141,10 @@ Response.HTTP_LOOP_DETECTED = 508;
 Response.HTTP_NOT_EXTENDED = 510;
 Response.HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;
 Response.ContentType = {
-    html: 'text/html',
-    css: 'text/css',
-    js: 'text/javascript',
-    json: 'application/json',
-    png: 'image/png',
-    jpg: 'image/jpg',
+  html: 'text/html',
+  css: 'text/css',
+  js: 'text/javascript',
+  json: 'application/json',
+  png: 'image/png',
+  jpg: 'image/jpg'
 };

@@ -1,70 +1,67 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _Container = require('./container/Container');
+var _Container = require("./container/Container");
 
-var _LoggerServiceProvider = require('./providers/LoggerServiceProvider');
+var _LoggerProvider = require("./providers/LoggerProvider");
 
-var _ProtocolServiceProvider = require('./providers/ProtocolServiceProvider');
+var _ProtocolProvider = require("./providers/ProtocolProvider");
 
-var _EventDispatcherServiceProvider = require('./providers/EventDispatcherServiceProvider');
+var _EventDispatcherProvider = require("./providers/EventDispatcherProvider");
 
-var _TwigServiceProvider = require('./providers/TwigServiceProvider');
+var _TwigProvider = require("./providers/TwigProvider");
 
-var _ControllerServiceProvider = require('./providers/ControllerServiceProvider');
+var _ControllerProvider = require("./providers/ControllerProvider");
 
-var _FileTransferServiceProvider = require('./providers/FileTransferServiceProvider');
+var _FileTransferProvider = require("./providers/FileTransferProvider");
 
-var _ExceptionServiceProvider = require('./providers/ExceptionServiceProvider');
+var _ExceptionProvider = require("./providers/ExceptionProvider");
 
-var _RouterServiceProvider = require('./providers/RouterServiceProvider');
+var _RouterProvider = require("./providers/RouterProvider");
 
-var _ValidateURIServiceProvider = require('./providers/ValidateURIServiceProvider');
+var _ValidateURIProvider = require("./providers/ValidateURIProvider");
 
 let pathLib = require('path');
 
-let boot = false;
-
 class Slix extends _Container.default {
-    /**
-     * @param {string} __dir
-     * */
-    constructor(__dir = pathLib.dirname(require.main.filename)) {
-        super();
-        this.set('ROOT_DIR', __dir);
-        this.set('_DEBUG', true);
-        this.registrationProvider(
-            new _EventDispatcherServiceProvider.default()
-        );
-        this.registrationProvider(new _ExceptionServiceProvider.default());
-        this.registrationProvider(new _LoggerServiceProvider.default());
-        this.registrationProvider(new _ProtocolServiceProvider.default());
-        this.registrationProvider(new _ValidateURIServiceProvider.default());
-        this.registrationProvider(new _FileTransferServiceProvider.default());
-        this.registrationProvider(new _TwigServiceProvider.default());
-        this.registrationProvider(new _RouterServiceProvider.default());
-        this.registrationProvider(new _ControllerServiceProvider.default());
-    }
+  /**
+   * @param {string} __dir
+   * */
+  constructor(__dir = pathLib.dirname(require.main.filename)) {
+    super();
 
-    run() {
-        if (!boot) {
-            boot = true;
-            this.boot();
-        }
+    if (!this.constructor.boot) {
+      this.constructor.this = this;
+      this.set('ROOT_DIR', __dir);
+      this.registrationProvider(new _EventDispatcherProvider.default());
+      this.registrationProvider(new _ExceptionProvider.default());
+      this.registrationProvider(new _LoggerProvider.default());
+      this.registrationProvider(new _ProtocolProvider.default());
+      this.registrationProvider(new _ValidateURIProvider.default());
+      this.registrationProvider(new _FileTransferProvider.default());
+      this.registrationProvider(new _TwigProvider.default());
+      this.registrationProvider(new _RouterProvider.default());
+      this.registrationProvider(new _ControllerProvider.default());
     }
+  }
 
-    boot() {
-        if (boot) {
-            for (let provider of this.getAllProviders()) {
-                provider.boot(this);
-            }
+  run() {
+    if (!this.constructor.boot) {
+      this.constructor.boot = true;
 
-            for (let provider of this.getAllProviders()) {
-                provider.subscribe(this, this.get('eventDispatcher'));
-            }
-        }
+      for (let provider of this.getAllProviders()) {
+        provider.boot(this);
+      }
+
+      for (let provider of this.getAllProviders()) {
+        provider.subscribe(this, this.get('eventDispatcher'));
+      }
     }
+  }
+
 }
 
 exports.default = Slix;
+Slix.this = null;
+Slix.boot = false;

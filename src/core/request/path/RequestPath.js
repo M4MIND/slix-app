@@ -1,4 +1,4 @@
-import Request from '../Request';
+import Request from '../SlixRequest';
 
 export default class RequestPath {
     /** @param {Request} request */
