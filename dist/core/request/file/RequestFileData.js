@@ -49,13 +49,9 @@ class RequestFileData {
   }
 
   save(path = '/temp/', name = this.filename) {
-    fs.readFile('C:\\Users\\user\\Downloads\\ico-payment.png', (err, data) => {
-      fs.writeFile('C:\\projects\\Slix\\test\\temp\\img.png', data.toString('binary'), "binary", err1 => {});
-      console.dir(this.buffer.length);
-    });
     path = pathLib.join(_Slix.default.this.get("ROOT_DIR"), path, name);
     return new Promise((resolve, reject) => {
-      fs.writeFile(path, this.buffer.toString('binary'), "binary", err => {
+      fs.writeFile(path, this.buffer, "binary", err => {
         if (err) {
           reject(err);
         }

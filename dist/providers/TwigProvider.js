@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _AbstractProvider = require("../api/AbstractProvider");
+var _AbstractProvider = require('../api/AbstractProvider');
 
-var _Response = require("../core/response/Response");
+var _Response = require('../core/response/Response');
 
 const config = {
-  path: "/views/",
+  path: '/views/',
   cache: false,
-  typeFile: ".twig"
+  typeFile: '.twig',
 };
 
 let twigLib = require('twig');
@@ -39,7 +39,6 @@ class TwigProvider extends _AbstractProvider.default {
       });
     };
   }
-
 }
 
 exports.default = TwigProvider;

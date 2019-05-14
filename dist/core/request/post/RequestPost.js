@@ -53,7 +53,7 @@ exports.default = RequestPost;
 
 RequestPost.multipart = (request, requestPost) => {
   let boundary = "--" + request.contentType.match(new RegExp('(?<=boundary=).+', 'g'))[0];
-  let chunks = request.req.body.toString('utf8').split(new RegExp(boundary, 'g'));
+  let chunks = request.req.body.toString('binary').split(new RegExp(boundary, 'g'));
 
   for (let chunk of chunks) {
     if (chunk.match(new RegExp('filename', 'g'))) {

@@ -4,64 +4,57 @@ let fs = require('fs');
 let pathLib = require('path');
 
 export default class RequestFileData {
-	constructor(name, filename, typeContent, buffer) {
-		this.name = name
-		this.filename = filename
-		this.typeContent = typeContent
-		this.buffer = buffer
-	}
+    constructor(name, filename, typeContent, buffer) {
+        this.name = name;
+        this.filename = filename;
+        this.typeContent = typeContent;
+        this.buffer = buffer;
+    }
 
-	get name() {
-		return this._name
-	}
+    get name() {
+        return this._name
+    }
 
-	set name(value) {
-		this._name = value
-	}
+    set name(value) {
+        this._name = value
+    }
 
-	get filename() {
-		return this._filename
-	}
+    get filename() {
+        return this._filename
+    }
 
-	set filename(value) {
-		this._filename = value
-	}
+    set filename(value) {
+        this._filename = value
+    }
 
-	get typeContent() {
-		return this._typeContent
-	}
+    get typeContent() {
+        return this._typeContent
+    }
 
-	set typeContent(value) {
-		this._typeContent = value
-	}
+    set typeContent(value) {
+        this._typeContent = value
+    }
 
-	get buffer() {
-		return this._buffer
-	}
+    get buffer() {
+        return this._buffer
+    }
 
-	set buffer(value) {
-		this._buffer = value
-	}
+    set buffer(value) {
+        this._buffer = value
+    }
 
-	save(path = '/temp/', name = this.filename) {
-		fs.readFile('C:\\Users\\user\\Downloads\\ico-payment.png', (err, data) => {
-			fs.writeFile('C:\\projects\\Slix\\test\\temp\\img.png', data.toString('binary'), "binary", err1 => {
+    save(path = '/temp/', name = this.filename) {
+        path = pathLib.join(Slix.this.get("ROOT_DIR"), path, name);
 
-			})
-			console.dir(this.buffer.length);
-		})
+        return new Promise((resolve, reject) => {
+            fs.writeFile(path, this.buffer, "binary", err => {
+                if (err) {
+                    reject(err);
+                }
 
-		path = pathLib.join(Slix.this.get("ROOT_DIR"), path, name);
+                resolve(true)
+            })
+        })
 
-		return new Promise((resolve, reject) => {
-			fs.writeFile(path, this.buffer.toString('binary'), "binary", err => {
-				if (err) {
-					reject(err);
-				}
-
-				resolve(true)
-			})
-		})
-
-	}
+    }
 }

@@ -35,7 +35,7 @@ class Request {
     this.contentType = this.header.get('content-type');
     this.cookie = new _RequestCookie.default(this);
     this.query = new _RequestQuery.default(this);
-    this.post = new _RequestPost.default(this);
+    this.body = new _RequestPost.default(this);
   }
   /** @return {IncomingMessage} */
 
@@ -124,14 +124,14 @@ class Request {
   /** @return {RequestPost} */
 
 
-  get post() {
+  get body() {
     return this._post;
   }
   /** @param {RequestPost} value */
 
 
-  set post(value) {
-    this._post = value;
+  set body(value) {
+    this._post = this._post ? this._post : value;
   }
   /** @return {RequestFile} */
 
@@ -143,7 +143,7 @@ class Request {
 
 
   set file(value) {
-    this._file = value;
+    this._file = this._file ? this._file : value;
   }
 
 }

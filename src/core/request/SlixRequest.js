@@ -1,4 +1,4 @@
-import { IncomingMessage } from 'http';
+import {IncomingMessage} from 'http';
 import RequestCookie from './cookie/RequestCookie';
 import RequestHeader from './headers/RequestHeader';
 import RequestQuery from './query/RequestQuery';
@@ -17,7 +17,7 @@ export default class Request {
         this.contentType = this.header.get('content-type');
         this.cookie = new RequestCookie(this);
         this.query = new RequestQuery(this);
-        this.post = new RequestPost(this);
+        this.body = new RequestPost(this);
     }
 
     /** @return {IncomingMessage} */
@@ -91,13 +91,13 @@ export default class Request {
     }
 
     /** @return {RequestPost} */
-    get post() {
+    get body() {
         return this._post;
     }
 
     /** @param {RequestPost} value */
-    set post(value) {
-        this._post = value;
+    set body(value) {
+        this._post = this._post ? this._post : value;
     }
 
     /** @return {RequestFile} */
@@ -107,6 +107,6 @@ export default class Request {
 
     /** @param {RequestFile} value */
     set file(value) {
-        this._file = value;
+        this._file = this._file ? this._file : value;
     }
 }

@@ -1,20 +1,30 @@
 import RequestFileData from "./RequestFileData"
 
 export default class RequestFile {
-	constructor() {
-		this.collection = new Map();
-	}
+    constructor() {
+        /** @param {Map<string, RequestFile>} */
+        this.collection = new Map();
+    }
 
-	/** @param {RequestFileData} value */
-	add(value) {
-		this.collection.set(value.name, value);
-	}
+    /** @param {RequestFileData} value */
+    add(value) {
+        this.collection.set(value.name, value);
+    }
 
-	get(name) {
-		return this.collection.get(name);
-	}
+    /** @return {RequestFile} */
+    get(name) {
+        return this.collection.get(name);
+    }
 
-	has(name) {
-		return this.collection.has(name);
-	}
+    /** @return {boolean} */
+    has(name) {
+        return this.collection.has(name);
+    }
+
+    /** @return {Promise} */
+    save(key, path, filename) {
+        if (this.has(key)) {
+            return this.get(key).save(path, filename);
+        }
+    }
 }

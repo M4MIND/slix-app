@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _AbstractProvider = require("../api/AbstractProvider");
+var _AbstractProvider = require('../api/AbstractProvider');
 
 class Container {
   constructor() {
@@ -11,24 +11,20 @@ class Container {
   }
   /** @return {Map<string, AbstractProvider>} */
 
-
   get providers() {
     return this._providers;
   }
   /** @param {Map<string, AbstractProvider>} value */
-
 
   set providers(value) {
     this._providers = this._providers ? this._providers : value;
   }
   /** @return {Map<string, Object>} */
 
-
   get params() {
     return this._params;
   }
   /** @param {Map<string, Object>} value */
-
 
   set params(value) {
     this._params = this._params ? this._params : value;
@@ -37,7 +33,6 @@ class Container {
    * @param {AbstractProvider} provider
    * @param {Object|?} value
    * */
-
 
   registrationProvider(provider, value = {}) {
     value.__provider = provider.getName();
@@ -54,18 +49,15 @@ class Container {
   }
   /** @param {AbstractProvider} provider */
 
-
   removeProvider(provider) {
     this._providers.get(provider.getName()).remove();
   }
   /** @return [AbstractProvider]*/
 
-
   getAllProviders() {
     return [...this._providers.values()];
   }
   /** @return [Object] */
-
 
   getAllParams() {
     return [...this._params.values()];
@@ -74,7 +66,6 @@ class Container {
    * @param {string} key
    * @param {?Object} value
    * */
-
 
   setParam(key, value) {
     if (!this._params.has(key)) {
@@ -92,12 +83,10 @@ class Container {
    * @param {object} value
    * */
 
-
   replaceParamProvider(provider, value) {
     this.setParam(provider.getName(), value);
   }
   /** @param {string} key*/
-
 
   getParam(key) {
     if (this._params.has(key)) {
@@ -111,14 +100,12 @@ class Container {
    * @param {*} value
    * */
 
-
   set(key, value) {
     if (!this.hasOwnProperty(key)) {
       this[key] = value;
     }
   }
   /** @param {string} key */
-
 
   get(key) {
     if (this.hasOwnProperty(key)) {
@@ -127,7 +114,6 @@ class Container {
 
     return null;
   }
-
 }
 
 exports.default = Container;
