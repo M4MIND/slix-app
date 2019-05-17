@@ -3,7 +3,7 @@ export default class Log {
      * @param {string} message
      * @param {number} level
      * */
-    static console(message, level = this.DEFAULT) {
+    static console(message = "", level = this.DEFAULT) {
         console.log(this.getColor(level) + message);
     }
 
@@ -16,7 +16,7 @@ export default class Log {
             return '\x1b[34m';
         }
         if (level === this.SUCCESS) {
-            return '\x1b[32m';
+            return '\x1b[36m';
         }
         if (level === this.WARNING) {
             return '\x1b[33m';

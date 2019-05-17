@@ -53,8 +53,9 @@ class LoggerProvider extends _AbstractProvider.default {
       _KernelEvents.default.TERMINATE,
       (Event) => {
         if (Event.request.log) {
-          Event.request.log += ` [time: '${Date.now() - Event.request.time}ms'] `;
+          Event.request.log += ` [time: '${Date.now() - Event.request.time}ms']`;
           App.log(Event.request.log, _Log.default.INFO);
+          App.log('-'.repeat(Event.request.log.length), _Log.default.SUCCESS);
         }
       },
       999999

@@ -1,6 +1,6 @@
 {
   "name": "slix-app",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,9 @@
     "prettier-src": "prettier --config .prettierrc --write dist/**/*.js",
     "pret": "npm run prettier-dist && npm run prettier-src",
     "version:patch": "node utils/version.js",
-    "git:publish": "npm run version:patch && npm run pret && npm run git:push && npm publish",
-    "git:push": "git add . && git commit -m 'Changelog update' && git push && git push --tag"
+    "git:publish": "npm run dts && npm run version:patch && npm run pret && npm run git:push && npm publish",
+    "git:push": "git add . && git commit -m 'Changelog update' && git push && git push --tag",
+    "dts": "node utils/dts-generate.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,9 @@
     "gulp-cached": "^1.1.1",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "readdirp": "^3.0.1",
+    "tern": "^0.23.0"
   },
   "dependencies": {
     "natives": "^1.1.6",

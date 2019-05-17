@@ -7,7 +7,7 @@ class Log {
    * @param {string} message
    * @param {number} level
    * */
-  static console(message, level = this.DEFAULT) {
+  static console(message = "", level = this.DEFAULT) {
     console.log(this.getColor(level) + message);
   }
   /** @return {string} */
@@ -23,7 +23,7 @@ class Log {
     }
 
     if (level === this.SUCCESS) {
-      return '\x1b[32m';
+      return '\x1b[36m';
     }
 
     if (level === this.WARNING) {
