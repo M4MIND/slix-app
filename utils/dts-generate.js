@@ -11,7 +11,7 @@ let allFilePaths = [];
 
 // Iterate recursively through a folder
 readdirp.promise(settings.root, settings).then(result => {
-	console.log('Generate d.ts files')
+	console.log('Generate d.ts files');
 	for (let file of result) {
 		file.path = path.join('src', file.path).replace(new RegExp("\\\\", 'g'), '/');
 
@@ -28,7 +28,7 @@ readdirp.promise(settings.root, settings).then(result => {
 			} else {
 				console.log("[dtsmake extest] " + file.basename.replace('.js', '.d.ts') + " file output complete.");
 				let copy = 'cp ' + file.path.replace('.js', '.d.ts');
-				copy += " " + file.path.replace('src', 'dist').replace('.js', '.d.ts');
+				copy += " " + file.path.replace('src', 'dts').replace('.js', '.d.ts');
 
 				child.exec(copy, (e, s, se) => {
 						if (e || se) {
