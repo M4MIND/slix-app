@@ -47,6 +47,10 @@ class ControllerProvider extends _AbstractProvider.default {
         return controllerResponse;
       }
     };
+
+    App.registerController = (controller) => {
+      controller.mount();
+    };
   }
 
   boot(App) {
@@ -74,8 +78,7 @@ function readDir(path, App) {
           let controller = require(file).default;
           /** @type {AbstractController} */
 
-          controller = new controller(App);
-          controller.mount();
+          App.registerController(new controller(App));
         } else {
           readDir(file, App);
         }
