@@ -1,7 +1,7 @@
 export default class RequestPostData {
 	constructor(name, data) {
-		this.name = name
-		this.data = data
+		this.name = name;
+		this.data = data;
 	}
 
 	get name() {

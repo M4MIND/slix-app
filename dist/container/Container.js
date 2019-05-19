@@ -64,7 +64,7 @@ class Container {
     return [...this._params.values()];
   }
   /**
-   * @param {string|Object} key
+   * @param {string|AbstractProvider} key
    * @param {?Object} value
    * */
 

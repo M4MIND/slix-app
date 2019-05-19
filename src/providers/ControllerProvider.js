@@ -48,7 +48,9 @@ export default class ControllerProvider extends AbstractProvider {
     this.config = App.getParam(this.getName());
     this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
 
-    readDir(this.config.path, App);
+    if (this.config.path !== false) {
+      readDir(this.config.path, App);
+    }
   }
 }
 

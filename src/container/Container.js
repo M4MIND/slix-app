@@ -61,7 +61,7 @@ export default class Container {
   }
 
   /**
-   * @param {string|Object} key
+   * @param {string|AbstractProvider} key
    * @param {?Object} value
    * */
   setParam(key, value) {

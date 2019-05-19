@@ -49,26 +49,32 @@ export default class Route {
         this._route = value;
     }
 
+    /** @return {function} */
     get handler() {
         return this._handler;
     }
 
+    /** @param {function} value */
     set handler(value) {
         this._handler = value;
     }
 
+    /** @return {boolean} */
     get dynamic() {
         return this._dynamic;
     }
 
+    /** @param {boolean} value */
     set dynamic(value) {
         this._dynamic = value;
     }
 
+    /** @return {AbstractController} */
     get controller() {
         return this._controller;
     }
 
+    /** @param {AbstractController} value */
     set controller(value) {
         this._controller = value;
     }
