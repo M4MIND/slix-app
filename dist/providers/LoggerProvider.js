@@ -35,19 +35,23 @@ class LoggerProvider extends _AbstractProvider.default {
         Event.request.time = Date.now();
         Event.request.log = `[${Event.request.method} : '${Event.request.url}']`;
       },
-      -99999
+      -99
     );
-    EventDispatcher.addEventListener(_KernelEvents.default.CALL_CONTROLLER, (Event) => {
-      Event.request.log += ` [Controller: ${Event.controller.controller.constructor.name} '${
-        Event.controller.pattern
-      }']`;
-    });
+    EventDispatcher.addEventListener(
+      _KernelEvents.default.CALL_CONTROLLER,
+      (Event) => {
+        Event.request.log += ` [Controller: ${Event.controller.controller.constructor.name} '${
+          Event.controller.pattern
+        }']`;
+      },
+      99
+    );
     EventDispatcher.addEventListener(
       _KernelEvents.default.EXCEPTION,
       (Event) => {
         App.log(`${Event.ex.message}`, _Log.default.ERROR);
       },
-      -99999
+      -99
     );
     EventDispatcher.addEventListener(
       _KernelEvents.default.TERMINATE,
@@ -57,7 +61,7 @@ class LoggerProvider extends _AbstractProvider.default {
           App.log(Event.request.log, _Log.default.INFO);
         }
       },
-      999999
+      99
     );
   }
 }

@@ -3,7 +3,7 @@ import config from "./config/config.json";
 
 let server = new Slix();
 
-server.replaceParamProvider(ProtocolProvider, config.protocol);
-server.replaceParamProvider(FileTransferProvider, config.fileTransfer);
+server.setParam(ProtocolProvider, config.protocol);
+server.setParam(FileTransferProvider, config.fileTransfer);
 
 server.run();

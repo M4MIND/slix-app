@@ -61,10 +61,16 @@ export default class Container {
   }
 
   /**
-   * @param {string} key
+   * @param {string|Object} key
    * @param {?Object} value
    * */
   setParam(key, value) {
+    if (typeof key === 'function') {
+      if (key.__proto__.name === 'AbstractProvider') {
+        key = key.getName();
+      }
+    }
+
     if (!this._params.has(key)) {
       this._params.set(key, value);
     } else {

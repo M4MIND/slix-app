@@ -20,7 +20,7 @@ var _ExceptionProvider = require("./providers/ExceptionProvider");
 
 var _RouterProvider = require("./providers/RouterProvider");
 
-var _ValidateURIProvider = require("./providers/ValidateURIProvider");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 let pathLib = require('path');
 
@@ -38,7 +38,6 @@ class Slix extends _Container.default {
       this.registrationProvider(_ExceptionProvider.default);
       this.registrationProvider(_LoggerProvider.default);
       this.registrationProvider(_ProtocolProvider.default);
-      this.registrationProvider(_ValidateURIProvider.default);
       this.registrationProvider(_FileTransferProvider.default);
       this.registrationProvider(_TwigProvider.default);
       this.registrationProvider(_RouterProvider.default);
@@ -63,5 +62,7 @@ class Slix extends _Container.default {
 }
 
 exports.default = Slix;
-Slix.this = null;
-Slix.boot = false;
+
+_defineProperty(Slix, "this", void 0);
+
+_defineProperty(Slix, "boot", void 0);

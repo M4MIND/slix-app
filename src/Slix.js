@@ -7,15 +7,18 @@ import ControllerProvider from './providers/ControllerProvider';
 import FileTransferProvider from './providers/FileTransferProvider';
 import ExceptionProvider from './providers/ExceptionProvider';
 import RouterProvider from './providers/RouterProvider';
-import ValidateURIProvider from './providers/ValidateURIProvider';
 
 let pathLib = require('path');
 
 export default class Slix extends Container {
+    static this;
+    static boot;
+
     /**
      * @param {string} __dir
      * */
     constructor(__dir = pathLib.dirname(require.main.filename)) {
+
         super();
         if (!this.constructor.boot) {
             this.constructor.this = this;
@@ -25,7 +28,6 @@ export default class Slix extends Container {
             this.registrationProvider(ExceptionProvider);
             this.registrationProvider(LoggerProvider);
             this.registrationProvider(ProtocolProvider);
-            this.registrationProvider(ValidateURIProvider);
             this.registrationProvider(FileTransferProvider);
             this.registrationProvider(TwigProvider);
             this.registrationProvider(RouterProvider);
@@ -45,6 +47,3 @@ export default class Slix extends Container {
         }
     }
 }
-
-Slix.this = null;
-Slix.boot = false;
