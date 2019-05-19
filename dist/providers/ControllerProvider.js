@@ -20,7 +20,6 @@ let fsLib = require('fs');
 
 class ControllerProvider extends _AbstractProvider.default {
   registration(App) {
-    config.path = pathLib.join(App.get('ROOT_DIR'), config.path);
     App.setParam(this.getName(), config);
     /**
      * @param {Route} route
@@ -56,6 +55,7 @@ class ControllerProvider extends _AbstractProvider.default {
 
   boot(App) {
     this.config = App.getParam(this.getName());
+    this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
     readDir(this.config.path, App);
   }
 }
