@@ -35,6 +35,7 @@ class Container {
    * */
 
   registrationProvider(provider, value = {}) {
+    provider = new provider();
     value.__provider = provider.getName();
 
     if (!this._providers.has(provider.getName())) {

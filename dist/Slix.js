@@ -34,15 +34,15 @@ class Slix extends _Container.default {
     if (!this.constructor.boot) {
       this.constructor.this = this;
       this.set('ROOT_DIR', __dir);
-      this.registrationProvider(new _EventDispatcherProvider.default());
-      this.registrationProvider(new _ExceptionProvider.default());
-      this.registrationProvider(new _LoggerProvider.default());
-      this.registrationProvider(new _ProtocolProvider.default());
-      this.registrationProvider(new _ValidateURIProvider.default());
-      this.registrationProvider(new _FileTransferProvider.default());
-      this.registrationProvider(new _TwigProvider.default());
-      this.registrationProvider(new _RouterProvider.default());
-      this.registrationProvider(new _ControllerProvider.default());
+      this.registrationProvider(_EventDispatcherProvider.default);
+      this.registrationProvider(_ExceptionProvider.default);
+      this.registrationProvider(_LoggerProvider.default);
+      this.registrationProvider(_ProtocolProvider.default);
+      this.registrationProvider(_ValidateURIProvider.default);
+      this.registrationProvider(_FileTransferProvider.default);
+      this.registrationProvider(_TwigProvider.default);
+      this.registrationProvider(_RouterProvider.default);
+      this.registrationProvider(_ControllerProvider.default);
     }
   }
 

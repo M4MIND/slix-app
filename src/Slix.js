@@ -21,15 +21,15 @@ export default class Slix extends Container {
             this.constructor.this = this;
 
             this.set('ROOT_DIR', __dir);
-            this.registrationProvider(new EventDispatcherProvider());
-            this.registrationProvider(new ExceptionProvider());
-            this.registrationProvider(new LoggerProvider());
-            this.registrationProvider(new ProtocolProvider());
-            this.registrationProvider(new ValidateURIProvider());
-            this.registrationProvider(new FileTransferProvider());
-            this.registrationProvider(new TwigProvider());
-            this.registrationProvider(new RouterProvider());
-            this.registrationProvider(new ControllerProvider());
+            this.registrationProvider(EventDispatcherProvider);
+            this.registrationProvider(ExceptionProvider);
+            this.registrationProvider(LoggerProvider);
+            this.registrationProvider(ProtocolProvider);
+            this.registrationProvider(ValidateURIProvider);
+            this.registrationProvider(FileTransferProvider);
+            this.registrationProvider(TwigProvider);
+            this.registrationProvider(RouterProvider);
+            this.registrationProvider(ControllerProvider);
         }
     }
 

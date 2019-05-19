@@ -47,7 +47,6 @@ export default class LoggerProvider extends AbstractProvider {
         if (Event.request.log) {
           Event.request.log += ` [time: '${Date.now() - Event.request.time}ms']`;
           App.log(Event.request.log, Log.INFO);
-          App.log('-'.repeat(Event.request.log.length), Log.SUCCESS);
         }
       },
       999999

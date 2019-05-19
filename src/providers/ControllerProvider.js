@@ -17,6 +17,7 @@ export default class ControllerProvider extends AbstractProvider {
      * @param {Route} route
      * @param {Request} request
      * */
+
     App._runControllers = async (route, request) => {
       let controllerResponse = await (async () => {
         let response;
@@ -38,7 +39,8 @@ export default class ControllerProvider extends AbstractProvider {
       }
     };
 
-    App.registerController = (controller) => {
+    App.controllerRegistration = (controller) => {
+      controller = new controller(App);
       controller.mount();
     };
   }
@@ -65,8 +67,7 @@ function readDir(path, App) {
 
         if (stat.isFile()) {
           let controller = require(file).default;
-          /** @type {AbstractController} */
-          App.registerController(new controller(App));
+          App.controllerRegistration(controller);
         } else {
           readDir(file, App);
         }

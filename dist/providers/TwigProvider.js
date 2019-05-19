@@ -18,12 +18,12 @@ let pathLib = require('path');
 
 class TwigProvider extends _AbstractProvider.default {
   registration(App) {
-    config.path = pathLib.join(App.get('ROOT_DIR'), config.path);
     App.setParam(this.getName(), config);
   }
 
   boot(App) {
     this.config = App.getParam(this.getName());
+    this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
     twigLib.cache(this.config.cache);
 
     App.render = async (path, values = {}) => {
