@@ -13,7 +13,7 @@ version[2] = Number(version[2]) + 1;
 
 version = `"version": "${version.join('.')}"`;
 
-file = file.replace(new RegExp('"version": "[0-9].[0-9].[0-9]"', 'g'), version);
+file = file.replace(new RegExp('"version": "[0-9]+.[0-9]+.[0-9]+"', 'g'), version);
 
 fs.writeFileSync(path.join(__dirname, '..', 'package.json'), file, {
     encoding: 'utf8'
