@@ -6,6 +6,10 @@ var _AbstractProvider = require('../api/AbstractProvider');
 
 var _Response = require('../core/response/Response');
 
+var _KernelEvents = require('./eventProvider/KernelEvents');
+
+var _EventRenderingPreparation = require('./eventProvider/EventRenderingPreparation');
+
 const config = {
   path: '/views/',
   cache: false,
@@ -27,6 +31,9 @@ class TwigProvider extends _AbstractProvider.default {
     twigLib.cache(this.config.cache);
 
     App.render = async (path, values = {}) => {
+      let $event = new _EventRenderingPreparation.default(null, values);
+      App.dispatch(_KernelEvents.default.RENDERING_PREPARATION, $event);
+      values = $event.data;
       return await new Promise((resolve, reject) => {
         path = pathLib.join(this.config.path, path) + this.config.typeFile;
         twigLib.renderFile(path, values, (err, html) => {

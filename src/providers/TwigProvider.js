@@ -2,6 +2,8 @@ import AbstractProvider from '../api/AbstractProvider';
 import Response from '../core/response/Response';
 
 import config from './twigProvider/config.json';
+import KernelEvents from './eventProvider/KernelEvents';
+import EventRenderingPreparation from './eventProvider/EventRenderingPreparation';
 
 let twigLib = require('twig');
 let pathLib = require('path');
@@ -18,6 +20,12 @@ export default class TwigProvider extends AbstractProvider {
     twigLib.cache(this.config.cache);
 
     App.render = async (path, values = {}) => {
+      let $event = new EventRenderingPreparation(null, values);
+
+      App.dispatch(KernelEvents.RENDERING_PREPARATION, $event);
+
+      values = $event.data;
+
       return await new Promise((resolve, reject) => {
         path = pathLib.join(this.config.path, path) + this.config.typeFile;
 

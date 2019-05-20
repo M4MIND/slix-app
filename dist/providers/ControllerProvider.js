@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _AbstractProvider = require('../api/AbstractProvider');
 
-var _AbstractController = require('../api/AbstractController');
-
 var _Route = require('./routerProvider/Route');
 
 var _SlixRequest = require('../core/request/SlixRequest');
@@ -55,9 +53,9 @@ class ControllerProvider extends _AbstractProvider.default {
 
   boot(App) {
     this.config = App.getParam(this.getName());
-    this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
 
     if (this.config.path !== false) {
+      this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
       readDir(this.config.path, App);
     }
   }

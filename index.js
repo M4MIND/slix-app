@@ -24,7 +24,6 @@ module.exports.AbstractEvent = require('./dist/api/AbstractEvent').default;
 /** PROVIDERS **/
 module.exports.EventDispatcherProvider = require('./dist/providers/EventDispatcherProvider').default;
 module.exports.FileTransferProvider = require('./dist/providers/FileTransferProvider').default;
-module.exports.ValidateURIProvider = require('./dist/providers/ValidateURIProvider').default;
 module.exports.ControllerProvider = require('./dist/providers/ControllerProvider').default;
 module.exports.ProtocolProvider = require('./dist/providers/ProtocolProvider').default;
 module.exports.RouterProvider = require('./dist/providers/RouterProvider').default;
@@ -33,7 +32,6 @@ module.exports.TwigProvider = require('./dist/providers/TwigProvider').default;
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcher = require('./dist/providers/eventProvider/EventDispatcher').default;
-module.exports.Validator = require('./dist/providers/validatorProvider/Validator').default;
 module.exports.Router = require('./dist/providers/routerProvider/Router').default;
 module.exports.Route = require('./dist/providers/routerProvider/Route').default;
 module.exports.HTTP = require('./dist/providers/protocolProvider/HTTP').default;

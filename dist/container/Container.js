@@ -75,6 +75,10 @@ class Container {
       }
     }
 
+    if (typeof key === 'object') {
+      throw new Error('Container: Wrong key parameter passed');
+    }
+
     if (!this._params.has(key)) {
       this._params.set(key, value);
     } else {
@@ -84,14 +88,6 @@ class Container {
         }
       }
     }
-  }
-  /**
-   * @param {AbstractProvider} provider
-   * @param {object} value
-   * */
-
-  replaceParamProvider(provider, value) {
-    this.setParam(provider.getName(), value);
   }
   /** @param {string} key*/
 
