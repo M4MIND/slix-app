@@ -1,9 +1,8 @@
-import {Slix, ProtocolProvider, FileTransferProvider} from '../index';
-import config from "./config/config.json";
+import {Slix} from '../index';
+import providers from './config/providers';
 
 let server = new Slix();
 
-server.setParam(ProtocolProvider, config.protocol);
-server.setParam(FileTransferProvider, config.fileTransfer);
+server.addProviders(providers);
 
 server.run();

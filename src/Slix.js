@@ -46,4 +46,15 @@ export default class Slix extends Container {
             }
         }
     }
+
+    /** @param {Array<Array>} value*/
+    addProviders(value = []) {
+        for (let provider of value) {
+            this.registrationProvider(provider[0]);
+
+            if (provider[1]) {
+                this.setParam(provider[0], provider[1]);
+            }
+        }
+    }
 }
