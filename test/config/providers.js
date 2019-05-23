@@ -3,7 +3,7 @@ import {TwigProvider, ProtocolProvider, FileTransferProvider} from "../../index"
 export default [
     [TwigProvider, {}],
     [ProtocolProvider, {
-        "port": 4000
+        "port": 4050
     }],
     [FileTransferProvider, {
         "foldersWithAccess": {
