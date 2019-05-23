@@ -32,6 +32,10 @@ class Route {
       if (this.controller.after) {
         this.handlerQueue.push(this.controller.after);
       }
+    } else {
+      if (this.handler) {
+        this.handlerQueue.push(this.handler);
+      }
     }
   }
   /** @return {string} */
