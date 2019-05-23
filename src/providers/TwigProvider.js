@@ -18,7 +18,6 @@ export default class TwigProvider extends AbstractProvider {
     this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
 
     twigLib.cache(this.config.cache);
-    twigLib.root(App.get('ROOT_DIR'));
 
     App.render = async (path, values = {}) => {
       let $event = new EventRenderingPreparation(null, values);
