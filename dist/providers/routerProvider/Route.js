@@ -20,16 +20,18 @@ class Route {
     this.dynamic = dynamic;
     this.handlerQueue = [];
 
-    if (this.controller.before) {
-      this.handlerQueue.push(this.controller.before);
-    }
+    if (this.controller) {
+      if (this.controller.before) {
+        this.handlerQueue.push(this.controller.before);
+      }
 
-    if (this.handler) {
-      this.handlerQueue.push(this.handler);
-    }
+      if (this.handler) {
+        this.handlerQueue.push(this.handler);
+      }
 
-    if (this.controller.after) {
-      this.handlerQueue.push(this.controller.after);
+      if (this.controller.after) {
+        this.handlerQueue.push(this.controller.after);
+      }
     }
   }
   /** @return {string} */
