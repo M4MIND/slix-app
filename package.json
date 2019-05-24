@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/M4MIND/Slix.git"
+    "url": "git+https://github.com/M4MIND/slix.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/M4MIND/Slix/issues"
+    "url": "https://github.com/M4MIND/slix/issues"
   },
-  "homepage": "https://github.com/M4MIND/Slix#readme",
+  "homepage": "https://github.com/M4MIND/slix#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
