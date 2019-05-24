@@ -10,10 +10,6 @@ var _ProtocolProvider = require("./providers/ProtocolProvider");
 
 var _EventDispatcherProvider = require("./providers/EventDispatcherProvider");
 
-var _TwigProvider = require("./providers/TwigProvider");
-
-var _ControllerProvider = require("./providers/ControllerProvider");
-
 var _FileTransferProvider = require("./providers/FileTransferProvider");
 
 var _ExceptionProvider = require("./providers/ExceptionProvider");
@@ -39,9 +35,7 @@ class Slix extends _Container.default {
       this.registrationProvider(_LoggerProvider.default);
       this.registrationProvider(_ProtocolProvider.default);
       this.registrationProvider(_FileTransferProvider.default);
-      this.registrationProvider(_TwigProvider.default);
       this.registrationProvider(_RouterProvider.default);
-      this.registrationProvider(_ControllerProvider.default);
     }
   }
 

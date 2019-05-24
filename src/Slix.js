@@ -2,8 +2,6 @@ import Container from './container/Container';
 import LoggerProvider from './providers/LoggerProvider';
 import ProtocolProvider from './providers/ProtocolProvider';
 import EventDispatcherProvider from './providers/EventDispatcherProvider';
-import TwigProvider from './providers/TwigProvider';
-import ControllerProvider from './providers/ControllerProvider';
 import FileTransferProvider from './providers/FileTransferProvider';
 import ExceptionProvider from './providers/ExceptionProvider';
 import RouterProvider from './providers/RouterProvider';
@@ -29,9 +27,7 @@ export default class Slix extends Container {
             this.registrationProvider(LoggerProvider);
             this.registrationProvider(ProtocolProvider);
             this.registrationProvider(FileTransferProvider);
-            this.registrationProvider(TwigProvider);
             this.registrationProvider(RouterProvider);
-            this.registrationProvider(ControllerProvider);
         }
     }
 

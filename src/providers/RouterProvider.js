@@ -28,5 +28,30 @@ export default class RouterProvider extends AbstractProvider {
     App._getController = (request) => {
       return this.router.findRoute(request);
     };
+
+    /**
+     * @param {Route} route
+     * @param {Request} request
+     * */
+    App._runControllers = async (route, request) => {
+      let controllerResponse = await (async () => {
+        let response;
+
+        for (let controller of route.handlerQueue) {
+          let out = await controller(request, request.query, request.post, request.file);
+
+          if (out && !response) {
+            response = out;
+            break;
+          }
+        }
+
+        return response;
+      })();
+
+      if (controllerResponse) {
+        return controllerResponse;
+      }
+    };
   }
 }

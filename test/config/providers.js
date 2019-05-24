@@ -1,7 +1,9 @@
-import {TwigProvider, ProtocolProvider, FileTransferProvider} from "../../index";
+import {TwigProvider, ProtocolProvider, FileTransferProvider, ControllerProvider} from "../../index";
 
 export default [
-    [TwigProvider, {}],
+    [TwigProvider, {
+        path: 'views'
+    }],
     [ProtocolProvider, {
         "port": 4000
     }],
@@ -9,5 +11,6 @@ export default [
         "foldersWithAccess": {
             "rigel-ui": "..\\node_modules\\rigel-ui\\dist\\css\\"
         }
-    }]
+    }],
+    [ControllerProvider]
 ]
