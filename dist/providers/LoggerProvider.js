@@ -40,9 +40,11 @@ class LoggerProvider extends _AbstractProvider.default {
     EventDispatcher.addEventListener(
       _KernelEvents.default.CALL_CONTROLLER,
       (Event) => {
-        Event.request.log += ` [Controller: ${Event.controller.controller.constructor.name} '${
-          Event.controller.pattern
-        }']`;
+        if (Event.controller.controller !== null) {
+          Event.request.log += ` [Controller: ${Event.controller.controller.constructor.name} '${
+            Event.controller.pattern
+          }']`;
+        }
       },
       99
     );

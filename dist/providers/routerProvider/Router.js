@@ -24,7 +24,10 @@ class Router {
   mount(route, method, handler, controller = null) {
     let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), this.constructor.pattern.full);
     let dynamic = !!route.match(new RegExp(':(\\w+):', 'g'));
-    if (dynamic) regExpRoute += '$';
+
+    if (dynamic) {
+      regExpRoute += '$';
+    }
 
     if (!this.collection.has(regExpRoute)) {
       this.collection.set(regExpRoute, new Map());
@@ -61,11 +64,24 @@ class Router {
 
 
     for (let key of this.collection.keys()) {
-      if (key === '*') break;
+      if (key === '*') {
+        break;
+      }
+
       let matches = request.path.full.match(new RegExp(key, 'g'));
-      if (!matches) continue;
-      if (!this.collection.get(key).has(request.method)) continue;
-      if (!this.collection.get(key).get(request.method).dynamic) continue;
+
+      if (!matches) {
+        continue;
+      }
+
+      if (!this.collection.get(key).has(request.method)) {
+        continue;
+      }
+
+      if (!this.collection.get(key).get(request.method).dynamic) {
+        continue;
+      }
+
       let route = this.collection.get(key).get(request.method);
       request.path.parse(route.pattern, route.route, request.path.full);
       return route;

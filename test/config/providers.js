@@ -5,7 +5,7 @@ export default [
         path: 'views'
     }],
     [ProtocolProvider, {
-        "port": 4000
+        "port": 4050
     }],
     [FileTransferProvider, {
         "foldersWithAccess": {
