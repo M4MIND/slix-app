@@ -39,16 +39,25 @@ export default class Slix extends Container {
                 let collection = [];
 
                 for (let provider of this.getAllProviders()) {
+                    collection.push(provider.registration());
+                }
+
+                await Promise.all(collection);
+
+                collection = [];
+
+                for (let provider of this.getAllProviders()) {
                     collection.push(provider.boot(this));
                 }
 
                 await Promise.all(collection);
-                
+
                 collection = [];
 
                 for (let provider of this.getAllProviders()) {
                     collection.push(provider.subscribe(this, this.get('eventDispatcher')));
                 }
+                
                 await Promise.all(collection);
             }
         })();

@@ -41,8 +41,6 @@ export default class Container {
     if (value) {
       this.setParam(provider.getName(), value);
     }
-
-    provider.registration(this);
   }
 
   /** @param {AbstractProvider} provider */

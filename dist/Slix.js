@@ -46,6 +46,13 @@ class Slix extends _Container.default {
         let collection = [];
 
         for (let provider of this.getAllProviders()) {
+          collection.push(provider.registration());
+        }
+
+        await Promise.all(collection);
+        collection = [];
+
+        for (let provider of this.getAllProviders()) {
           collection.push(provider.boot(this));
         }
 
