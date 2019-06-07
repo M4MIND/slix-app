@@ -3,6 +3,8 @@ import AbstractController from '../api/AbstractController';
 import Request from '../core/request/SlixRequest';
 import Router from './routerProvider/Router';
 
+let pathLib = require('path');
+
 export default class RouterProvider extends AbstractProvider {
   constructor() {
     super();
@@ -18,6 +20,8 @@ export default class RouterProvider extends AbstractProvider {
      * @param {AbstractController} controller
      * */
     App._mount = (route, method, handler, controller = null) => {
+      route = pathLib.join('/', route, '/');
+
       this.router.mount(route, method, handler, controller);
     };
 

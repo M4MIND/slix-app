@@ -10,6 +10,8 @@ var _SlixRequest = require('../core/request/SlixRequest');
 
 var _Router = require('./routerProvider/Router');
 
+let pathLib = require('path');
+
 class RouterProvider extends _AbstractProvider.default {
   constructor() {
     super();
@@ -25,6 +27,7 @@ class RouterProvider extends _AbstractProvider.default {
      * @param {AbstractController} controller
      * */
     App._mount = (route, method, handler, controller = null) => {
+      route = pathLib.join('/', route, '/');
       this.router.mount(route, method, handler, controller);
     };
     /**

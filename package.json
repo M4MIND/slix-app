@@ -1,6 +1,6 @@
 {
   "name": "slix-app",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -50,5 +50,9 @@
     "natives": "^1.1.6",
     "twig": "^1.13.2",
     "rigel-ui": "^0.0.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": []
 }

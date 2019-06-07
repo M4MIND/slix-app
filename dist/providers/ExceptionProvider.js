@@ -15,11 +15,7 @@ class ExceptionProvider extends _AbstractProvider.default {
       async (event) => {
         if (App.get('_DEBUG')) {
           event.response = new _Response.default(
-            `<h1>${
-              event.ex.name
-            }</h1><pre style="border: 1px solid #EEE; display: block; padding: 20px; border-radius: 4px;">${
-              event.ex.message
-            }</pre>`,
+            `<h1>${event.ex.name}</h1><pre style="border: 1px solid #EEE; display: block; padding: 20px; border-radius: 4px;">${event.ex.message}</pre>`,
             500
           );
         } else {
