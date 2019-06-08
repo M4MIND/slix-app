@@ -57,4 +57,3 @@ task('watch-test', gulp.parallel(() => {
 }));
 
 task('dev', gulp.series('dist-clean', 'compile-src', 'copy-json', gulp.parallel('watch-dev')));
-// task('test', gulp.series(gulp.parallel()))
