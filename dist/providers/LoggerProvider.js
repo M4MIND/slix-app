@@ -8,19 +8,14 @@ var _Log = require('./loggerProvider/Log');
 
 var _KernelEvents = require('./eventProvider/KernelEvents');
 
-const config = {
-  console: true,
-  writeFile: true,
-  pathFile: '/logs/',
-  recordEventsLevel: [100, 200, 300, 500],
-};
+var _config = require('./loggerProvider/config.js');
 
 class LoggerProvider extends _AbstractProvider.default {
-  registration(App) {
-    App.setParam(this.getName(), config);
+  async registration(App) {
+    App.setParam(this.getName(), _config.default);
   }
 
-  boot(App) {
+  async boot(App) {
     App.set('log', (message, level = _Log.default.DEFAULT) => {
       if (App.getParam(this.getName()).console) {
         _Log.default.console(message, level);
@@ -28,7 +23,7 @@ class LoggerProvider extends _AbstractProvider.default {
     });
   }
 
-  subscribe(App, EventDispatcher) {
+  async subscribe(App, EventDispatcher) {
     EventDispatcher.addEventListener(
       _KernelEvents.default.REQUEST,
       (Event) => {

@@ -13,7 +13,7 @@ let fsLib = require('fs');
 let pathLib = require('path');
 
 class FileTransferProvider extends _AbstractProvider.default {
-  registration(App) {
+  async registration(App) {
     App.setParam(this.getName(), {
       path: '/static/',
       foldersWithAccess: {},
@@ -30,7 +30,7 @@ class FileTransferProvider extends _AbstractProvider.default {
     this.config = App.getParam(this.getName());
   }
 
-  boot(App) {
+  async boot(App) {
     let foldersWithAccess = {};
 
     for (let key of Object.keys(this.config.foldersWithAccess)) {
@@ -43,7 +43,7 @@ class FileTransferProvider extends _AbstractProvider.default {
     });
   }
 
-  subscribe(App, EventDispatcher) {
+  async subscribe(App, EventDispatcher) {
     EventDispatcher.addEventListener(
       _KernelEvents.default.REQUEST,
       (event) => {

@@ -2,14 +2,14 @@ import AbstractProvider from '../api/AbstractProvider';
 import Log from './loggerProvider/Log';
 import KernelEvents from './eventProvider/KernelEvents';
 
-import config from './loggerProvider/config.json';
+import config from './loggerProvider/config.js';
 
 export default class LoggerProvider extends AbstractProvider {
-  registration(App) {
+  async registration(App) {
     App.setParam(this.getName(), config);
   }
 
-  boot(App) {
+  async boot(App) {
     App.set('log', (message, level = Log.DEFAULT) => {
       if (App.getParam(this.getName()).console) {
         Log.console(message, level);
@@ -17,7 +17,7 @@ export default class LoggerProvider extends AbstractProvider {
     });
   }
 
-  subscribe(App, EventDispatcher) {
+  async subscribe(App, EventDispatcher) {
     EventDispatcher.addEventListener(
       KernelEvents.REQUEST,
       (Event) => {

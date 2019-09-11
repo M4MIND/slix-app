@@ -8,17 +8,15 @@ var _Route = require('./routerProvider/Route');
 
 var _SlixRequest = require('../core/request/SlixRequest');
 
-const config = {
-  path: '/controllers/',
-};
+var _config = require('./controllerProvider/config');
 
 let pathLib = require('path');
 
 let fsLib = require('fs');
 
 class ControllerProvider extends _AbstractProvider.default {
-  registration(App) {
-    App.setParam(this.getName(), config);
+  async registration(App) {
+    App.setParam(this.getName(), _config.default);
     /**
      * @param {Route} route
      * @param {Request} request
@@ -51,7 +49,7 @@ class ControllerProvider extends _AbstractProvider.default {
     };
   }
 
-  boot(App) {
+  async boot(App) {
     this.config = App.getParam(this.getName());
 
     if (this.config.path !== false) {

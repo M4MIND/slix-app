@@ -9,7 +9,7 @@ var _KernelEvents = require('./eventProvider/KernelEvents');
 var _Response = require('../core/response/Response');
 
 class ExceptionProvider extends _AbstractProvider.default {
-  subscribe(App, EventDispatcher) {
+  async subscribe(App, EventDispatcher) {
     EventDispatcher.addEventListener(
       _KernelEvents.default.EXCEPTION,
       async (event) => {

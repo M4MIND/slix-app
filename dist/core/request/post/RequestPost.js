@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _SlixRequest = require("../SlixRequest");
+var _SlixRequest = require('../SlixRequest');
 
-var _RequestPostData = require("./RequestPostData");
+var _RequestPostData = require('./RequestPostData');
 
-var _RequestFile = require("../file/RequestFile");
+var _RequestFile = require('../file/RequestFile');
 
-var _RequestFileData = require("../file/RequestFileData");
+var _RequestFileData = require('../file/RequestFileData');
 
 class RequestPost {
   /** @param {Request} request */
@@ -41,18 +41,16 @@ class RequestPost {
   has(name) {
     return this.collection.has(name);
   }
-
 }
 /**
  * @param {Request} request
  * @param {RequestPost} requestPost
  * */
 
-
 exports.default = RequestPost;
 
 RequestPost.multipart = (request, requestPost) => {
-  let boundary = "--" + request.contentType.match(new RegExp('(?<=boundary=).+', 'g'))[0];
+  let boundary = '--' + request.contentType.match(new RegExp('(?<=boundary=).+', 'g'))[0];
   let chunks = request.req.body.toString('binary').split(new RegExp(boundary, 'g'));
 
   for (let chunk of chunks) {
@@ -66,8 +64,8 @@ RequestPost.multipart = (request, requestPost) => {
       let contentType = chunk.match(new RegExp('(?<=Content-Type: )(.*)(?=\\r\\n\\r\\n)', 'gm'))[0];
 
       if (name && filename && contentType) {
-        let fileStartIndex = chunk.indexOf(contentType) + contentType.length + "\r\n\r\n".length;
-        let bufferFile = chunk.substr(fileStartIndex, chunk.length - fileStartIndex - "\r\n".length);
+        let fileStartIndex = chunk.indexOf(contentType) + contentType.length + '\r\n\r\n'.length;
+        let bufferFile = chunk.substr(fileStartIndex, chunk.length - fileStartIndex - '\r\n'.length);
         request.file.add(new _RequestFileData.default(name, filename, contentType, bufferFile));
       }
     } else {

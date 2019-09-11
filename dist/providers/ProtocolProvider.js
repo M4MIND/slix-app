@@ -24,6 +24,8 @@ var _Response = require('../core/response/Response');
 
 var _EventTerminate = require('./eventProvider/EventTerminate');
 
+var _config = require('./protocolProvider/config.js');
+
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
@@ -33,16 +35,10 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-const config = {
-  protocol: 'http',
-  host: 'localhost',
-  port: 10000,
-};
 /**
  * @export
  * @class ProtocolProvider
  * */
-
 class ProtocolProvider extends _AbstractProvider.default {
   constructor(...args) {
     super(...args);
@@ -103,13 +99,13 @@ class ProtocolProvider extends _AbstractProvider.default {
     });
   }
 
-  registration(App) {
-    App.setParam(this.getName(), config);
+  async registration(App) {
+    App.setParam(this.getName(), _config.default);
     this.App = App;
     this.config = App.getParam(this.getName());
   }
 
-  boot(App) {
+  async boot(App) {
     this.config.processingRequest = this.processingRequest;
 
     if (this.config.protocol === 'http') {

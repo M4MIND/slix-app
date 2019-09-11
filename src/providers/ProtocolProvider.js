@@ -10,20 +10,20 @@ import EventControllerArguments from './eventProvider/EventControllerArguments';
 import Response from '../core/response/Response';
 import EventTerminate from './eventProvider/EventTerminate';
 
-import config from './protocolProvider/config.json';
+import config from './protocolProvider/config.js';
 
 /**
  * @export
  * @class ProtocolProvider
  * */
 export default class ProtocolProvider extends AbstractProvider {
-  registration(App) {
+  async registration(App) {
     App.setParam(this.getName(), config);
     this.App = App;
     this.config = App.getParam(this.getName());
   }
 
-  boot(App) {
+  async boot(App) {
     this.config.processingRequest = this.processingRequest;
     if (this.config.protocol === 'http') {
       new HTTP(this.config);

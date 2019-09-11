@@ -7,106 +7,106 @@ import RequestFile from './file/RequestFile';
 import RequestPost from './post/RequestPost';
 
 export default class Request {
-    /** @param {IncomingMessage} req */
-    constructor(req) {
-        this.req = req;
-        this.url = req.url;
-        this.method = req.method.toUpperCase();
-        this.path = new RequestPath(this);
-        this.header = new RequestHeader(this);
-        this.contentType = this.header.get('content-type');
-        this.cookie = new RequestCookie(this);
-        this.query = new RequestQuery(this);
-        this.body = new RequestPost(this);
-    }
+  /** @param {IncomingMessage} req */
+  constructor(req) {
+    this.req = req;
+    this.url = req.url;
+    this.method = req.method.toUpperCase();
+    this.path = new RequestPath(this);
+    this.header = new RequestHeader(this);
+    this.contentType = this.header.get('content-type');
+    this.cookie = new RequestCookie(this);
+    this.query = new RequestQuery(this);
+    this.body = new RequestPost(this);
+  }
 
-    /** @return {IncomingMessage} */
-    get req() {
-        return this._req;
-    }
+  /** @return {IncomingMessage} */
+  get req() {
+    return this._req;
+  }
 
-    /** @param {IncomingMessage} value */
-    set req(value) {
-        this._req = value;
-    }
+  /** @param {IncomingMessage} value */
+  set req(value) {
+    this._req = value;
+  }
 
-    /** @return {RequestCookie} */
-    get cookie() {
-        return this._cookie;
-    }
+  /** @return {RequestCookie} */
+  get cookie() {
+    return this._cookie;
+  }
 
-    /** @param {RequestCookie} value */
-    set cookie(value) {
-        this._cookie = value;
-    }
+  /** @param {RequestCookie} value */
+  set cookie(value) {
+    this._cookie = value;
+  }
 
-    /** @return {RequestHeader} */
-    get header() {
-        return this._header;
-    }
+  /** @return {RequestHeader} */
+  get header() {
+    return this._header;
+  }
 
-    /** @param {RequestHeader} value */
-    set header(value) {
-        this._header = value;
-    }
+  /** @param {RequestHeader} value */
+  set header(value) {
+    this._header = value;
+  }
 
-    /** @return {string} */
-    get url() {
-        return this._url;
-    }
+  /** @return {string} */
+  get url() {
+    return this._url;
+  }
 
-    /** @param {string} value */
-    set url(value) {
-        this._url = value;
-    }
+  /** @param {string} value */
+  set url(value) {
+    this._url = value;
+  }
 
-    /** @return {string} */
-    get method() {
-        return this._method;
-    }
+  /** @return {string} */
+  get method() {
+    return this._method;
+  }
 
-    /** @param {string} value */
-    set method(value) {
-        this._method = value;
-    }
+  /** @param {string} value */
+  set method(value) {
+    this._method = value;
+  }
 
-    /** @return {RequestQuery} */
-    get query() {
-        return this._query;
-    }
+  /** @return {RequestQuery} */
+  get query() {
+    return this._query;
+  }
 
-    /** @param {RequestQuery} value */
-    set query(value) {
-        this._query = value;
-    }
+  /** @param {RequestQuery} value */
+  set query(value) {
+    this._query = value;
+  }
 
-    /** @return {RequestPath} */
-    get path() {
-        return this._path;
-    }
+  /** @return {RequestPath} */
+  get path() {
+    return this._path;
+  }
 
-    /** @param {RequestPath} value */
-    set path(value) {
-        this._path = value;
-    }
+  /** @param {RequestPath} value */
+  set path(value) {
+    this._path = value;
+  }
 
-    /** @return {RequestPost} */
-    get body() {
-        return this._post;
-    }
+  /** @return {RequestPost} */
+  get body() {
+    return this._post;
+  }
 
-    /** @param {RequestPost} value */
-    set body(value) {
-        this._post = this._post ? this._post : value;
-    }
+  /** @param {RequestPost} value */
+  set body(value) {
+    this._post = this._post ? this._post : value;
+  }
 
-    /** @return {RequestFile} */
-    get file() {
-        return this._file;
-    }
+  /** @return {RequestFile} */
+  get file() {
+    return this._file;
+  }
 
-    /** @param {RequestFile} value */
-    set file(value) {
-        this._file = this._file ? this._file : value;
-    }
+  /** @param {RequestFile} value */
+  set file(value) {
+    this._file = this._file ? this._file : value;
+  }
 }

@@ -18,7 +18,7 @@ class RouterProvider extends _AbstractProvider.default {
     this.router = new _Router.default();
   }
 
-  registration(App) {
+  async registration(App) {
     /**
      * @callback
      * @param {string} route
@@ -27,7 +27,7 @@ class RouterProvider extends _AbstractProvider.default {
      * @param {AbstractController} controller
      * */
     App._mount = (route, method, handler, controller = null) => {
-      route = pathLib.join('/', route, '/');
+      route = pathLib.posix.join('/', route, '/');
       this.router.mount(route, method, handler, controller);
     };
     /**

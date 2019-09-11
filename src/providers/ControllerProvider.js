@@ -2,13 +2,13 @@ import AbstractProvider from '../api/AbstractProvider';
 import Route from './routerProvider/Route';
 import Request from '../core/request/SlixRequest';
 
-import config from 'controllerProvider/config.json';
+import config from './controllerProvider/config';
 
 let pathLib = require('path');
 let fsLib = require('fs');
 
 export default class ControllerProvider extends AbstractProvider {
-  registration(App) {
+  async registration(App) {
     App.setParam(this.getName(), config);
 
     /**
@@ -43,7 +43,7 @@ export default class ControllerProvider extends AbstractProvider {
     };
   }
 
-  boot(App) {
+  async boot(App) {
     this.config = App.getParam(this.getName());
 
     if (this.config.path !== false) {

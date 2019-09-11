@@ -3,7 +3,7 @@ import KernelEvents from './eventProvider/KernelEvents';
 import Response from '../core/response/Response';
 
 export default class ExceptionProvider extends AbstractProvider {
-  subscribe(App, EventDispatcher) {
+  async subscribe(App, EventDispatcher) {
     EventDispatcher.addEventListener(
       KernelEvents.EXCEPTION,
       async (event) => {

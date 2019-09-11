@@ -1,4 +1,4 @@
-import {AbstractController, Slix, RedirectResponse} from "../../index"
+import {AbstractController, Slix, RedirectResponse, Response} from "../../index"
 
 export default class IndexController extends AbstractController {
     mount() {
@@ -7,9 +7,7 @@ export default class IndexController extends AbstractController {
     }
 
     index = async (request) => {
-        return await this.App.render('index', {
-            title: 'Index page'
-        });
+        return new Response()
     };
 
     post = async (request) => {

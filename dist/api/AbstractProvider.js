@@ -12,16 +12,16 @@ class AbstractProvider {
   }
   /** @param {Slix} App */
 
-  registration(App) {}
+  async registration(App) {}
   /** @param {Slix} App */
 
-  boot(App) {}
+  async boot(App) {}
   /**
    * @param {Slix} App
    * @param {EventDispatcher} EventDispatcher
    * */
 
-  subscribe(App, EventDispatcher) {}
+  async subscribe(App, EventDispatcher) {}
   /** @param {Slix} App */
 
   remove(App) {

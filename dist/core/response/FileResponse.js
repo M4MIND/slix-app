@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _Response = require("./Response");
+var _Response = require('./Response');
 
 class FileResponse extends _Response.default {
   /**
@@ -14,7 +14,6 @@ class FileResponse extends _Response.default {
     this.headers.setContentType(contentType);
     return this;
   }
-
 }
 
 exports.default = FileResponse;

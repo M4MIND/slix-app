@@ -5,4 +5,10 @@ let server = new Slix();
 
 server.addProviders(providers);
 
-server.run();
+server.run(() => {
+  console.dir('Run server');
+
+  server._mount('/', 'GET', () => {
+    return new Response('index');
+  })
+});

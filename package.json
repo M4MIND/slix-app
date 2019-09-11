@@ -1,12 +1,13 @@
 {
   "name": "slix-app",
-  "version": "1.0.29",
-  "description": "",
+  "version": "1.0.32",
+  "description": "Installation\r ------------",
   "main": "index.js",
   "scripts": {
+    "dev": "npx gulp dev",
     "test": "nodemon --exec babel-node ./test/index.js",
-    "prettier-dist": "prettier --config .prettierrc --write src/**/*.js",
-    "prettier-src": "prettier --config .prettierrc --write dist/**/*.js",
+    "prettier-dist": "npx prettier --config .prettierrc --write src/**/*.js",
+    "prettier-src": "npx prettier --config .prettierrc --write dist/**/*.js",
     "pret": "npm run prettier-dist && npm run prettier-src",
     "version:patch": "node utils/version.js",
     "git:publish": "gulp compile-src && npm run version:patch && npm run pret && npm run git:push && npm publish",
@@ -42,11 +43,13 @@
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "nodemon": "^1.18.10",
-    "tern": "^0.23.0"
+    "slix-app": "^1.0.29",
+    "slix-twig-provider": "git+https://github.com/M4MIND/slix-twig-provider.git",
+    "tern": "^0.23.0",
+    "prettier": "^1.18.2"
   },
   "dependencies": {
     "natives": "^1.1.6",
-    "twig": "^1.13.2",
     "rigel-ui": "^0.0.1"
   },
   "directories": {

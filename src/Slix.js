@@ -9,57 +9,49 @@ import RouterProvider from './providers/RouterProvider';
 let pathLib = require('path');
 
 export default class Slix extends Container {
-    static this;
-    static boot;
+  static this;
+  static boot;
 
-    /**
-     * @param {string} __dir
-     * */
-    constructor(__dir = pathLib.dirname(require.main.filename)) {
+  /**
+   * @param {string} __dir
+   * */
+  constructor(__dir = pathLib.dirname(require.main.filename)) {
+    super();
+    if (!this.constructor.boot) {
+      this.constructor.this = this;
 
-        super();
-        if (!this.constructor.boot) {
-            this.constructor.this = this;
-
-            this.set('ROOT_DIR', __dir);
-            this.registrationProvider(EventDispatcherProvider);
-            this.registrationProvider(ExceptionProvider);
-            this.registrationProvider(LoggerProvider);
-            this.registrationProvider(ProtocolProvider);
-            this.registrationProvider(FileTransferProvider);
-            this.registrationProvider(RouterProvider);
-        }
+      this.set('ROOT_DIR', __dir);
+      this.registrationProvider(EventDispatcherProvider);
+      this.registrationProvider(ExceptionProvider);
+      this.registrationProvider(LoggerProvider);
+      this.registrationProvider(ProtocolProvider);
+      this.registrationProvider(FileTransferProvider);
+      this.registrationProvider(RouterProvider);
     }
+  }
 
-    run() {
-        (async () => {
-            if (!this.constructor.boot) {
-                this.constructor.boot = true;
+  async run(success) {
+    if (!this.constructor.boot) {
+      this.constructor.boot = true;
 
-                for (let provider of this.getAllProviders()) {
-                    await provider.registration(this);
-                }
+      await Promise.all(this.getAllProviders().map((item) => item.registration(this)));
+      await Promise.all(this.getAllProviders().map((item) => item.boot(this)));
+      await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher)));
 
-                for (let provider of this.getAllProviders()) {
-                    await provider.boot(this);
-                }
-
-
-                for (let provider of this.getAllProviders()) {
-                    await provider.subscribe(this, this.get('eventDispatcher'));
-                }
-            }
-        })();
+      if (success) {
+        success(this);
+      }
     }
+  }
 
-    /** @param {Array<Array>} value*/
-    addProviders(value = []) {
-        for (let provider of value) {
-            this.registrationProvider(provider[0]);
+  /** @param {Array<Array>} value*/
+  addProviders(value = []) {
+    for (let provider of value) {
+      this.registrationProvider(provider[0]);
 
-            if (provider[1]) {
-                this.setParam(provider[0], provider[1]);
-            }
-        }
+      if (provider[1]) {
+        this.setParam(provider[0], provider[1]);
+      }
     }
+  }
 }

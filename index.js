@@ -28,7 +28,6 @@ module.exports.ControllerProvider = require('./dist/providers/ControllerProvider
 module.exports.ProtocolProvider = require('./dist/providers/ProtocolProvider').default;
 module.exports.RouterProvider = require('./dist/providers/RouterProvider').default;
 module.exports.LoggerProvider = require('./dist/providers/LoggerProvider').default;
-module.exports.TwigProvider = require('./dist/providers/TwigProvider').default;
 
 /** PROVIDERS MODULE **/
 module.exports.EventDispatcher = require('./dist/providers/eventProvider/EventDispatcher').default;
