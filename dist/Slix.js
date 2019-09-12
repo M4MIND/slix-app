@@ -45,6 +45,9 @@ class Slix extends _Container.default {
       this.registrationProvider(_RouterProvider.default);
     }
   }
+  /**
+   * @param {function?} success
+   * */
 
   async run(success) {
     if (!this.constructor.boot) {

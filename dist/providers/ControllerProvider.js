@@ -16,12 +16,10 @@ let fsLib = require('fs');
 
 class ControllerProvider extends _AbstractProvider.default {
   async registration(App) {
-    App.setParam(this.getName(), _config.default);
     /**
      * @param {Route} route
      * @param {Request} request
      * */
-
     App._runControllers = async (route, request) => {
       let controllerResponse = await (async () => {
         let response;
@@ -50,7 +48,7 @@ class ControllerProvider extends _AbstractProvider.default {
   }
 
   async boot(App) {
-    this.config = App.getParam(this.getName());
+    this.config = {..._config.default, ...App.getParam(this.getName())};
 
     if (this.config.path !== false) {
       this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);

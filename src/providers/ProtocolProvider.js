@@ -18,12 +18,12 @@ import config from './protocolProvider/config.js';
  * */
 export default class ProtocolProvider extends AbstractProvider {
   async registration(App) {
-    App.setParam(this.getName(), config);
     this.App = App;
-    this.config = App.getParam(this.getName());
   }
 
   async boot(App) {
+    this.config = {...config, ...App.getParam(this.getName())};
+
     this.config.processingRequest = this.processingRequest;
     if (this.config.protocol === 'http') {
       new HTTP(this.config);

@@ -2,12 +2,8 @@ import AbstractProvider from '../api/AbstractProvider';
 import Log from './loggerProvider/Log';
 import KernelEvents from './eventProvider/KernelEvents';
 
-import config from './loggerProvider/config.js';
-
 export default class LoggerProvider extends AbstractProvider {
-  async registration(App) {
-    App.setParam(this.getName(), config);
-  }
+  async registration(App) {}
 
   async boot(App) {
     App.set('log', (message, level = Log.DEFAULT) => {

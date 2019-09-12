@@ -30,6 +30,9 @@ export default class Slix extends Container {
     }
   }
 
+  /**
+   * @param {function?} success
+   * */
   async run(success) {
     if (!this.constructor.boot) {
       this.constructor.boot = true;

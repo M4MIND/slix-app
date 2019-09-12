@@ -100,12 +100,11 @@ class ProtocolProvider extends _AbstractProvider.default {
   }
 
   async registration(App) {
-    App.setParam(this.getName(), _config.default);
     this.App = App;
-    this.config = App.getParam(this.getName());
   }
 
   async boot(App) {
+    this.config = {..._config.default, ...App.getParam(this.getName())};
     this.config.processingRequest = this.processingRequest;
 
     if (this.config.protocol === 'http') {

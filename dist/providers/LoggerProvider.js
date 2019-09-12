@@ -8,12 +8,8 @@ var _Log = require('./loggerProvider/Log');
 
 var _KernelEvents = require('./eventProvider/KernelEvents');
 
-var _config = require('./loggerProvider/config.js');
-
 class LoggerProvider extends _AbstractProvider.default {
-  async registration(App) {
-    App.setParam(this.getName(), _config.default);
-  }
+  async registration(App) {}
 
   async boot(App) {
     App.set('log', (message, level = _Log.default.DEFAULT) => {

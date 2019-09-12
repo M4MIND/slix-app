@@ -5,5 +5,4 @@ let server = new Slix();
 
 server.addProviders(providers);
 
-server.run(() => {
-});
+server.run();
