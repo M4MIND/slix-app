@@ -36,21 +36,21 @@ export default class Slix extends Container {
    * @param {function?} subscribe
    * @param {function?} success
    * */
-  run(registration = () => {
-  }, boot = () => {
-  }, subscribe = () => {
-  }, success = () => {
-  }) {
+  run(registration = () => {}, boot = () => {}, subscribe = () => {}, success = () => {}) {
     (async () => {
       if (!this.constructor.boot) {
         this.constructor.boot = true;
 
-        await Promise.all(this.getAllProviders().map((item) => item.registration(this))).then(() => !registration || registration(this));
-        await Promise.all(this.getAllProviders().map((item) => item.boot(this))).then(() => !boot || boot(this));
-        await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher))).then(() =>
-          !subscribe || subscribe(this),
+        await Promise.all(this.getAllProviders().map((item) => item.registration(this))).then(
+          () => !registration || registration(this)
         );
-        await Promise.all(this.getAllProviders().map((item) => item.success(this))).then(() => !success || success(this));
+        await Promise.all(this.getAllProviders().map((item) => item.boot(this))).then(() => !boot || boot(this));
+        await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher))).then(
+          () => !subscribe || subscribe(this)
+        );
+        await Promise.all(this.getAllProviders().map((item) => item.success(this))).then(
+          () => !success || success(this)
+        );
       }
     })();
   }

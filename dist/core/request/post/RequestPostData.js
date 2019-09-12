@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
@@ -23,7 +23,6 @@ class RequestPostData {
   set data(value) {
     this._data = value;
   }
-
 }
 
 exports.default = RequestPostData;

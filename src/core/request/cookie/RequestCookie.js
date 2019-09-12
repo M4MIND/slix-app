@@ -17,7 +17,7 @@ export default class RequestCookie {
 
   /** @param {Cookie} name */
   get(name) {
-    return this.collection.get(name);
+    return this.collection.get(name) || null;
   }
 
   /** @param {string} name */

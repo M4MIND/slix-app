@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _AbstractEvent = require("../../api/AbstractEvent");
+var _AbstractEvent = require('../../api/AbstractEvent');
 
 class EventCallController extends _AbstractEvent.default {
   constructor(request, controller) {
@@ -17,7 +17,6 @@ class EventCallController extends _AbstractEvent.default {
   set controller(value) {
     this._controller = value;
   }
-
 }
 
 exports.default = EventCallController;

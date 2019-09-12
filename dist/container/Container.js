@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _AbstractProvider = require("../api/AbstractProvider");
+var _AbstractProvider = require('../api/AbstractProvider');
 
 class Container {
   constructor() {
@@ -94,7 +94,6 @@ class Container {
 
     return null;
   }
-
 }
 
 exports.default = Container;

@@ -1,22 +1,29 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _Container = require("./container/Container");
+var _Container = require('./container/Container');
 
-var _LoggerProvider = require("./providers/LoggerProvider");
+var _LoggerProvider = require('./providers/LoggerProvider');
 
-var _ProtocolProvider = require("./providers/ProtocolProvider");
+var _ProtocolProvider = require('./providers/ProtocolProvider');
 
-var _EventDispatcherProvider = require("./providers/EventDispatcherProvider");
+var _EventDispatcherProvider = require('./providers/EventDispatcherProvider');
 
-var _FileTransferProvider = require("./providers/FileTransferProvider");
+var _FileTransferProvider = require('./providers/FileTransferProvider');
 
-var _ExceptionProvider = require("./providers/ExceptionProvider");
+var _ExceptionProvider = require('./providers/ExceptionProvider');
 
-var _RouterProvider = require("./providers/RouterProvider");
+var _RouterProvider = require('./providers/RouterProvider');
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
 
 let pathLib = require('path');
 
@@ -45,15 +52,20 @@ class Slix extends _Container.default {
    * @param {function?} success
    * */
 
-
   run(registration = () => {}, boot = () => {}, subscribe = () => {}, success = () => {}) {
     (async () => {
       if (!this.constructor.boot) {
         this.constructor.boot = true;
-        await Promise.all(this.getAllProviders().map(item => item.registration(this))).then(() => !registration || registration(this));
-        await Promise.all(this.getAllProviders().map(item => item.boot(this))).then(() => !boot || boot(this));
-        await Promise.all(this.getAllProviders().map(item => item.subscribe(this, this.eventDispatcher))).then(() => !subscribe || subscribe(this));
-        await Promise.all(this.getAllProviders().map(item => item.success(this))).then(() => !success || success(this));
+        await Promise.all(this.getAllProviders().map((item) => item.registration(this))).then(
+          () => !registration || registration(this)
+        );
+        await Promise.all(this.getAllProviders().map((item) => item.boot(this))).then(() => !boot || boot(this));
+        await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher))).then(
+          () => !subscribe || subscribe(this)
+        );
+        await Promise.all(this.getAllProviders().map((item) => item.success(this))).then(
+          () => !success || success(this)
+        );
       }
     })();
   }
@@ -67,11 +79,10 @@ class Slix extends _Container.default {
       }
     }
   }
-
 }
 
 exports.default = Slix;
 
-_defineProperty(Slix, "this", void 0);
+_defineProperty(Slix, 'this', void 0);
 
-_defineProperty(Slix, "boot", void 0);
+_defineProperty(Slix, 'boot', void 0);
