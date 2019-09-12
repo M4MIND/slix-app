@@ -46,19 +46,21 @@ class Slix extends _Container.default {
     }
   }
   /**
+   * @param {function?} registration
+   * @param {function?} boot
+   * @param {function?} subscribe
    * @param {function?} success
    * */
 
-  async run(success) {
+  async run(registration = () => {}, boot = () => {}, subscribe = () => {}, success = () => {}) {
     if (!this.constructor.boot) {
       this.constructor.boot = true;
-      await Promise.all(this.getAllProviders().map((item) => item.registration(this)));
-      await Promise.all(this.getAllProviders().map((item) => item.boot(this)));
-      await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher)));
-
-      if (success) {
-        success(this);
-      }
+      await Promise.all(this.getAllProviders().map((item) => item.registration(this))).then(() => registration(this));
+      await Promise.all(this.getAllProviders().map((item) => item.boot(this))).then(() => boot(this));
+      await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher))).then(() =>
+        subscribe(this)
+      );
+      await Promise.all(this.getAllProviders().map((item) => item.success(this))).then(() => success(this));
     }
   }
   /** @param {Array<Array>} value*/

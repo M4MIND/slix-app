@@ -22,6 +22,11 @@ class AbstractProvider {
    * */
 
   async subscribe(App, EventDispatcher) {}
+  /**
+   * @param {Slix} App
+   * */
+
+  async success(App) {}
   /** @param {Slix} App */
 
   remove(App) {

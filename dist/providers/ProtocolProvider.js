@@ -103,7 +103,7 @@ class ProtocolProvider extends _AbstractProvider.default {
     this.App = App;
   }
 
-  async boot(App) {
+  async success(App) {
     this.config = {..._config.default, ...App.getParam(this.getName())};
     this.config.processingRequest = this.processingRequest;
 

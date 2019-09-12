@@ -21,7 +21,7 @@ export default class ProtocolProvider extends AbstractProvider {
     this.App = App;
   }
 
-  async boot(App) {
+  async success(App) {
     this.config = {...config, ...App.getParam(this.getName())};
 
     this.config.processingRequest = this.processingRequest;
