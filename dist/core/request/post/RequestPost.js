@@ -35,7 +35,11 @@ class RequestPost {
   }
 
   get(name) {
-    return this.collection.get(name);
+    return this.collection.get(name) ? this.collection.get(name).data : null;
+  }
+
+  getOriginal(key) {
+    return this.collection.get(key);
   }
 
   has(name) {

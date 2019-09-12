@@ -23,7 +23,7 @@ export default class AbstractHeader {
 
   /** @param {string} name */
   get(name) {
-    return this.headers[name] ? this.headers[name] : null;
+    return this.headers[name] || null;
   }
 
   /** @return {boolean} */
