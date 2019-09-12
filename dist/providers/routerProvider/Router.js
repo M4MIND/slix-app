@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractController = require('../../api/AbstractController');
+var _AbstractController = require("../../api/AbstractController");
 
-var _Route = require('./Route');
+var _Route = require("./Route");
 
-var _SlixRequest = require('../../core/request/SlixRequest');
+var _SlixRequest = require("../../core/request/SlixRequest");
 
 class Router {
   constructor() {
@@ -19,6 +19,7 @@ class Router {
    * @param {function} handler
    * @param {AbstractController} controller
    * */
+
 
   mount(route, method, handler, controller = null) {
     let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), this.constructor.pattern.full);
@@ -33,27 +34,24 @@ class Router {
     }
 
     if (!this.collection.get(regExpRoute).has(method)) {
-      this.collection
-        .get(regExpRoute)
-        .set(method, new _Route.default(regExpRoute, route, handler, controller, dynamic));
+      this.collection.get(regExpRoute).set(method, new _Route.default(regExpRoute, route, handler, controller, dynamic));
     }
 
     this.sorted();
   }
 
   sorted() {
-    this.collection = new Map(
-      [...this.collection.entries()].sort((a, b) => {
-        a = a[0] === '*' ? 0 : a[0].length;
-        b = b[0] === '*' ? 0 : b[0].length;
-        return b - a;
-      })
-    );
+    this.collection = new Map([...this.collection.entries()].sort((a, b) => {
+      a = a[0] === '*' ? 0 : a[0].length;
+      b = b[0] === '*' ? 0 : b[0].length;
+      return b - a;
+    }));
   }
   /**
    * @param {Request} request
    * @return Route
    * */
+
 
   findRoute(request) {
     /** Find static rout controller */
@@ -63,6 +61,7 @@ class Router {
       }
     }
     /** Find dynamic rout controller */
+
 
     for (let key of this.collection.keys()) {
       if (key === '/*/') {
@@ -89,14 +88,17 @@ class Router {
     }
     /** Find 404 page controller */
 
+
     if (this.collection.has('/*/')) {
       if (this.collection.get('/*/').has('*')) {
         return this.collection.get('/*/').get('*');
       }
     }
   }
+
 }
 /** @type {Object} */
+
 
 exports.default = Router;
 Router.METHOD = {
@@ -108,10 +110,10 @@ Router.METHOD = {
   CONNECT: 'CONNECT',
   OPTIONS: 'OPTIONS',
   TRACE: 'TRACE',
-  ALL: '*',
+  ALL: '*'
 };
 /** @type {Object} */
 
 Router.pattern = {
-  full: '([^?\\/]+)',
+  full: '([^?\\/]+)'
 };

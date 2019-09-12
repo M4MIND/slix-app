@@ -1,8 +1,9 @@
 /.babelrc
 /gulpfile.js
 /test
+/src
+/utils
 .idea
 *.log
 package-lock.json
-utils
 .prettierrc

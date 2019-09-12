@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _ResponseHeader = require('./header/ResponseHeader');
+var _ResponseHeader = require("./header/ResponseHeader");
 
 class Response {
   /**
@@ -20,10 +20,12 @@ class Response {
   }
   /** @return {string} */
 
+
   get content() {
     return this._content;
   }
   /** @param {string} value */
+
 
   set content(value) {
     this._content = value;
@@ -31,10 +33,12 @@ class Response {
   }
   /** @return {number} */
 
+
   get statusCode() {
     return this._statusCode;
   }
   /** @param {number} value */
+
 
   set statusCode(value) {
     this._statusCode = value;
@@ -42,16 +46,19 @@ class Response {
   }
   /** @return {ResponseHeader} */
 
+
   get headers() {
     return this._headers;
   }
   /** @param {ResponseHeader} value */
+
 
   set headers(value) {
     this._headers = value;
     return this;
   }
   /** @param {string} value */
+
 
   setContentType(value) {
     this.headers.set('Content-Type', value + '; charset=' + this.encoding);
@@ -65,6 +72,7 @@ class Response {
   set encoding(value) {
     this._encoding = value;
   }
+
 }
 
 exports.default = Response;
@@ -138,5 +146,5 @@ Response.ContentType = {
   js: 'text/javascript',
   json: 'application/json',
   png: 'image/png',
-  jpg: 'image/jpg',
+  jpg: 'image/jpg'
 };

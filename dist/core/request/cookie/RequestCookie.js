@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _Cookie = require('../../cookie/Cookie');
+var _Cookie = require("../../cookie/Cookie");
 
-var _SlixRequest = require('../SlixRequest');
+var _SlixRequest = require("../SlixRequest");
 
 class RequestCookie {
   /** @param {Request} request */
@@ -21,19 +21,23 @@ class RequestCookie {
   }
   /** @param {Cookie} name */
 
+
   get(name) {
     return this.collection.get(name);
   }
   /** @param {string} name */
+
 
   has(name) {
     return this.collection.has(name);
   }
   /** @return {Array<Cookie>}*/
 
+
   all() {
     return [...this.collection.values()];
   }
+
 }
 
 exports.default = RequestCookie;

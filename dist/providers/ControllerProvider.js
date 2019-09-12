@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractProvider = require('../api/AbstractProvider');
+var _AbstractProvider = require("../api/AbstractProvider");
 
-var _Route = require('./routerProvider/Route');
+var _Route = require("./routerProvider/Route");
 
-var _SlixRequest = require('../core/request/SlixRequest');
+var _SlixRequest = require("../core/request/SlixRequest");
 
-var _config = require('./controllerProvider/config');
+var _config = require("./controllerProvider/config");
 
 let pathLib = require('path');
 
@@ -41,20 +41,23 @@ class ControllerProvider extends _AbstractProvider.default {
       }
     };
 
-    App.controllerRegistration = (controller) => {
+    App.controllerRegistration = controller => {
       controller = new controller(App);
       controller.mount();
     };
   }
 
   async boot(App) {
-    this.config = {..._config.default, ...App.getParam(this.getName())};
+    this.config = { ..._config.default,
+      ...App.getParam(this.getName())
+    };
 
     if (this.config.path !== false) {
       this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);
       readDir(this.config.path, App);
     }
   }
+
 }
 
 exports.default = ControllerProvider;

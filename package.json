@@ -48,10 +48,6 @@
     "tern": "^0.23.0",
     "contentful": "^7.9.1"
   },
-  "dependencies": {
-    "natives": "^1.1.6",
-    "rigel-ui": "^0.0.1"
-  },
   "directories": {
     "test": "test"
   },

@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractHeader = require('../../header/AbstractHeader');
+var _AbstractHeader = require("../../header/AbstractHeader");
 
-var _Cookie = require('../../cookie/Cookie');
+var _Cookie = require("../../cookie/Cookie");
 
 class ResponseHeader extends _AbstractHeader.default {
   /** @param {Object} headers */
@@ -26,10 +26,12 @@ class ResponseHeader extends _AbstractHeader.default {
   }
   /** @param {string} value */
 
+
   setContentType(value) {
     this.headers['Content-Type'] = value;
   }
   /** @param {Cookie} value */
+
 
   setCookie(value) {
     if (!this.hasCookie(value.name)) {
@@ -40,17 +42,20 @@ class ResponseHeader extends _AbstractHeader.default {
   }
   /** @param {string} name */
 
+
   hasCookie(name) {
-    let find = this.cookies.findIndex((item) => item.name === name);
+    let find = this.cookies.findIndex(item => item.name === name);
     return find !== -1;
   }
   /** @param {string} name */
 
+
   getCookie(name) {
-    let find = this.cookies.find((item) => item.name === name);
+    let find = this.cookies.find(item => item.name === name);
     return find ? find : null;
   }
   /** @param {string} name */
+
 
   removeCookie(name) {
     this.setCookie(new _Cookie.default(name, null, new Date(0)));
@@ -58,10 +63,12 @@ class ResponseHeader extends _AbstractHeader.default {
   }
   /** @return Array<Cookie> */
 
+
   getAllCookies() {
     return this.cookies;
   }
   /** @return Array<Array<>>*/
+
 
   preparationHeaders() {
     let out = [];
@@ -76,6 +83,7 @@ class ResponseHeader extends _AbstractHeader.default {
 
     return out;
   }
+
 }
 
 exports.default = ResponseHeader;
