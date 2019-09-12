@@ -13,6 +13,8 @@ class ExceptionProvider extends _AbstractProvider.default {
     EventDispatcher.addEventListener(
       _KernelEvents.default.EXCEPTION,
       async (event) => {
+        console.dir(event.ex);
+
         if (App.get('_DEBUG')) {
           event.response = new _Response.default(
             `<h1>${event.ex.name}</h1><pre style="border: 1px solid #EEE; display: block; padding: 20px; border-radius: 4px;">${event.ex.message}</pre>`,

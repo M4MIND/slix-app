@@ -73,12 +73,12 @@ export default class Container {
       throw new Error('Container: Wrong key parameter passed');
     }
 
-    if (!this._params.has(key)) {
-      this._params.set(key, value);
+    if (!this.params.has(key)) {
+      this.params.set(key, value);
     } else {
-      if (typeof this._params.get(key) === 'object') {
+      if (typeof this.params.get(key) === 'object') {
         for (let property of Object.keys(value)) {
-          this._params.get(key)[property] = value[property];
+          this.params.get(key)[property] = value[property];
         }
       }
     }

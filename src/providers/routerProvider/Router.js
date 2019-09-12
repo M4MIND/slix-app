@@ -21,8 +21,6 @@ export default class Router {
 
     if (dynamic) {
       regExpRoute += '$';
-
-      console.dir(regExpRoute);
     }
 
     if (!this.collection.has(regExpRoute)) {
@@ -61,11 +59,10 @@ export default class Router {
 
     /** Find dynamic rout controller */
     for (let key of this.collection.keys()) {
-      if (key === '*') {
+      if (key === '/*/') {
         break;
       }
 
-      console.dir(key);
       let matches = request.path.full.match(new RegExp(key, 'g'));
 
       if (!matches) {
@@ -85,9 +82,9 @@ export default class Router {
     }
 
     /** Find 404 page controller */
-    if (this.collection.has('*')) {
-      if (this.collection.get('*').has('*')) {
-        return this.collection.get('*').get('*');
+    if (this.collection.has('/*/')) {
+      if (this.collection.get('/*/').has('*')) {
+        return this.collection.get('/*/').get('*');
       }
     }
   }

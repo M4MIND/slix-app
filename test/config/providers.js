@@ -1,10 +1,10 @@
 import {ProtocolProvider, FileTransferProvider, ControllerProvider} from "../../index";
-import TwigProvider from 'slix-twig-provider/dist/TwigProvider';
+import TwigProvider from 'slix-twig-provider';
 
 export default [
-/*    [TwigProvider, {
+    [TwigProvider, {
         path: 'views'
-    }],*/
+    }],
     [ProtocolProvider, {
         "port": 4050
     }],
