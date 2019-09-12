@@ -11,7 +11,7 @@
     "pret": "npm run prettier-dist && npm run prettier-src",
     "version:patch": "node utils/version.js",
     "git:publish": "gulp compile-src && npm run version:patch && npm run pret && npm run git:push && npm publish",
-    "git:push": "git add . && git commit -m 'Changelog update' && git push"
+    "git:push": "git add . && git commit -m \"Changelog update\" && git push"
   },
   "repository": {
     "type": "git",
