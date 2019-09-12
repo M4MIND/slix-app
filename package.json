@@ -1,6 +1,6 @@
 {
   "name": "slix-app",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "Installation\r ------------",
   "main": "index.js",
   "scripts": {
