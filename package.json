@@ -1,6 +1,6 @@
 {
   "name": "slix-app",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "Installation\r ------------",
   "main": "index.js",
   "scripts": {
@@ -45,7 +45,8 @@
     "nodemon": "^1.18.10",
     "prettier": "^1.18.2",
     "slix-twig-provider": "git+https://github.com/M4MIND/slix-twig-provider.git",
-    "tern": "^0.23.0"
+    "tern": "^0.23.0",
+    "contentful": "^7.9.1"
   },
   "dependencies": {
     "natives": "^1.1.6",
