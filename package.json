@@ -1,7 +1,7 @@
 {
   "name": "slix-app",
-  "version": "1.0.36",
-  "description": "Installation\r ------------",
+  "version": "1.0.37",
+  "description": "Installation",
   "main": "index.js",
   "scripts": {
     "dev": "npx gulp dev",
@@ -37,6 +37,7 @@
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-inline-json-import": "^0.3.2",
     "browser-sync": "^2.26.3",
+    "contentful": "^7.9.1",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cached": "^1.1.1",
@@ -44,12 +45,14 @@
     "gulp-concat": "^2.6.1",
     "nodemon": "^1.18.10",
     "prettier": "^1.18.2",
-    "slix-twig-provider": "git+https://github.com/M4MIND/slix-twig-provider.git",
-    "tern": "^0.23.0",
-    "contentful": "^7.9.1"
+    "slix-app-twig": "^1.0.5",
+    "tern": "^0.23.0"
   },
   "directories": {
     "test": "test"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "twig": "^1.13.3"
+  }
 }

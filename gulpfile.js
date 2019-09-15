@@ -12,6 +12,7 @@ let path = {
 	src: {
 		backend: ['./src/**/*.js'],
 		json: ['./src/**/*.json'],
+		twig: ['./src/**/*.twig']
 	},
 	dist: {
 		backendOut: ['./dist/'],
@@ -47,13 +48,20 @@ task('dist-clean', gulp.parallel(() => {
 		.pipe(clean());
 }));
 
+task('copy-twig', gulp.parallel(() => {
+	return gulp.src(path.src.twig).pipe(gulp.dest(path.dist.dist));
+}));
+
 task('watch-dev', gulp.parallel(() => {
 	watch(path.src.backend, gulp.series('compile-src'));
 	watch(path.src.json, gulp.series('copy-json'));
+	watch(path.src.twig, gulp.series('copy-twig'))
 }));
 
 task('watch-test', gulp.parallel(() => {
 	watch(path.test.backend)
 }));
 
-task('dev', gulp.series('dist-clean', 'compile-src', 'copy-json', gulp.parallel('watch-dev')));
+
+
+task('dev', gulp.series('dist-clean', 'compile-src', 'copy-json', 'copy-twig', gulp.parallel('watch-dev')));

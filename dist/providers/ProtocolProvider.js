@@ -24,8 +24,6 @@ var _Response = require('../core/response/Response');
 
 var _EventTerminate = require('./eventProvider/EventTerminate');
 
-var _config = require('./protocolProvider/config.js');
-
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
@@ -104,7 +102,7 @@ class ProtocolProvider extends _AbstractProvider.default {
   }
 
   async success(App) {
-    this.config = {..._config.default, ...App.getParam(this.getName())};
+    this.config = App.getParam(this.getName());
     this.config.processingRequest = this.processingRequest;
 
     if (this.config.protocol === 'http') {

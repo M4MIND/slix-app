@@ -4,17 +4,7 @@ exports.default = void 0;
 
 var _Container = require('./container/Container');
 
-var _LoggerProvider = require('./providers/LoggerProvider');
-
-var _ProtocolProvider = require('./providers/ProtocolProvider');
-
-var _EventDispatcherProvider = require('./providers/EventDispatcherProvider');
-
-var _FileTransferProvider = require('./providers/FileTransferProvider');
-
-var _ExceptionProvider = require('./providers/ExceptionProvider');
-
-var _RouterProvider = require('./providers/RouterProvider');
+var _providers = require('./config/providers');
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -37,12 +27,7 @@ class Slix extends _Container.default {
     if (!this.constructor.boot) {
       this.constructor.this = this;
       this.set('ROOT_DIR', __dir);
-      this.registrationProvider(_EventDispatcherProvider.default);
-      this.registrationProvider(_ExceptionProvider.default);
-      this.registrationProvider(_LoggerProvider.default);
-      this.registrationProvider(_ProtocolProvider.default);
-      this.registrationProvider(_FileTransferProvider.default);
-      this.registrationProvider(_RouterProvider.default);
+      this.addProviders(_providers.default);
     }
   }
   /**
@@ -56,14 +41,16 @@ class Slix extends _Container.default {
     (async () => {
       if (!this.constructor.boot) {
         this.constructor.boot = true;
-        await Promise.all(this.getAllProviders().map((item) => item.registration(this))).then(
+        await Promise.all(this.getAllProviders().map((item) => !item.registration || item.registration(this))).then(
           () => !registration || registration(this)
         );
-        await Promise.all(this.getAllProviders().map((item) => item.boot(this))).then(() => !boot || boot(this));
-        await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher))).then(
-          () => !subscribe || subscribe(this)
+        await Promise.all(this.getAllProviders().map((item) => !item.boot || item.boot(this))).then(
+          () => !boot || boot(this)
         );
-        await Promise.all(this.getAllProviders().map((item) => item.success(this))).then(
+        await Promise.all(
+          this.getAllProviders().map((item) => !item.subscribe || item.subscribe(this, this.eventDispatcher))
+        ).then(() => !subscribe || subscribe(this));
+        await Promise.all(this.getAllProviders().map((item) => !item.success || item.success(this))).then(
           () => !success || success(this)
         );
       }

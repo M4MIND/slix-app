@@ -10,59 +10,59 @@ var _SlixRequest = require('../core/request/SlixRequest');
 
 var _Router = require('./routerProvider/Router');
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+
 let pathLib = require('path');
 
 class RouterProvider extends _AbstractProvider.default {
   constructor() {
     super();
-    this.router = new _Router.default();
-  }
 
-  async registration(App) {
-    /**
-     * @callback
-     * @param {string} route
-     * @param {string} method
-     * @param {function} handler
-     * @param {AbstractController} controller
-     * */
-    App._mount = (route, method, handler, controller = null) => {
-      route = pathLib.posix.join('/', route, '/');
-      this.router.mount(route, method, handler, controller);
-    };
-    /**
-     * @callback
-     * @param {Request} request
-     * */
+    _defineProperty(this, 'registration', async (App) => {
+      App.mount = this.router.mount;
+      /**
+       * @callback
+       * @param {Request} request
+       * */
 
-    App._getController = (request) => {
-      return this.router.findRoute(request);
-    };
-    /**
-     * @param {Route} route
-     * @param {Request} request
-     * */
+      App._getController = (request) => {
+        return this.router.findRoute(request);
+      };
+      /**
+       * @param {Route} route
+       * @param {Request} request
+       * */
 
-    App._runControllers = async (route, request) => {
-      let controllerResponse = await (async () => {
-        let response;
+      App._runControllers = async (route, request) => {
+        let controllerResponse = await (async () => {
+          let response;
 
-        for (let controller of route.handlerQueue) {
-          let out = await controller(request, request.query, request.post, request.file);
+          for (let controller of route.handlerQueue) {
+            let out = await controller(request, request.query, request.post, request.file);
 
-          if (out && !response) {
-            response = out;
-            break;
+            if (out && !response) {
+              response = out;
+              break;
+            }
           }
+
+          return response;
+        })();
+
+        if (controllerResponse) {
+          return controllerResponse;
         }
+      };
+    });
 
-        return response;
-      })();
-
-      if (controllerResponse) {
-        return controllerResponse;
-      }
-    };
+    this.router = new _Router.default();
   }
 }
 

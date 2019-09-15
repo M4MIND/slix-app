@@ -34,7 +34,7 @@ export class Container {
 
   setParam(key: AbstractProvider, params: object): void;
 
-  getParam(key: string): void;
+  getParam(key: string): object;
 }
 
 

@@ -31,35 +31,35 @@ class AbstractController {
     });
 
     _defineProperty(this, 'ALL', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.ALL, handler, this);
+      this.App.mount(route, _Router.default.METHOD.ALL, handler, this);
     });
 
     _defineProperty(this, 'GET', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.GET, handler, this);
+      this.App.mount(route, _Router.default.METHOD.GET, handler, this);
     });
 
     _defineProperty(this, 'POST', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.POST, handler, this);
+      this.App.mount(route, _Router.default.METHOD.POST, handler, this);
     });
 
     _defineProperty(this, 'HEAD', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.HEAD, handler, this);
+      this.App.mount(route, _Router.default.METHOD.HEAD, handler, this);
     });
 
     _defineProperty(this, 'DELETE', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.DELETE, handler, this);
+      this.App.mount(route, _Router.default.METHOD.DELETE, handler, this);
     });
 
     _defineProperty(this, 'CONNECT', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.CONNECT, handler, this);
+      this.App.mount(route, _Router.default.METHOD.CONNECT, handler, this);
     });
 
     _defineProperty(this, 'OPTIONS', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.OPTIONS, handler, this);
+      this.App.mount(route, _Router.default.METHOD.OPTIONS, handler, this);
     });
 
     _defineProperty(this, 'TRACE', (route, handler) => {
-      this.App._mount(route, _Router.default.METHOD.TRACE, handler, this);
+      this.App.mount(route, _Router.default.METHOD.TRACE, handler, this);
     });
 
     this._App = App;

@@ -1,17 +1,17 @@
-import {AbstractController, Response} from "../../index"
+import {AbstractController, Response} from '../../index';
 
 export default class PageNotFound extends AbstractController {
-	mount() {
-		this.ALL('*', this.index);
-	}
+  mount() {
+    this.ALL('*', this.index);
+  }
 
-	index = async (request) => {
-		let response = await this.App.render('error/404/index', {
-			title: "Page not found"
-		});
+  index = async (request) => {
+    let response = await this.App.render({file: 'error/404/index'}, {
+      title: 'Page not found',
+    });
 
-		response.statusCode = Response.HTTP_NOT_FOUND;
+    response.statusCode = Response.HTTP_NOT_FOUND;
 
-		return response;
-	}
+    return response;
+  };
 }

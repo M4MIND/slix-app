@@ -2,8 +2,6 @@ import AbstractProvider from '../api/AbstractProvider';
 import Route from './routerProvider/Route';
 import Request from '../core/request/SlixRequest';
 
-import config from './controllerProvider/config';
-
 let pathLib = require('path');
 let fsLib = require('fs');
 
@@ -13,7 +11,6 @@ export default class ControllerProvider extends AbstractProvider {
      * @param {Route} route
      * @param {Request} request
      * */
-
     App._runControllers = async (route, request) => {
       let controllerResponse = await (async () => {
         let response;
@@ -42,7 +39,7 @@ export default class ControllerProvider extends AbstractProvider {
   }
 
   async boot(App) {
-    this.config = {...config, ...App.getParam(this.getName())};
+    this.config = App.getParam(this.getName());
 
     if (this.config.path !== false) {
       this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);

@@ -1,10 +1,5 @@
 import Container from './container/Container';
-import LoggerProvider from './providers/LoggerProvider';
-import ProtocolProvider from './providers/ProtocolProvider';
-import EventDispatcherProvider from './providers/EventDispatcherProvider';
-import FileTransferProvider from './providers/FileTransferProvider';
-import ExceptionProvider from './providers/ExceptionProvider';
-import RouterProvider from './providers/RouterProvider';
+import providers from './config/providers';
 
 let pathLib = require('path');
 
@@ -21,12 +16,7 @@ export default class Slix extends Container {
       this.constructor.this = this;
 
       this.set('ROOT_DIR', __dir);
-      this.registrationProvider(EventDispatcherProvider);
-      this.registrationProvider(ExceptionProvider);
-      this.registrationProvider(LoggerProvider);
-      this.registrationProvider(ProtocolProvider);
-      this.registrationProvider(FileTransferProvider);
-      this.registrationProvider(RouterProvider);
+      this.addProviders(providers);
     }
   }
 
@@ -41,14 +31,16 @@ export default class Slix extends Container {
       if (!this.constructor.boot) {
         this.constructor.boot = true;
 
-        await Promise.all(this.getAllProviders().map((item) => item.registration(this))).then(
+        await Promise.all(this.getAllProviders().map((item) => !item.registration || item.registration(this))).then(
           () => !registration || registration(this)
         );
-        await Promise.all(this.getAllProviders().map((item) => item.boot(this))).then(() => !boot || boot(this));
-        await Promise.all(this.getAllProviders().map((item) => item.subscribe(this, this.eventDispatcher))).then(
-          () => !subscribe || subscribe(this)
+        await Promise.all(this.getAllProviders().map((item) => !item.boot || item.boot(this))).then(
+          () => !boot || boot(this)
         );
-        await Promise.all(this.getAllProviders().map((item) => item.success(this))).then(
+        await Promise.all(
+          this.getAllProviders().map((item) => !item.subscribe || item.subscribe(this, this.eventDispatcher))
+        ).then(() => !subscribe || subscribe(this));
+        await Promise.all(this.getAllProviders().map((item) => !item.success || item.success(this))).then(
           () => !success || success(this)
         );
       }

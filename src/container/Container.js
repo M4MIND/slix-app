@@ -62,9 +62,7 @@ export default class Container {
       this.params.set(key, value);
     } else {
       if (typeof this.params.get(key) === 'object') {
-        for (let property of Object.keys(value)) {
-          this.params.get(key)[property] = value[property];
-        }
+        this.params.set(key, {...this.params.get(key), ...value});
       }
     }
   }

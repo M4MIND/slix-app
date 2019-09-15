@@ -1,8 +1,12 @@
-import {ProtocolProvider, FileTransferProvider, ControllerProvider} from "../../index";
-import TwigProvider from 'slix-twig-provider';
+import {SlixTwigProvider} from 'slix-app-twig';
+import {ExceptionProvider} from '../../index.js';
 
 export default [
-    {provider: ProtocolProvider},
-    {provider: FileTransferProvider},
-    {provider: ControllerProvider}
-]
+  {provider: SlixTwigProvider},
+  {
+    provider: ExceptionProvider, params: {
+      consoleLog: true,
+      renderingPage: true
+    },
+  },
+];

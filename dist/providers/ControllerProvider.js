@@ -8,8 +8,6 @@ var _Route = require('./routerProvider/Route');
 
 var _SlixRequest = require('../core/request/SlixRequest');
 
-var _config = require('./controllerProvider/config');
-
 let pathLib = require('path');
 
 let fsLib = require('fs');
@@ -48,7 +46,7 @@ class ControllerProvider extends _AbstractProvider.default {
   }
 
   async boot(App) {
-    this.config = {..._config.default, ...App.getParam(this.getName())};
+    this.config = App.getParam(this.getName());
 
     if (this.config.path !== false) {
       this.config.path = pathLib.join(App.get('ROOT_DIR'), this.config.path);

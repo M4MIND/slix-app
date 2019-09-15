@@ -30,7 +30,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   ALL = (route, handler) => {
-    this.App._mount(route, Router.METHOD.ALL, handler, this);
+    this.App.mount(route, Router.METHOD.ALL, handler, this);
   };
 
   /**
@@ -38,7 +38,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   GET = (route, handler) => {
-    this.App._mount(route, Router.METHOD.GET, handler, this);
+    this.App.mount(route, Router.METHOD.GET, handler, this);
   };
 
   /**
@@ -46,7 +46,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   POST = (route, handler) => {
-    this.App._mount(route, Router.METHOD.POST, handler, this);
+    this.App.mount(route, Router.METHOD.POST, handler, this);
   };
 
   /**
@@ -54,7 +54,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   HEAD = (route, handler) => {
-    this.App._mount(route, Router.METHOD.HEAD, handler, this);
+    this.App.mount(route, Router.METHOD.HEAD, handler, this);
   };
 
   /**
@@ -62,7 +62,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   DELETE = (route, handler) => {
-    this.App._mount(route, Router.METHOD.DELETE, handler, this);
+    this.App.mount(route, Router.METHOD.DELETE, handler, this);
   };
 
   /**
@@ -70,7 +70,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   CONNECT = (route, handler) => {
-    this.App._mount(route, Router.METHOD.CONNECT, handler, this);
+    this.App.mount(route, Router.METHOD.CONNECT, handler, this);
   };
 
   /**
@@ -78,7 +78,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   OPTIONS = (route, handler) => {
-    this.App._mount(route, Router.METHOD.OPTIONS, handler, this);
+    this.App.mount(route, Router.METHOD.OPTIONS, handler, this);
   };
 
   /**
@@ -86,7 +86,7 @@ export default class AbstractController {
    * @param {function} handler
    * */
   TRACE = (route, handler) => {
-    this.App._mount(route, Router.METHOD.TRACE, handler, this);
+    this.App.mount(route, Router.METHOD.TRACE, handler, this);
   };
 
   /** @return {Slix} */

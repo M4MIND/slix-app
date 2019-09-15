@@ -2,6 +2,8 @@ import AbstractController from '../../api/AbstractController';
 import Route from './Route';
 import Request from '../../core/request/SlixRequest';
 
+let pathLib = require('path');
+
 export default class Router {
   constructor() {
     /** @type {Map<string, Map<string, Route>>} */
@@ -14,8 +16,10 @@ export default class Router {
    * @param {function} handler
    * @param {AbstractController} controller
    * */
-  mount(route, method, handler, controller = null) {
-    let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), this.constructor.pattern.full);
+  mount = (route, method, handler, controller = null) => {
+    route = pathLib.posix.join('/', route, '/');
+
+    let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), Router.pattern.full);
 
     let dynamic = !!route.match(new RegExp(':(\\w+):', 'g'));
 
@@ -32,7 +36,7 @@ export default class Router {
     }
 
     this.sorted();
-  }
+  };
 
   sorted() {
     this.collection = new Map(

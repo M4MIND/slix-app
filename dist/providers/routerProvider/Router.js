@@ -8,8 +8,41 @@ var _Route = require('./Route');
 
 var _SlixRequest = require('../../core/request/SlixRequest');
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+
+let pathLib = require('path');
+
 class Router {
   constructor() {
+    _defineProperty(this, 'mount', (route, method, handler, controller = null) => {
+      route = pathLib.posix.join('/', route, '/');
+      let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), Router.pattern.full);
+      let dynamic = !!route.match(new RegExp(':(\\w+):', 'g'));
+
+      if (dynamic) {
+        regExpRoute += '$';
+      }
+
+      if (!this.collection.has(regExpRoute)) {
+        this.collection.set(regExpRoute, new Map());
+      }
+
+      if (!this.collection.get(regExpRoute).has(method)) {
+        this.collection
+          .get(regExpRoute)
+          .set(method, new _Route.default(regExpRoute, route, handler, controller, dynamic));
+      }
+
+      this.sorted();
+    });
+
     /** @type {Map<string, Map<string, Route>>} */
     this.collection = new Map();
   }
@@ -19,27 +52,6 @@ class Router {
    * @param {function} handler
    * @param {AbstractController} controller
    * */
-
-  mount(route, method, handler, controller = null) {
-    let regExpRoute = route.replace(new RegExp(':(\\w+):', 'g'), this.constructor.pattern.full);
-    let dynamic = !!route.match(new RegExp(':(\\w+):', 'g'));
-
-    if (dynamic) {
-      regExpRoute += '$';
-    }
-
-    if (!this.collection.has(regExpRoute)) {
-      this.collection.set(regExpRoute, new Map());
-    }
-
-    if (!this.collection.get(regExpRoute).has(method)) {
-      this.collection
-        .get(regExpRoute)
-        .set(method, new _Route.default(regExpRoute, route, handler, controller, dynamic));
-    }
-
-    this.sorted();
-  }
 
   sorted() {
     this.collection = new Map(
