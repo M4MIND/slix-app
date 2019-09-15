@@ -10,7 +10,7 @@
     "prettier-src": "npx prettier --config .prettierrc --write dist/**/*.js",
     "pret": "npm run prettier-dist && npm run prettier-src",
     "version:patch": "node utils/version.js",
-    "git:publish": "gulp compile-src && npm run version:patch && npm run pret && npm run git:push && npm publish",
+    "git:publish": "gulp compile-src && npm run version:patch && npm run pret && npm run git:push && npm publish https://www.npmjs.com/",
     "git:push": "git add . && git commit -m \"Changelog update\" && git push -u"
   },
   "repository": {
