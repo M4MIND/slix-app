@@ -34,7 +34,10 @@ class FileTransferProvider extends _AbstractProvider.default {
     EventDispatcher.addEventListener(
       _KernelEvents.default.REQUEST,
       (event) => {
-        if (event.response) return;
+        if (event.response) {
+          return;
+        }
+
         return new Promise((resolve, reject) => {
           let path;
 
@@ -47,7 +50,7 @@ class FileTransferProvider extends _AbstractProvider.default {
           }
 
           if (!path) {
-            path = pathLib.join(this.config.path, event.request.url);
+            path = pathLib.join(App.get('ROOT_DIR'), this.config.path, event.request.url);
           }
 
           let typeFile = pathLib.extname(path);

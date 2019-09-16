@@ -27,21 +27,23 @@ export default class FileTransferProvider extends AbstractProvider {
     EventDispatcher.addEventListener(
       KernelEvents.REQUEST,
       (event) => {
-        if (event.response) return;
+        if (event.response) {
+          return;
+        }
         return new Promise((resolve, reject) => {
           let path;
 
           for (let key of Object.keys(this.config.foldersWithAccess)) {
             if (event.request.url.indexOf(key) >= 0) {
               let file = event.request.url.replace(key, '');
-
               path = pathLib.join(this.config.foldersWithAccess[key], file);
+
               break;
             }
           }
 
           if (!path) {
-            path = pathLib.join(this.config.path, event.request.url);
+            path = pathLib.join(App.get('ROOT_DIR'), this.config.path, event.request.url);
           }
 
           let typeFile = pathLib.extname(path);
