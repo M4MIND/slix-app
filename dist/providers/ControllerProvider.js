@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _AbstractProvider = require("../api/AbstractProvider");
+var _AbstractProvider = require('../api/AbstractProvider');
 
-var _Route = require("./routerProvider/Route");
+var _Route = require('./routerProvider/Route');
 
-var _SlixRequest = require("../core/request/SlixRequest");
+var _SlixRequest = require('../core/request/SlixRequest');
 
 let pathLib = require('path');
 
@@ -39,7 +39,7 @@ class ControllerProvider extends _AbstractProvider.default {
       }
     };
 
-    App.controllerRegistration = controller => {
+    App.controllerRegistration = (controller) => {
       controller = new controller(App);
       controller.mount();
     };
@@ -53,7 +53,6 @@ class ControllerProvider extends _AbstractProvider.default {
       readDir(this.config.path, App);
     }
   }
-
 }
 
 exports.default = ControllerProvider;

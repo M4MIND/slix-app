@@ -1,30 +1,37 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _AbstractProvider = require("../api/AbstractProvider");
+var _AbstractProvider = require('../api/AbstractProvider');
 
-var _HTTP = require("./protocolProvider/HTTP");
+var _HTTP = require('./protocolProvider/HTTP');
 
-var _SlixRequest = require("../core/request/SlixRequest");
+var _SlixRequest = require('../core/request/SlixRequest');
 
-var _KernelEvents = require("./eventProvider/KernelEvents");
+var _KernelEvents = require('./eventProvider/KernelEvents');
 
-var _EventRequest = require("./eventProvider/EventRequest");
+var _EventRequest = require('./eventProvider/EventRequest');
 
-var _EventException = require("./eventProvider/EventException");
+var _EventException = require('./eventProvider/EventException');
 
-var _EventCallController = require("./eventProvider/EventCallController");
+var _EventCallController = require('./eventProvider/EventCallController');
 
-var _EventResponse = require("./eventProvider/EventResponse");
+var _EventResponse = require('./eventProvider/EventResponse');
 
-var _EventControllerArguments = require("./eventProvider/EventControllerArguments");
+var _EventControllerArguments = require('./eventProvider/EventControllerArguments');
 
-var _Response = require("../core/response/Response");
+var _Response = require('../core/response/Response');
 
-var _EventTerminate = require("./eventProvider/EventTerminate");
+var _EventTerminate = require('./eventProvider/EventTerminate');
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
 
 /**
  * @export
@@ -34,11 +41,11 @@ class ProtocolProvider extends _AbstractProvider.default {
   constructor(...args) {
     super(...args);
 
-    _defineProperty(this, "processingRequest", async (err, request, preparationResponse) => {
-      preparationResponse.setResponse((await this.handleRaw(request)));
+    _defineProperty(this, 'processingRequest', async (err, request, preparationResponse) => {
+      preparationResponse.setResponse(await this.handleRaw(request));
     });
 
-    _defineProperty(this, "handleRaw", async request => {
+    _defineProperty(this, 'handleRaw', async (request) => {
       try {
         let $event = new _EventRequest.default(request);
         await this.App.dispatch(_KernelEvents.default.REQUEST, $event);
@@ -73,7 +80,7 @@ class ProtocolProvider extends _AbstractProvider.default {
       }
     });
 
-    _defineProperty(this, "filterResponse", async (request, response) => {
+    _defineProperty(this, 'filterResponse', async (request, response) => {
       if (!response) {
         throw new Error('Response object not found!');
       }
@@ -84,7 +91,7 @@ class ProtocolProvider extends _AbstractProvider.default {
       return $event.response;
     });
 
-    _defineProperty(this, "finishRequest", async request => {
+    _defineProperty(this, 'finishRequest', async (request) => {
       let $event = new _EventTerminate.default(request);
       await this.App.dispatch(_KernelEvents.default.TERMINATE, $event);
     });
@@ -102,7 +109,6 @@ class ProtocolProvider extends _AbstractProvider.default {
       new _HTTP.default(this.config);
     }
   }
-
 }
 
 exports.default = ProtocolProvider;

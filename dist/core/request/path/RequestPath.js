@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _SlixRequest = require("../SlixRequest");
+var _SlixRequest = require('../SlixRequest');
 
 class RequestPath {
   /** @param {Request} request */
@@ -12,24 +12,20 @@ class RequestPath {
   }
   /** @return {string} */
 
-
   get full() {
     return this._full;
   }
   /** @param {string} value */
-
 
   set full(value) {
     this._full = value;
   }
   /** @return {Map<string, string>} */
 
-
   get collection() {
     return this._collection;
   }
   /** @param {Map<string, string>} value */
-
 
   set collection(value) {
     this._collection = value;
@@ -39,7 +35,6 @@ class RequestPath {
    * @param {string} route
    * @param {string} path
    * */
-
 
   parse(pattern, route, path) {
     let data = path.split(new RegExp(pattern, 'g'));
@@ -53,18 +48,15 @@ class RequestPath {
   }
   /** @return {string|?} */
 
-
   get(key) {
     return this._collection.get(key);
   }
   /** @return {boolean} */
 
-
   has(key) {
     return this._collection.has(key);
   }
   /** @return {Object} */
-
 
   all() {
     let out = {};
@@ -75,7 +67,6 @@ class RequestPath {
 
     return out;
   }
-
 }
 
 exports.default = RequestPath;

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _Slix = require("../../../Slix");
+var _Slix = require('../../../Slix');
 
 let fs = require('fs');
 
@@ -51,7 +51,7 @@ class RequestFileData {
   save(path = '/temp/', name = this.filename) {
     path = pathLib.join(_Slix.default.this.get('ROOT_DIR'), path, name);
     return new Promise((resolve, reject) => {
-      fs.writeFile(path, this.buffer, 'binary', err => {
+      fs.writeFile(path, this.buffer, 'binary', (err) => {
         if (err) {
           reject(err);
         }
@@ -60,7 +60,6 @@ class RequestFileData {
       });
     });
   }
-
 }
 
 exports.default = RequestFileData;

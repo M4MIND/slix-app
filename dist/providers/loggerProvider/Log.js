@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
@@ -11,7 +11,6 @@ class Log {
     console.log(this.getColor(level) + message);
   }
   /** @return {string} */
-
 
   static getColor(level = this.DEFAULT) {
     if (level === this.DEFAULT) {
@@ -34,7 +33,6 @@ class Log {
       return '\x1b[31m';
     }
   }
-
 }
 
 exports.default = Log;

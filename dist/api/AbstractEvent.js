@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.default = void 0;
 
-var _SlixRequest = require("../core/request/SlixRequest");
+var _SlixRequest = require('../core/request/SlixRequest');
 
 class AbstractEvent {
   /**
@@ -28,7 +28,6 @@ class AbstractEvent {
   set request(value) {
     this._request = value;
   }
-
 }
 
 exports.default = AbstractEvent;
