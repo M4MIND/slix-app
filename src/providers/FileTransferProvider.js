@@ -7,20 +7,6 @@ let pathLib = require('path');
 
 export default class FileTransferProvider extends AbstractProvider {
   async registration(App) {
-    App.setParam(this.getName(), {
-      path: '/static/',
-      foldersWithAccess: {},
-      defaultContentType: {
-        '.css': 'text/css',
-        '.js': 'text/javascript',
-        '.json': 'application/json',
-        '.png': 'image/png',
-        '.jpg': 'image/jpg',
-        '.ico': 'image/x-icon',
-      },
-      customContentType: {},
-    });
-
     this.config = App.getParam(this.getName());
   }
 

@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _SlixRequest = require('../SlixRequest');
+var _SlixRequest = require("../SlixRequest");
 
-var _RequestPostData = require('./RequestPostData');
+var _RequestPostData = require("./RequestPostData");
 
-var _RequestFile = require('../file/RequestFile');
+var _RequestFile = require("../file/RequestFile");
 
-var _RequestFileData = require('../file/RequestFileData');
+var _RequestFileData = require("../file/RequestFileData");
 
 class RequestPost {
   /** @param {Request} request */
@@ -45,11 +45,13 @@ class RequestPost {
   has(name) {
     return this.collection.has(name);
   }
+
 }
 /**
  * @param {Request} request
  * @param {RequestPost} requestPost
  * */
+
 
 exports.default = RequestPost;
 

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractProvider = require('../api/AbstractProvider');
+var _AbstractProvider = require("../api/AbstractProvider");
 
 class Container {
   constructor() {
@@ -66,7 +66,9 @@ class Container {
       this.params.set(key, value);
     } else {
       if (typeof this.params.get(key) === 'object') {
-        this.params.set(key, {...this.params.get(key), ...value});
+        this.params.set(key, { ...this.params.get(key),
+          ...value
+        });
       }
     }
   }
@@ -92,6 +94,7 @@ class Container {
 
     return null;
   }
+
 }
 
 exports.default = Container;

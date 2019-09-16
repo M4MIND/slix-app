@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractEvent = require('../../api/AbstractEvent');
+var _AbstractEvent = require("../../api/AbstractEvent");
 
 class EventException extends _AbstractEvent.default {
   constructor(request, ex) {
@@ -26,6 +26,7 @@ class EventException extends _AbstractEvent.default {
   set ex(value) {
     this._ex = value;
   }
+
 }
 
 exports.default = EventException;

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _SlixRequest = require('../SlixRequest');
+var _SlixRequest = require("../SlixRequest");
 
 class RequestQuery {
   /**  @param {Request} request */
@@ -12,20 +12,24 @@ class RequestQuery {
   }
   /** @return {string} */
 
+
   get full() {
     return this._full;
   }
   /** @param {string} value */
+
 
   set full(value) {
     this._full = value;
   }
   /** @return {Map<string, string>} */
 
+
   get collection() {
     return this._collection;
   }
   /** @param {string} value */
+
 
   set collection(value) {
     let query = new Map();
@@ -41,15 +45,18 @@ class RequestQuery {
   }
   /** @return {string|?} */
 
+
   get(key) {
     return this.collection.get(key);
   }
   /** @return {boolean} */
 
+
   has(key) {
     return this.collection.has(key);
   }
   /** @return {Object} */
+
 
   all() {
     let Object = {};
@@ -58,6 +65,7 @@ class RequestQuery {
     });
     return Object;
   }
+
 }
 
 exports.default = RequestQuery;

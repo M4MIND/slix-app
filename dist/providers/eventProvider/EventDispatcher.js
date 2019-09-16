@@ -1,38 +1,29 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _AbstractEvent = require('../../api/AbstractEvent');
+var _AbstractEvent = require("../../api/AbstractEvent");
 
-var _AbstractProvider = require('../../api/AbstractProvider');
+var _AbstractProvider = require("../../api/AbstractProvider");
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class EventDispatcher {
   constructor() {
-    _defineProperty(this, 'dispatch', async (typeEvent, event) => {
+    _defineProperty(this, "dispatch", async (typeEvent, event) => {
       if (!this.collection.has(typeEvent)) {
         return event;
       }
 
       return await (async () => {
-        let collection = this.collection.get(typeEvent).map((item) => item.callback(event));
-        await Promise.all(collection)
-          .then((result) => {})
-          .catch((err) => {
-            throw err;
-          });
+        let collection = this.collection.get(typeEvent).map(item => item.callback(event));
+        await Promise.all(collection).then(result => {}).catch(err => {
+          throw err;
+        });
       })();
     });
 
-    _defineProperty(this, 'addEventListener', (typeEvent, callback, priority = 0, provider = null) => {
+    _defineProperty(this, "addEventListener", (typeEvent, callback, priority = 0, provider = null) => {
       if (!this.collection.has(typeEvent)) {
         this.collection.set(typeEvent, []);
       }
@@ -40,15 +31,12 @@ class EventDispatcher {
       let listener = {
         priority: priority,
         callback: callback,
-        provider: provider,
+        provider: provider
       };
       this.collection.get(typeEvent).push(listener);
-      this.collection.set(
-        typeEvent,
-        this.collection.get(typeEvent).sort((a, b) => {
-          return a.priority - b.priority;
-        })
-      );
+      this.collection.set(typeEvent, this.collection.get(typeEvent).sort((a, b) => {
+        return a.priority - b.priority;
+      }));
     });
 
     /*** @type {Map<String, Array<{priority: number, callback: function}>>} **/
@@ -58,6 +46,8 @@ class EventDispatcher {
    * @param {string} typeEvent
    * @param {AbstractEvent} event
    * */
+
+
 }
 
 exports.default = EventDispatcher;

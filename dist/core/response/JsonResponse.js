@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _Response = require('./Response');
+var _Response = require("./Response");
 
 class JsonResponse extends _Response.default {
   /** @param {Object|string} content*/
@@ -11,6 +11,7 @@ class JsonResponse extends _Response.default {
     this.setContentType(_Response.default.ContentType.json);
     return this;
   }
+
 }
 
 exports.default = JsonResponse;

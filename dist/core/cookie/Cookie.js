@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
@@ -24,10 +24,12 @@ class Cookie {
   }
   /** @return {string} */
 
+
   get name() {
     return this._name;
   }
   /** @param {string} value */
+
 
   set name(value) {
     if (!value) {
@@ -42,65 +44,78 @@ class Cookie {
   }
   /** @return {string} */
 
+
   get value() {
     return this._value;
   }
   /** @param {string} value */
+
 
   set value(value) {
     this._value = value ? value : 'deleted';
   }
   /** @return {Date} */
 
+
   get expires() {
     return this._expires;
   }
   /** @param {Date} value */
+
 
   set expires(value) {
     this._expires = value;
   }
   /** @return {string} */
 
+
   get path() {
     return this._path;
   }
   /** @param {string} value */
+
 
   set path(value) {
     this._path = value ? value : '/';
   }
   /** @return {string} */
 
+
   get domain() {
     return this._domain;
   }
   /** @param {string} value */
+
 
   set domain(value) {
     this._domain = value;
   }
   /** @return {boolean} */
 
+
   get secure() {
     return this._secure;
   }
   /** @param {boolean} value */
+
 
   set secure(value) {
     this._secure = value;
   }
   /** @return {boolean} */
 
+
   get httpOnly() {
     return this._httpOnly;
   }
   /** @param {boolean} value */
 
+
   set httpOnly(value) {
     this._httpOnly = value;
   }
   /** @return {string} */
+
 
   raw() {
     let str = `${this.name}=${this.value}`;
@@ -127,6 +142,7 @@ class Cookie {
 
     return str;
   }
+
 }
 
 exports.default = Cookie;

@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 exports.default = void 0;
 
-var _Slix = require('../Slix');
+var _Slix = require("../Slix");
 
-var _EventDispatcher = require('../providers/eventProvider/EventDispatcher');
+var _EventDispatcher = require("../providers/eventProvider/EventDispatcher");
 
 class AbstractProvider {
   constructor() {
@@ -12,8 +12,10 @@ class AbstractProvider {
   }
   /** @param {Slix} App */
 
+
   async registration(App) {}
   /** @param {Slix} App */
+
 
   async boot(App) {}
   /**
@@ -21,13 +23,16 @@ class AbstractProvider {
    * @param {EventDispatcher} EventDispatcher
    * */
 
+
   async subscribe(App, EventDispatcher) {}
   /**
    * @param {Slix} App
    * */
 
+
   async success(App) {}
   /** @param {Slix} App */
+
 
   remove(App) {
     App.providers.delete(this.getName());
@@ -35,14 +40,17 @@ class AbstractProvider {
   }
   /** @return {string} */
 
+
   getName() {
     return this.constructor.name;
   }
   /** @return {string} */
 
+
   static getName() {
     return this.name;
   }
+
 }
 
 exports.default = AbstractProvider;
