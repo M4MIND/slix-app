@@ -1,10 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5", //компилируем в es6, можно использовать es5 для старых версий нода
-    "module": "commonjs", //импорт модулей преобразуется в commonjs (node require)
-    "sourceMap": false, //генерировать sourceMaps, нужно для отладки
-    "outDir": "./dist", //проект билдится из папки /src в папку /build/src
-    "rootDir": "./src"
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.collection"
+    ]
   },
   //указывает что включаться должны только файлы из папки /src
   "include": [
