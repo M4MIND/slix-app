@@ -1,1 +1,3 @@
-console.log('Help me');
+class Slix {
+
+}
