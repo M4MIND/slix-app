@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/npm-run-all/bin/npm-run-all/index.js -p tsc nodemon",
-    "nodemon": "./node_modules/nodemon/bin/nodemon.js ./dist/Slix.js",
+    "nodemon": "./node_modules/nodemon/bin/nodemon.js --watch ./dist ./test_environment/index.js ./test_environment/index.js",
     "tsc": "./node_modules/typescript/bin/tsc --w"
   },
   "repository": {

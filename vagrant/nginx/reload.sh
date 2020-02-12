@@ -1,0 +1,1 @@
+provider nginx restart
