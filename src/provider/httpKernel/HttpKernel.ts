@@ -1,9 +1,12 @@
 import {Request} from "../../core/request/Request";
+import {ResponseInterface} from "../../core/response/ResponseInterface";
 import {Response} from "../../core/response/Response";
-import {Res} from "../../core/response/Res";
+import {HttpKernelEventRequest} from "./event/HttpKernelEventRequest";
 
 export class HttpKernel {
-    public handle(request: Request): Response {
-        return new Res();
+    public async handle(request: Request): Promise<ResponseInterface> {
+        let event = new HttpKernelEventRequest();
+
+        return new Response('Я шатал ваш рот')
     }
 }

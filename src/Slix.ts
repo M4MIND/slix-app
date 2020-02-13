@@ -42,14 +42,18 @@ export class Slix extends Container {
         }
 
         for (var item of this.get('providers').values()) {
-            item.subscribe(this);
-
+            item.subscribe(this, this.get('eventDispatcher'));
             item.boot(this);
         }
 
-        protocol.boot(this, (request, response) => {
-            this.get('KERNEL').handle(request);
-            response.write('Hello world');
+        protocol.boot(this, async (request, response) => {
+            let httpKernelResponse = await this.get('KERNEL').handle(request);
+
+            console.dir(httpKernelResponse);
+
+            response.statusCode = httpKernelResponse.statusCode;
+            response.write(httpKernelResponse.content);
+
             response.end();
         });
     }
