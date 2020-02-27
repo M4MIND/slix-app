@@ -6,6 +6,7 @@ import {ExceptionHandlerServiceProvider} from "./provider/ExceptionHandlerServic
 import {Http} from "./core/server/Http";
 import {Protocol} from "./core/server/Protocol";
 import {EventDispatcher} from "./core/event/EventDispatcher";
+import {HttpKernelEvents} from "./provider/httpKernel/HttpKernelEvents";
 
 export class Slix extends Container {
     constructor(params?: object) {
@@ -41,15 +42,15 @@ export class Slix extends Container {
             protocol = new Http();
         }
 
-        for (var item of this.get('providers').values()) {
+        for (let item of this.get('providers').values()) {
             item.subscribe(this, this.get('eventDispatcher'));
             item.boot(this);
         }
 
+        console.dir(HttpKernelEvents.REQUEST);
+
         protocol.boot(this, async (request, response) => {
             let httpKernelResponse = await this.get('KERNEL').handle(request);
-
-            console.dir(httpKernelResponse);
 
             response.statusCode = httpKernelResponse.statusCode;
             response.write(httpKernelResponse.content);

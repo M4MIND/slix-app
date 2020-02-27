@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5ed9e913-e104-4aac-90ec-d87c9f31643d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/slix-app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/contracts/EventDispatcherContract.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/request/RequestBody.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/request/RequestHeader.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/request/RequestPath.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/request/RequestQuery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/request/cookie/Cookie.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/request/cookie/RequestCookies.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/provider/httpKernel/HttpKernelEvents.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vagrant/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vagrant/hyper-v/create-nat.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/Vagrantfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Slix.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Slix.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/event/EventDispatcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/event/EventDispatcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/request/Request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/request/Request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/server/Http.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/server/Http.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provider/ExceptionHandlerServiceProvider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/provider/ExceptionHandlerServiceProvider.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provider/HttpKernelServiceProvider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/provider/HttpKernelServiceProvider.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provider/httpKernel/HttpKernel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/provider/httpKernel/HttpKernel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provider/httpKernel/event/HttpKernelEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/provider/httpKernel/event/HttpKernelEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/nginx/add-config.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/nginx/add-config.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/nginx/config/slix-app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/nginx/config/slix-app.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/nginx/reload.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/nginx/reload.sh" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1XiAxBp2J80xhuhoTm92UEHS4Ax" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Vagrantfile" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\slix-app\src\core\request\cookie" />
+      <recent name="C:\Projects\slix-app\vagrant\nginx" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\slix-app\vagrant\nginx" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.node.js-nodemon">
+    <configuration default="true" type="NodeJSConfigurationType" path-to-node="vagrant://$PROJECT_DIR$/snap/bin/node">
+      <method v="2" />
+    </configuration>
+    <configuration name="node.js-nodeload" type="NodeJSConfigurationType" path-to-node="vagrant://$PROJECT_DIR$/snap/bin/node" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.node.js-nodemon" />
+      <item itemvalue="Node.js.node.js-nodeload" />
+      <item itemvalue="Node.js.node.js-typescript-compile" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ed9e913-e104-4aac-90ec-d87c9f31643d" name="Default Changelist" comment="" />
+      <created>1581518785420</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581518785420</updated>
+      <workItem from="1581518787886" duration="1296000" />
+      <workItem from="1581522595871" duration="8793000" />
+      <workItem from="1581616190126" duration="2942000" />
+      <workItem from="1581707844052" duration="907000" />
+      <workItem from="1581709142582" duration="4213000" />
+      <workItem from="1581941329272" duration="481000" />
+      <workItem from="1581941908872" duration="478000" />
+      <workItem from="1581942517295" duration="84000" />
+      <workItem from="1581942612087" duration="605000" />
+      <workItem from="1581943225274" duration="3705000" />
+      <workItem from="1582040034561" duration="3699000" />
+      <workItem from="1582044419081" duration="174000" />
+      <workItem from="1582044605117" duration="28000" />
+      <workItem from="1582127940415" duration="1471000" />
+      <workItem from="1582651043338" duration="2000" />
+      <workItem from="1582651057174" duration="25000" />
+      <workItem from="1582651490827" duration="702000" />
+      <workItem from="1582724708466" duration="438000" />
+      <workItem from="1582725153169" duration="64000" />
+      <workItem from="1582725229685" duration="3054000" />
+      <workItem from="1582729176541" duration="1327000" />
+      <workItem from="1582822137212" duration="4789000" />
+    </task>
+    <task id="LOCAL-00001" summary="Create HttpKernel">
+      <created>1581619063151</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581619063151</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Create HttpKernel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create HttpKernel" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="653" y="197" key="#Other_File_Types" timestamp="1581711353936">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="653" y="197" key="#Other_File_Types/0.0.2560.1050@0.0.2560.1050" timestamp="1581711353936" />
+    <state x="884" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582729338665">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="884" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1050@0.0.2560.1050" timestamp="1582729338665" />
+    <state x="1050" y="329" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582826010181">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1050" y="329" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1050@0.0.2560.1050" timestamp="1582826010181" />
+    <state x="1210" y="280" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1581944000768">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1210" y="280" key="#com.intellij.ide.macro.MacrosDialog/0.0.2560.1050@0.0.2560.1050" timestamp="1581944000768" />
+    <state x="1085" y="242" key="#com.intellij.ide.util.MemberChooser" timestamp="1581945860068">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1085" y="242" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1050@0.0.2560.1050" timestamp="1581945860068" />
+    <state x="905" y="120" key="CommitChangelistDialog2" timestamp="1582828371415">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="905" y="120" key="CommitChangelistDialog2/0.0.2560.1050@0.0.2560.1050" timestamp="1582828371415" />
+    <state x="938" y="284" key="FileChooserDialogImpl" timestamp="1581943897301">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="938" y="284" key="FileChooserDialogImpl/0.0.2560.1050@0.0.2560.1050" timestamp="1581943897301" />
+    <state width="1269" height="285" key="GridCell.Tab.0.bottom" timestamp="1582730504788">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1269" height="285" key="GridCell.Tab.0.bottom/0.0.2560.1050@0.0.2560.1050" timestamp="1582730504788" />
+    <state width="1269" height="285" key="GridCell.Tab.0.center" timestamp="1582730504788">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1269" height="285" key="GridCell.Tab.0.center/0.0.2560.1050@0.0.2560.1050" timestamp="1582730504788" />
+    <state width="1269" height="285" key="GridCell.Tab.0.left" timestamp="1582730504788">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1269" height="285" key="GridCell.Tab.0.left/0.0.2560.1050@0.0.2560.1050" timestamp="1582730504788" />
+    <state width="1269" height="285" key="GridCell.Tab.0.right" timestamp="1582730504788">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1269" height="285" key="GridCell.Tab.0.right/0.0.2560.1050@0.0.2560.1050" timestamp="1582730504788" />
+    <state width="1362" height="328" key="GridCell.Tab.1.bottom" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.1.bottom/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.1.center" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.1.center/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.1.left" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.1.left/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.1.right" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.1.right/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.2.bottom" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.2.bottom/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.2.center" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.2.center/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.2.left" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.2.left/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.2.right" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.2.right/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.3.bottom" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.3.bottom/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.3.center" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.3.center/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.3.left" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.3.left/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state width="1362" height="328" key="GridCell.Tab.3.right" timestamp="1581946932766">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1362" height="328" key="GridCell.Tab.3.right/0.0.2560.1050@0.0.2560.1050" timestamp="1581946932766" />
+    <state x="1368" y="213" key="SettingsEditor" timestamp="1582725146746">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1368" y="213" key="SettingsEditor/0.0.2560.1050@0.0.2560.1050" timestamp="1582725146746" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1581708430333">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.2560.1050@0.0.2560.1050" timestamp="1581708430333" />
+    <state x="872" y="259" key="Vcs.Push.Dialog.v2" timestamp="1581619067436">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="872" y="259" key="Vcs.Push.Dialog.v2/0.0.2560.1050@0.0.2560.1050" timestamp="1581619067436" />
+    <state x="981" y="350" key="com.intellij.ide.util.TipDialog" timestamp="1582725184795">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="981" y="350" key="com.intellij.ide.util.TipDialog/0.0.2560.1050@0.0.2560.1050" timestamp="1582725184795" />
+    <state x="1089" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1582725231515">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1089" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1050@0.0.2560.1050" timestamp="1582725231515" />
+    <state x="1171" y="305" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1581943736450">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1171" y="305" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.0.2560.1050@0.0.2560.1050" timestamp="1581943736450" />
+    <state x="556" y="123" width="607" height="804" key="find.popup" timestamp="1582040761833">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="556" y="123" width="607" height="804" key="find.popup/0.0.2560.1050@0.0.2560.1050" timestamp="1582040761833" />
+    <state x="1752" y="301" width="394" height="537" key="ftp.server.browser" timestamp="1581943926699">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1752" y="301" width="394" height="537" key="ftp.server.browser/0.0.2560.1050@0.0.2560.1050" timestamp="1581943926699" />
+    <state x="1314" y="371" key="jetbrains.nodejs.interpreters-dialog" timestamp="1582725213057">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1314" y="371" key="jetbrains.nodejs.interpreters-dialog/0.0.2560.1050@0.0.2560.1050" timestamp="1582725213057" />
+    <state x="1737" y="464" key="publish.login" timestamp="1581943013073">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1737" y="464" key="publish.login/0.0.2560.1050@0.0.2560.1050" timestamp="1581943013073" />
+    <state x="943" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1582042571223">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="943" y="227" width="672" height="678" key="search.everywhere.popup/0.0.2560.1050@0.0.2560.1050" timestamp="1582042571223" />
+  </component>
+</project>

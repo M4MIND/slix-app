@@ -1,0 +1,12 @@
+hyperv:
+  vmname: 'slix-app-web-server'
+  cpus: 2
+  maxmemory: 2048
+  share_folder:
+    type: 'smb'
+    disabled: true
+  network:
+    name: 'SlixAppWebServer'
+    ip: '10.0.0.1'
+    gateway: '10.0.0.0'
+    mask: 24

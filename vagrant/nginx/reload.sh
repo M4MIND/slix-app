@@ -1,1 +1,1 @@
-provider nginx restart
+service nginx restart

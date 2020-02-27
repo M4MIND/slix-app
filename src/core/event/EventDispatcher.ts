@@ -1,23 +1,23 @@
 import {Slix} from "../../Slix";
+import {EventDispatcherContract} from "../../contracts/EventDispatcherContract";
 
 export class EventDispatcher {
     private app: Slix;
+    private listeners: Object;
 
     constructor(app: Slix) {
         this.app = app;
-        this.app.set('eventDispatcher', new Map());
     }
 
-    subscribe(event: string, handler: () => void, priority: number = 0) {
-
-        if (!this.app.get('eventDispatcher').has(event)) {
-            this.app.get('eventDispatcher').set(event, [])
+    subscribe(eventName: string, handler: () => void, priority: number = 0) {
+        if (!this.listeners[eventName]) {
+            this.listeners[eventName] = {};
         }
 
-        this.app.get('eventDispatcher').get(event).push(handler);
+        this.listeners[eventName][priority] = handler;
     }
 
-    dispatch() {
+    dispatch(eventName: string, event: EventDispatcherContract) {
 
     }
 }

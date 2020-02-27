@@ -4,6 +4,6 @@ import {HttpKernel} from "./httpKernel/HttpKernel";
 
 export class HttpKernelServiceProvider extends AbstractServiceProvider {
     registration(app: Slix): void {
-        app.set('KERNEL', new HttpKernel());
+        app.set('KERNEL', new HttpKernel(app, app.get('eventDispatcher')));
     }
 }

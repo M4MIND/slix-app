@@ -10,5 +10,4 @@ export class ExceptionHandlerServiceProvider extends AbstractServiceProvider {
 
     subscribe(app: Slix): void {
     }
-
 }

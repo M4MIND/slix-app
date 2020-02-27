@@ -1,10 +1,12 @@
-import {HttpKernelEventInterface} from "./HttpKernelEventInterface";
 import {ResponseInterface} from "../../../core/response/ResponseInterface";
+import {Slix} from "../../../Slix";
+import {Request} from "../../../core/request/Request";
+import {EventDispatcherContract} from "../../../contracts/EventDispatcherContract";
 
-export abstract class HttpKernelEvent implements HttpKernelEventInterface {
+export abstract class HttpKernelEvent implements EventDispatcherContract {
     private _response?: ResponseInterface;
 
-    protected constructor() {
+    constructor(app: Slix, request: Request) {
         this.response = null;
     }
 
